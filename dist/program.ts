@@ -1,5 +1,5 @@
 import StartUp from "./StartUp";
 
-StartUp.app.listen(5000, function () {
+StartUp.app.listen(5495, function () {
     console.log("Starting up...");
 })
