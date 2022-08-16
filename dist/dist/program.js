@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const StartUp_1 = __importDefault(require("./StartUp"));
-StartUp_1.default.app.listen(5000, function () {
-    console.log("Starting up in port 5000...");
+let port = 5495;
+StartUp_1.default.app.listen(port, function () {
+    console.log("Starting up in port: " + port);
 });

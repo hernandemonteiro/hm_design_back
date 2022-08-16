@@ -1,5 +1,5 @@
 import StartUp from "./StartUp";
-
-StartUp.app.listen(5495, function () {
-    console.log("Starting up...");
+let port = 5495;
+StartUp.app.listen(port, function () {
+    console.log("Starting up in port: " + port);
 })
