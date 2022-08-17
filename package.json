@@ -7,7 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node ./dist/dist/program.js",
+    "start": "node ./dist/index.js",
     "build": "tsc"
   },
   "keywords": [],
