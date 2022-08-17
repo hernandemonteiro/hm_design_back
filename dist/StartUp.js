@@ -32,7 +32,7 @@ class StartUp {
         this.app.route('/users/:id').get((req, res) => {
             return UsersController_1.default.getById(req, res);
         });
-        this.app.route('/users').get((req, res) => {
+        this.app.route('/dist/users').get((req, res) => {
             return UsersController_1.default.get(req, res);
         });
         this.app.route('/users').post((req, res) => {

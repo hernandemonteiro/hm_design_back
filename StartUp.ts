@@ -42,7 +42,7 @@ class StartUp {
             return UsersController.getById(req, res);
         });
 
-        this.app.route('/users').get((req, res) => {
+        this.app.route('/dist/users').get((req, res) => {
             return UsersController.get(req, res);
         });
 
