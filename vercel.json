@@ -9,6 +9,6 @@
     }],
     "routes": [{
         "src": "/dist/(.*)",
-        "dest": "/"
+        "dest": "/dist/"
     }]
 }
