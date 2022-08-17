@@ -8,7 +8,7 @@
         "use": "@vercel/node"
     }],
     "routes": [{
-        "src": "/*",
+        "src": "/dist/(.*)",
         "dest": "/"
     }]
 }
