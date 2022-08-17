@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const db_1 = __importDefault(require("../infra/db"));
-const ProductsController_1 = __importDefault(require("../controllers/ProductsController"));
-const UsersController_1 = __importDefault(require("../controllers/UsersController"));
+const db_1 = __importDefault(require("./infra/db"));
+const ProductsController_1 = __importDefault(require("./controllers/ProductsController"));
+const UsersController_1 = __importDefault(require("./controllers/UsersController"));
 const cors = require('cors');
 class StartUp {
     constructor() {

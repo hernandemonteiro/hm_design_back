@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Api server for hm-design",
   "main": "index.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node ./dist/dist/program.js",
-    "build": "tsc && node ./dist/dist/program.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "Hernande monteiro",

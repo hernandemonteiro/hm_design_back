@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from "express";
-import Database from "../infra/db";
-import ProductsController from "../controllers/ProductsController";
-import UsersController from "../controllers/UsersController";
+import Database from "./infra/db";
+import ProductsController from "./controllers/ProductsController";
+import UsersController from "./controllers/UsersController";
 const cors = require('cors');
 
 class StartUp {
