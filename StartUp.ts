@@ -29,7 +29,7 @@ class StartUp {
             return ProductsController.getById(req, res);
         });
 
-        this.app.route('/products').post((req, res) => {
+        this.app.route('/products').get((req, res) => {
             return ProductsController.get(req, res);
         });
 
@@ -43,10 +43,6 @@ class StartUp {
         });
 
         this.app.route('/users').get((req, res) => {
-            return UsersController.get(req, res);
-        });
-
-        this.app.route('/users').post((req, res) => {
             return UsersController.get(req, res);
         });
 

@@ -23,7 +23,7 @@ class StartUp {
         this.app.route('/products/:id').get((req, res) => {
             return ProductsController_1.default.getById(req, res);
         });
-        this.app.route('/products').post((req, res) => {
+        this.app.route('/products').get((req, res) => {
             return ProductsController_1.default.get(req, res);
         });
         this.app.route('/users/:page/:qtd').get((req, res) => {
@@ -33,9 +33,6 @@ class StartUp {
             return UsersController_1.default.getById(req, res);
         });
         this.app.route('/users').get((req, res) => {
-            return UsersController_1.default.get(req, res);
-        });
-        this.app.route('/users').post((req, res) => {
             return UsersController_1.default.get(req, res);
         });
         this.app.route('/users').put((req, res) => {
