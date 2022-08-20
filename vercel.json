@@ -1,9 +1,6 @@
 {
     "version": 2,
     "public": true,
-    "headers": [{
-        "key": "Access-Control-Allow-Origin", "value": "*"
-    }],
     "builds": [{
         "src": "./dist/index.js",
         "use": "@vercel/node"
