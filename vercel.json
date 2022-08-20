@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "public": true,
     "headers": [{
         "key": "Access-Control-Allow-Origin", "value": "*"
     }],
@@ -8,7 +9,7 @@
         "use": "@vercel/node"
     }],
     "routes": [{
-        "src": "/dist/(.*)",
+        "src": "/(.*)",
         "dest": "/"
     }]
 }
