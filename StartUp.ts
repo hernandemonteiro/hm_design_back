@@ -18,10 +18,8 @@ class StartUp {
     }
 
     routes() {
-        let corsOptions = {
-            origin: "*",
-        }
-        this.app.use(cors(corsOptions));
+
+        this.app.use(cors("*"));
 
         this.app.route('/products/:page/:qtd').get((req, res) => {
             return ProductsController.get(req, res);

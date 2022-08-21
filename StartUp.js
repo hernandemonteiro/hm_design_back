@@ -16,7 +16,7 @@ class StartUp {
         this.routes();
     }
     routes() {
-        this.app.use(cors());
+        this.app.use(cors("*"));
         this.app.route('/products/:page/:qtd').get((req, res) => {
             return ProductsController_1.default.get(req, res);
         });
