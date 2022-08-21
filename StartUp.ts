@@ -19,7 +19,14 @@ class StartUp {
 
     routes() {
 
-        this.app.use(cors("*"));
+        let corsOptions =  {
+            "origin": "*",
+            "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+            "preflightContinue": false,
+            "optionsSuccessStatus": 204
+          };
+          
+        this.app.use(cors(corsOptions));
 
         this.app.route('/products/:page/:qtd').get((req, res) => {
             return ProductsController.get(req, res);
