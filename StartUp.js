@@ -18,6 +18,7 @@ class StartUp {
     routes() {
         let corsOptions = {
             "origin": "*",
+            "Access-Control-Allow-Origin": "*",
             "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
             "preflightContinue": false,
             "optionsSuccessStatus": 204
