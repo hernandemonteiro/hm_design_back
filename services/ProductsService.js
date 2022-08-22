@@ -19,13 +19,19 @@ class ProductsService {
             return result;
         });
     }
-    getAll(page, qtd) {
+    getAllWithLimit(page, qtd) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = new Result_1.Result();
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield ProductsRepository_1.ProductsRepository.count({});
             result.Data = yield ProductsRepository_1.ProductsRepository.find({}).skip((page * qtd) - qtd).limit(qtd);
+            return result;
+        });
+    }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield ProductsRepository_1.ProductsRepository.find({});
             return result;
         });
     }

@@ -19,7 +19,7 @@ class UsersService {
             return result;
         });
     }
-    getAll(page, qtd) {
+    getAllWithLimit(page, qtd) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = new Result_1.Result();
             result.Page = page;
@@ -29,16 +29,29 @@ class UsersService {
             return result;
         });
     }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield UsersRepository_1.UsersRepository.find({});
+            return result;
+        });
+    }
     userRegister(name, email, password, type) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = new UsersRepository_1.UsersRepository({
-                name: name,
-                email: email,
-                password: password,
-                type: type
-            });
-            result.save();
-            return result;
+            const userIsRegistered = yield UsersRepository_1.UsersRepository.find({ email: email }).count({});
+            if (userIsRegistered == 0) {
+                let result = new UsersRepository_1.UsersRepository({
+                    name: name,
+                    email: email,
+                    password: password,
+                    type: type
+                });
+                result.save();
+                return result;
+            }
+            else {
+                let message = "Usuário já cadastrado";
+                return message;
+            }
         });
     }
 }

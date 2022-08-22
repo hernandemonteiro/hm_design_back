@@ -12,7 +12,7 @@ export class UsersService implements iUsersService {
 
     }
 
-    async getAll(page: number, qtd: number): Promise<Result> {
+    async getAllWithLimit(page: number, qtd: number): Promise<Result> {
 
         let result = new Result();
         result.Page = page;
@@ -23,17 +23,31 @@ export class UsersService implements iUsersService {
 
     }
 
+    async getAll() {
+
+        let result = await UsersRepository.find({});
+        return result;
+
+    }
+
     async userRegister(name: string, email: string, password: string, type: string) {
 
-        let result = new UsersRepository ({
-            name: name,
-            email: email,
-            password: password,
-            type: type
-        });
+        const userIsRegistered = await UsersRepository.find({email: email}).count({});
 
-        result.save();
+        if (userIsRegistered == 0) {
+            let result = new UsersRepository({
+                name: name,
+                email: email,
+                password: password,
+                type: type
+            });
 
-        return result;
+            result.save();
+            return result;
+
+        } else {
+            let message = "Usuário já cadastrado";
+            return message
+        }
     }
 }

@@ -4,6 +4,8 @@ export interface iProductsService {
 
     get(id: string): any;
 
-    getAll(qtd: number, page: number ): Promise<Result>;
+    getAllWithLimit(qtd: number, page: number ): Promise<Result>;
+
+    getAll();
 
 }

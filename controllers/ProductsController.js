@@ -19,7 +19,18 @@ class ProductsController {
             try {
                 const page = request.params.page ? parseInt(request.params.page) : 1;
                 const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
-                let result = yield this._service.getAll(page, qtd);
+                let result = yield this._service.getAllWithLimit(page, qtd);
+                response.status(200).json({ result });
+            }
+            catch (error) {
+                response.status(500).json({ error: error.message || error.toString() });
+            }
+        });
+    }
+    getAll(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let result = yield this._service.getAll();
                 response.status(200).json({ result });
             }
             catch (error) {
