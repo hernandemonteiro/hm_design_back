@@ -2,14 +2,16 @@ import express, { Application, Request, Response } from "express";
 import Database from "./infra/db";
 import ProductsController from "./controllers/ProductsController";
 import UsersController from "./controllers/UsersController";
+import CartController from "./controllers/CartController";
+import OrderController from "./controllers/OrderController";
 const cors = require('cors');
 
 class StartUp {
-    
+
     public app: Application;
     private _db: Database = new Database();
 
-    constructor(){
+    constructor() {
 
         this.app = express();
         this._db.createConnection();
@@ -19,14 +21,14 @@ class StartUp {
 
     routes() {
 
-        let corsOptions =  {
+        let corsOptions = {
             "origin": "*",
             "Access-Control-Allow-Origin": "*",
             "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
             "preflightContinue": false,
             "optionsSuccessStatus": 204
-          };
-          
+        };
+
         this.app.use(cors(corsOptions));
 
         /*
@@ -71,15 +73,66 @@ class StartUp {
             return UsersController.getById(req, res);
         });
 
+        // implements update method
         // implements delete method
+        this.app.route('/users/:id').delete((req, res) => {
+            return UsersController.deleteUser(req, res);
+        })
 
         this.app.route('/users').get((req, res) => {
             return UsersController.getAll(req, res);
         });
-        
+
         this.app.route('/users').put((req, res) => {
             return UsersController.userRegister(req, res);
         });
+
+        /*
+        * @description this routes is for serve the cart
+        *
+        * @params /:page/:qtd filter the results in limit quantity with pages
+        * @param /:id search product cart for _id
+        * 
+        * 
+        */
+
+        this.app.route('/cart/:page/:qtd').get((req, res) => {
+            return CartController.get(req, res);
+        });
+
+        this.app.route('/cart/:id').get((req, res) => {
+            return CartController.getById(req, res);
+        });
+
+        // implements delete method
+
+        this.app.route('/cart').get((req, res) => {
+            return CartController.getAll(req, res);
+        });
+
+        /*
+        * @description this routes is for serve the orders
+        *
+        * @params /:page/:qtd filter the results in limit quantity with pages
+        * @param /:id search order for _id
+        * 
+        * 
+        */
+
+        this.app.route('/order/:page/:qtd').get((req, res) => {
+            return OrderController.get(req, res);
+        });
+
+        this.app.route('/order/:id').get((req, res) => {
+            return OrderController.getById(req, res);
+        });
+
+        // implements delete method
+
+        this.app.route('/order').get((req, res) => {
+            return OrderController.getAll(req, res);
+        });
+
     }
 }
 

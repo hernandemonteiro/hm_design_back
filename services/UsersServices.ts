@@ -32,7 +32,7 @@ export class UsersService implements iUsersService {
 
     async userRegister(name: string, email: string, password: string, type: string) {
 
-        const userIsRegistered = await UsersRepository.find({email: email}).count({});
+        const userIsRegistered = await UsersRepository.find({ email: email }).count({});
 
         if (userIsRegistered == 0) {
             let result = new UsersRepository({
@@ -49,5 +49,12 @@ export class UsersService implements iUsersService {
             let message = "Usuário já cadastrado";
             return message
         }
+    }
+
+    async deleteUser(_id: string) {
+
+        const deleteUser = await UsersRepository.findByIdAndDelete(_id);
+        return deleteUser;
+
     }
 }

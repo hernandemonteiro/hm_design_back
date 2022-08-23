@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const UsersServices_1 = require("../services/UsersServices");
-class UsersController {
+const CartService_1 = require("../services/CartService");
+class CartController {
     constructor() {
-        this._service = new UsersServices_1.UsersService();
+        this._service = new CartService_1.CartService();
     }
     get(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -24,7 +24,6 @@ class UsersController {
             }
             catch (error) {
                 response.status(500).json({ error: error.message || error.toString() });
-                console.log(error);
             }
         });
     }
@@ -36,7 +35,6 @@ class UsersController {
             }
             catch (error) {
                 response.status(500).json({ error: error.message || error.toString() });
-                console.log(error);
             }
         });
     }
@@ -52,32 +50,5 @@ class UsersController {
             }
         });
     }
-    userRegister(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const name = request.query.name;
-                const email = request.query.email;
-                const password = request.query.password;
-                const type = request.query.type;
-                let result = yield this._service.userRegister(name, email, password, type);
-                response.status(200).json({ result });
-            }
-            catch (error) {
-                response.status(500).json({ error: error.message || error.toString() });
-            }
-        });
-    }
-    deleteUser(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const _id = request.params.id;
-                let result = yield this._service.deleteUser(_id);
-                response.status(200).json({ result });
-            }
-            catch (error) {
-                response.status(500).json({ error: error.message || error.toString() });
-            }
-        });
-    }
 }
-exports.default = new UsersController();
+exports.default = new CartController();

@@ -6,6 +6,4 @@ export interface iProductsService {
 
     getAllWithLimit(qtd: number, page: number ): Promise<Result>;
 
-    getAll();
-
 }

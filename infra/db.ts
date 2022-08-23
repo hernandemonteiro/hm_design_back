@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-
+require('dotenv').config();
 class Database {
-    private DB_URL = "mongodb+srv://monteirops:Frangofrito23.@hm-design.2pm6n7h.mongodb.net/hm-design?retryWrites=true";
+    
+    private DB_URL = process.env.MONGO_DB_URL;
 
     createConnection() {
 

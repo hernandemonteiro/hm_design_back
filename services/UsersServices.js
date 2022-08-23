@@ -54,5 +54,11 @@ class UsersService {
             }
         });
     }
+    deleteUser(_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const deleteUser = yield UsersRepository_1.UsersRepository.findByIdAndDelete(_id);
+            return deleteUser;
+        });
+    }
 }
 exports.UsersService = UsersService;
