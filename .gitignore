@@ -1,6 +1,3 @@
-# compiled archives
-*.js
-
 # npm modules path
 node_modules
 
