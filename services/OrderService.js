@@ -25,7 +25,9 @@ class OrderService {
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield OrderRepository_1.OrderRepository.count({});
-            result.Data = yield OrderRepository_1.OrderRepository.find({}).skip((page * qtd) - qtd).limit(qtd);
+            result.Data = yield OrderRepository_1.OrderRepository.find({})
+                .skip(page * qtd - qtd)
+                .limit(qtd);
             return result;
         });
     }

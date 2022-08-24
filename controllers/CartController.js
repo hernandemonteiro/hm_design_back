@@ -50,5 +50,17 @@ class CartController {
             }
         });
     }
+    deleteProductCart(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const _id = request.params.id;
+                let result = yield this._service.deleteProductCart(_id);
+                response.status(200).json({ result });
+            }
+            catch (error) {
+                response.status(500).json({ error: error.message || error.toString() });
+            }
+        });
+    }
 }
 exports.default = new CartController();

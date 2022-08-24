@@ -13,5 +13,5 @@ exports.CartSchema = new mongoose_1.default.Schema({
     unitPrice: { type: String, required: true },
     totalPrice: { type: String, required: true },
     order: { type: String, required: true },
-    isOrdered: { type: Boolean, required: true }
+    isOrdered: { type: Boolean, required: true },
 });

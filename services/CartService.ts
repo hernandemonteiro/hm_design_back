@@ -23,4 +23,9 @@ export class CartService implements iCartService {
     let result = await CartRepository.find({});
     return result;
   }
+
+  async deleteProductCart(_id: string) {
+    const deleteProductCart = await CartRepository.findByIdAndDelete(_id);
+    return deleteProductCart;
+  }
 }

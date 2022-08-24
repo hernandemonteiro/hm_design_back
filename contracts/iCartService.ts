@@ -4,4 +4,7 @@ export interface iCartService {
   get(id: string): any;
 
   getAllWithLimit(qtd: number, page: number): Promise<Result>;
+
+  deleteProductCart(_id: string): any;
+
 }

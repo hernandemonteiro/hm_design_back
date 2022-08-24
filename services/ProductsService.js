@@ -25,7 +25,9 @@ class ProductsService {
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield ProductsRepository_1.ProductsRepository.count({});
-            result.Data = yield ProductsRepository_1.ProductsRepository.find({}).skip((page * qtd) - qtd).limit(qtd);
+            result.Data = yield ProductsRepository_1.ProductsRepository.find({})
+                .skip(page * qtd - qtd)
+                .limit(qtd);
             return result;
         });
     }

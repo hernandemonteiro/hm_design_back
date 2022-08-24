@@ -37,6 +37,16 @@ class CartController {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
+
+  async deleteProductCart(request: Request, response: Response) {
+    try {
+      const _id: any = request.params.id;
+      let result = await this._service.deleteProductCart(_id);
+      response.status(200).json({ result });
+    } catch (error: any) {
+      response.status(500).json({ error: error.message || error.toString() });
+    }
+  }
 }
 
 export default new CartController();

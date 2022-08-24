@@ -25,7 +25,9 @@ class UsersService {
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield UsersRepository_1.UsersRepository.count({});
-            result.Data = yield UsersRepository_1.UsersRepository.find({}).skip((page * qtd) - qtd).limit(qtd);
+            result.Data = yield UsersRepository_1.UsersRepository.find({})
+                .skip(page * qtd - qtd)
+                .limit(qtd);
             return result;
         });
     }
@@ -43,7 +45,7 @@ class UsersService {
                     name: name,
                     email: email,
                     password: password,
-                    type: type
+                    type: type,
                 });
                 result.save();
                 return result;

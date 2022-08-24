@@ -25,7 +25,9 @@ class CartService {
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield CartRepository_1.CartRepository.count({});
-            result.Data = yield CartRepository_1.CartRepository.find({}).skip((page * qtd) - qtd).limit(qtd);
+            result.Data = yield CartRepository_1.CartRepository.find({})
+                .skip(page * qtd - qtd)
+                .limit(qtd);
             return result;
         });
     }
@@ -33,6 +35,12 @@ class CartService {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield CartRepository_1.CartRepository.find({});
             return result;
+        });
+    }
+    deleteProductCart(_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const deleteProductCart = yield CartRepository_1.CartRepository.findByIdAndDelete(_id);
+            return deleteProductCart;
         });
     }
 }

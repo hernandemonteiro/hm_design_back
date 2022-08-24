@@ -4,4 +4,6 @@ export interface iUsersService {
   get(id: string): any;
 
   getAllWithLimit(qtd: number, page: number): Promise<Result>;
+
+  deleteUser(_id: string)
 }
