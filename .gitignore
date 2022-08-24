@@ -1,2 +1,8 @@
+# compiled archives
+*.js
+
+# npm modules path
 node_modules
+
+# ambient variables
 .env

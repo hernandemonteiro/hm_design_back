@@ -7,9 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node ./index.js",
-    "build": "tsc",
-    "dev": "tsc && node ./index.js"
+    "start": "tsc && node ./index.js"
   },
   "keywords": [],
   "author": "Hernande monteiro",
