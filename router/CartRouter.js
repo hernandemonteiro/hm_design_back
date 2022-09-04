@@ -50,12 +50,20 @@ cartRouter.route("/cart/:id").delete((req, res) => {
     return CartController_1.default.deleteProductCart(req, res);
 });
 /*
- * @description this routes is for serve the cart
- * @params /:page/:qtd filter the results in limit quantity with pages
- * @param /:id search product cart for _id
+ * @description this route update one product;
+ * @param [id] find the product to update;
+ * @param [user_id] define the user;
+ * @param [quantity] quantity of product order;
+ * @param [product_id] id of product;
+ * @param [product] name of product;
+ * @param [unit_price] unit price of product;
+ * @param [total_price] unit price x quantity ;
+ * @param [status] define the status of order;
  */
 // implements update method
-cartRouter.route("/cart/update/:id/:user_id/:quantity/:product_id/:product/:unit_price/:total_price/:order_id/:status").delete((req, res) => {
-    return CartController_1.default.deleteProductCart(req, res);
+cartRouter
+    .route("/cart/update/:id/:user_id/:quantity/:product_id/:product/:unit_price/:total_price/:status")
+    .put((req, res) => {
+    return CartController_1.default.updateProductCart(req, res);
 });
 exports.default = cartRouter;

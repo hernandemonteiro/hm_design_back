@@ -53,10 +53,31 @@ class CartService {
                 unit_price: unit_price,
                 total_price: total_price,
                 order_id: order_id,
-                status: status
+                status: status,
             });
             registeredProduct.save();
             return registeredProduct;
+        });
+    }
+    updateProductCart(id, user_id, quantity, product_id, product, unit_price, total_price, status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const updatedOrder = yield CartRepository_1.CartRepository.findOneAndUpdate({ _id: id }, {
+                    $set: {
+                        user_id: user_id,
+                        quantity: quantity,
+                        product_id: product_id,
+                        product: product,
+                        unit_price: unit_price,
+                        total_price: total_price,
+                        status: status,
+                    },
+                });
+                return { status: "success" };
+            }
+            catch (error) {
+                return { status: "Error: " + error.toString() };
+            }
         });
     }
 }
