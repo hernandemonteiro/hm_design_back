@@ -8,18 +8,6 @@ class UsersController {
     this._service = new UsersService();
   }
 
-  async get(request: Request, response: Response) {
-    try {
-      const page = request.params.page ? parseInt(request.params.page) : 1;
-      const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
-      let result = await this._service.getAllWithLimit(page, qtd);
-      response.status(200).json({ result });
-    } catch (error: any) {
-      response.status(500).json({ error: error.message || error.toString() });
-      console.log(error);
-    }
-  }
-
   async getAll(request: Request, response: Response) {
     try {
       let result = await this._service.getAll();
@@ -42,16 +30,29 @@ class UsersController {
 
   async userRegister(request: Request, response: Response) {
     try {
-      const name: any = request.query.name;
-      const email: any = request.query.email;
-      const password: any = request.query.password;
-      const type: any = request.query.type;
+      const name: any = request.params.name;
+      const email: any = request.params.email;
+      const password: any = request.params.password;
+      const type: any = request.params.type;
       let result = await this._service.userRegister(
         name,
         email,
         password,
         type
       );
+      response.status(200).json({ result });
+    } catch (error: any) {
+      response.status(500).json({ error: error.message || error.toString() });
+    }
+  }
+
+  async updateUser(request: Request, response: Response) {
+    try {
+      const id: string = request.params.id;
+      const name: string = request.params.name;
+      const email: string = request.params.email;
+      const password: string = request.params.password;
+      let result = await this._service.updateUser(id, name, email, password);
       response.status(200).json({ result });
     } catch (error: any) {
       response.status(500).json({ error: error.message || error.toString() });

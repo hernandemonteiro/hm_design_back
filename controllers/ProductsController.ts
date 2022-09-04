@@ -37,6 +37,62 @@ class ProductsController {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
+
+  async deleteProduct(request: Request, response: Response) {
+    try {
+      const id = request.params.id;
+      let result = await this._service.deleteProduct(id);
+      response.status(200).json({ result });
+    } catch (error) {
+      response.status(500).json("Error: " + error);
+    }
+  }
+
+  async registerProduct(request: Request, response: Response) {
+    try {
+      const name = request.params.name;
+      const price = request.params.price;
+      const description = request.params.description;
+      const images = request.params.images;
+      const status = request.params.name;
+      const options = request.params.name;
+      let result = await this._service.registerProduct(
+        name,
+        price,
+        description,
+        images,
+        status,
+        options
+      );
+      response.status(200).json({ result });
+    } catch (error) {
+      response.status(500).json("Error: " + error);
+    }
+  }
+
+  async updateProduct(request: Request, response: Response) {
+    try {
+      const id = request.params.id;
+      const name = request.params.name;
+      const price = request.params.price;
+      const description = request.params.description;
+      const images = request.params.images;
+      const status = request.params.status;
+      const options = request.params.options;
+      let result = await this._service.updateProduct(
+        id,
+        name,
+        price,
+        description,
+        images,
+        status,
+        options
+      );
+      response.status(200).json({ result });
+    } catch (error) {
+      response.status(500).json("Error: " + error);
+    }
+  }
 }
 
 export default new ProductsController();

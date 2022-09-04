@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 export const CartSchema = new mongoose.Schema({
-  userId: { type: String, required: true },
+  user_id: { type: String, required: true },
   quantity: { type: String, required: true },
-  productId: { type: String, required: true },
+  product_id: { type: String, required: true },
   product: { type: String, required: true },
-  unitPrice: { type: String, required: true },
-  totalPrice: { type: String, required: true },
-  order: { type: String, required: true },
-  isOrdered: { type: Boolean, required: true },
+  unit_price: { type: String, required: true },
+  total_price: { type: String, required: true },
+  order_id: { type: String, required: true },
+  status: { type: String, required: true },
 });

@@ -43,5 +43,21 @@ class CartService {
             return deleteProductCart;
         });
     }
+    registerProductCart(user_id, quantity, product_id, product, unit_price, total_price, order_id, status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const registeredProduct = new CartRepository_1.CartRepository({
+                user_id: user_id,
+                quantity: quantity,
+                product_id: product_id,
+                product: product,
+                unit_price: unit_price,
+                total_price: total_price,
+                order_id: order_id,
+                status: status
+            });
+            registeredProduct.save();
+            return registeredProduct;
+        });
+    }
 }
 exports.CartService = CartService;

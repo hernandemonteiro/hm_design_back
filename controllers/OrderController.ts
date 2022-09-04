@@ -37,6 +37,54 @@ class OrderController {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
+
+  async registerOrder(request: Request, response: Response) {
+    try {
+      const user_id = request.params.user_id;
+      const address = request.params.address;
+      const order_id = request.params.order_id;
+      const status = request.params.status;
+      let result = await this._service.registerOrder(
+        user_id,
+        address,
+        order_id,
+        status
+      );
+      response.status(200).json({ result });
+    } catch (error: any) {
+      response.status(500).json({ error: error.message || error.toString() });
+    }
+  }
+
+  async deleteOrder(request: Request, response: Response) {
+    try {
+      const id = request.params.id;
+      let result = await this._service.deleteOrder(id);
+      response.status(200).json({ result });
+    } catch (error) {
+      response.status(500).json("Error: " + error);
+    }
+  }
+
+  async updateOrder(request: Request, response: Response){
+    try {
+      const id = request.params.id;
+      const user_id = request.params.user_id;
+      const address = request.params.address;
+      const order_id = request.params.order_id;
+      const status = request.params.status;
+      let result = await this._service.updateOrder(
+        id,
+        user_id,
+        address,
+        order_id,
+        status
+      );
+      response.status(200).json({ result });
+    } catch (error) {
+      response.status(500).json("Error: " + error);
+    }
+  }
 }
 
 export default new OrderController();

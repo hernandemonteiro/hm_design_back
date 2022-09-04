@@ -62,5 +62,24 @@ class CartController {
             }
         });
     }
+    registerProductCart(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user_id = request.params.user_id;
+                const quantity = request.params.quantity;
+                const product_id = request.params.product_id;
+                const product = request.params.product;
+                const unit_price = request.params.unit_price;
+                const total_price = request.params.total_price;
+                const order_id = request.params.order_id;
+                const status = request.params.status;
+                let result = yield this._service.registerProductCart(user_id, quantity, product_id, product, unit_price, total_price, order_id, status);
+                response.status(200).json({ result });
+            }
+            catch (error) {
+                response.status(500).json({ error: error.message || error.toString() });
+            }
+        });
+    }
 }
 exports.default = new CartController();

@@ -23,4 +23,50 @@ export class OrderService implements iOrderService {
     let result = await OrderRepository.find({});
     return result;
   }
+
+  async registerOrder(
+    user_id: string,
+    address: string,
+    order_id: string,
+    status: string
+  ) {
+    let result = await new OrderRepository({
+      user_id: user_id,
+      address: address,
+      order_id: order_id,
+      status: status,
+    });
+    result.save();
+    return result;
+  }
+
+  async deleteOrder(id: string) {
+    let result = await OrderRepository.findByIdAndDelete(id);
+    return result;
+  }
+
+  async updateOrder(
+    id: string,
+    user_id: string,
+    address: string,
+    order_id: string,
+    status: string
+  ) {
+    try {
+      const updatedOrder = await OrderRepository.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            user_id: user_id,
+            address: address,
+            order_id: order_id,
+            status: status,
+          },
+        }
+      );
+      return { status: "success" };
+    } catch (error) {
+      return { status: "Error: " + error.toString() };
+    }
+  }
 }

@@ -23,4 +23,58 @@ export class ProductsService implements iProductsService {
     let result = await ProductsRepository.find({});
     return result;
   }
+
+  async deleteProduct(id: string) {
+    let result = await ProductsRepository.findByIdAndDelete(id);
+    return result;
+  }
+
+  async registerProduct(
+    name: string,
+    price: string,
+    images: string,
+    description: string,
+    status: string,
+    options: string
+  ) {
+    let result = await new ProductsRepository({
+      name: name,
+      price: price,
+      images: images,
+      description: description,
+      status: status,
+      options: options,
+    });
+    result.save();
+    return result;
+  }
+
+  async updateProduct(
+    id: string,
+    name: string,
+    price: string,
+    images: string,
+    description: string,
+    status: string,
+    options: string
+  ) {
+    try {
+      const updatedProduct = await ProductsRepository.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            name: name,
+            price: price,
+            images: images,
+            description: description,
+            status: status,
+            options: options,
+          },
+        }
+      );
+      return { status: "success" };
+    } catch (error) {
+      return { status: "Error: " + error.toString() };
+    }
+  }
 }
