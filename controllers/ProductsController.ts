@@ -53,6 +53,7 @@ class ProductsController {
       const name = request.params.name;
       const price = request.params.price;
       const description = request.params.description;
+      const category = request.params.category;
       const images = request.params.images;
       const status = request.params.name;
       const options = request.params.name;
@@ -60,6 +61,7 @@ class ProductsController {
         name,
         price,
         description,
+        category,
         images,
         status,
         options

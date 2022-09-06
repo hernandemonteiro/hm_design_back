@@ -34,6 +34,7 @@ export class ProductsService implements iProductsService {
     price: string,
     images: string,
     description: string,
+    category: string,
     status: string,
     options: string
   ) {
@@ -42,6 +43,7 @@ export class ProductsService implements iProductsService {
       price: price,
       images: images,
       description: description,
+      category: category,
       status: status,
       options: options,
     });

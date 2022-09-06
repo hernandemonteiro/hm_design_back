@@ -68,10 +68,11 @@ class ProductsController {
                 const name = request.params.name;
                 const price = request.params.price;
                 const description = request.params.description;
+                const category = request.params.category;
                 const images = request.params.images;
                 const status = request.params.name;
                 const options = request.params.name;
-                let result = yield this._service.registerProduct(name, price, description, images, status, options);
+                let result = yield this._service.registerProduct(name, price, description, category, images, status, options);
                 response.status(200).json({ result });
             }
             catch (error) {

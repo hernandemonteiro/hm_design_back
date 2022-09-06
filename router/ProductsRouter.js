@@ -42,11 +42,12 @@ productsRouter.route("/product/:id").delete((req, res) => {
  * @param [price] price of the product;
  * @param [images] images in array format;
  * @param [description] description of the product;
+ * @param [category] category of the product for menu;
  * @param [status] status for view in store ('Ok' | 'In Progress');
  * @param [options] product options in array format;
  */
 productsRouter
-    .route("/product/:name/:price/:images/:description/:status/:options")
+    .route("/product/:name/:price/:images/:description/:category/:status/:options")
     .put((req, res) => {
     return ProductsController_1.default.registerProduct(req, res);
 });

@@ -43,13 +43,14 @@ class ProductsService {
             return result;
         });
     }
-    registerProduct(name, price, images, description, status, options) {
+    registerProduct(name, price, images, description, category, status, options) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield new ProductsRepository_1.ProductsRepository({
                 name: name,
                 price: price,
                 images: images,
                 description: description,
+                category: category,
                 status: status,
                 options: options,
             });
