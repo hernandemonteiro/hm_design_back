@@ -30,5 +30,4 @@ jobs:
     - run: npm run build
     # to tests development:
     # - run: npm run test
-    # use .env files to start;
-    # - run: npm start
+    - run: ls -la
