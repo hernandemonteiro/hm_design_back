@@ -1,0 +1,11 @@
+version: '3.5'
+services:
+  app:
+    build: .
+    container_name: hm_server
+    command: npm start
+    image: hm_server:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
