@@ -1,4 +1,8 @@
 # Hm-design - server
+
+## description:
+
+this aplication is an back-end provider to hm-design e-commerce;
 ### OS development:
 ![Linux Mint](https://img.shields.io/badge/Linux%20Mint-87CF3E?style=for-the-badge&logo=Linux%20Mint&logoColor=white)
 ### Development Languages and tests:
@@ -14,6 +18,3 @@
 ### Platform Deploy:
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-## Aplication description:
-
-this aplication is an back-end provider to hm-design e-commerce;
