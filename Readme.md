@@ -1,6 +1,6 @@
 # Hm-design - server
 
-## description:
+## Description:
 
 this aplication is an back-end provider to hm-design e-commerce;
 ### OS development:
