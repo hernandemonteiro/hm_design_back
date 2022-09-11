@@ -29,4 +29,5 @@ jobs:
     - run: npm install
     # to tests development:
     # - run: npm run test
-    - run: npm start
+    # use .env files to start;
+    # - run: npm start
