@@ -53,4 +53,12 @@ export class UsersService implements iUsersService {
     const deleteUser = await UsersRepository.findByIdAndDelete(_id);
     return deleteUser;
   }
+
+  async login(email: string, password: string) {
+      const user = await UsersRepository.findOne({
+        email: email,
+        password: password,
+      });
+      return user;
+  }
 }

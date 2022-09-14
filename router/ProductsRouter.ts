@@ -5,7 +5,7 @@ const productsRouter = express();
 
 /*
  * @description this route get all products;
- * @returns a JSON with all products;
+ * @return a JSON with all products;
  */
 productsRouter.route("/products").get((req, res) => {
   return ProductsController.getAll(req, res);
@@ -14,7 +14,7 @@ productsRouter.route("/products").get((req, res) => {
 /*
  * @description this route get products limited by quantity and pages;
  * @params [page] [qtd] limits in page with a quantity;
- * @returns a JSON with all products limited by pages and qtd;
+ * @return a JSON with all products limited by pages and qtd;
  */
 productsRouter.route("/products/:page/:qtd").get((req, res) => {
   return ProductsController.get(req, res);
@@ -23,7 +23,7 @@ productsRouter.route("/products/:page/:qtd").get((req, res) => {
 /*
  * @description this route get one product by id;
  * @param [id] find one product by _id;
- * @returns a JSON with one product;
+ * @return a JSON with one product;
  */
 productsRouter.route("/product/:id").get((req, res) => {
   return ProductsController.getById(req, res);
