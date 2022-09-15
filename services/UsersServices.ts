@@ -1,5 +1,6 @@
 import { iUsersService } from "../contracts/iUsersServices";
 import { UsersRepository } from "../repository/UsersRepository";
+import CryptoJS from "crypto-js";
 
 export class UsersService implements iUsersService {
   async get(_id: string) {
@@ -18,30 +19,40 @@ export class UsersService implements iUsersService {
     password: string,
     type: string
   ) {
-    const userIsRegistered = await UsersRepository.find({ email: email }).count(
+    const encryptedPassword = CryptoJS.SHA256(password).toString();
+    const encryptedEmail = CryptoJS.SHA256(email).toString();
+    const userIsRegistered = await UsersRepository.find({ email: encryptedEmail }).count(
       {}
     );
 
-    if (userIsRegistered == 0) {
+    if (userIsRegistered === 0) {
       let result = new UsersRepository({
         name: name,
-        email: email,
-        password: password,
+        email: encryptedEmail,
+        password: encryptedPassword,
         type: type,
       });
 
       result.save();
       return result;
     } else {
-      let message = "Usuário já cadastrado";
+      let message = "user registered";
       return message;
     }
   }
   async updateUser(id: string, name: string, email: string, password: string) {
+    const encryptedPassword = CryptoJS.SHA256(password);
+    const encryptedEmail = CryptoJS.SHA256(email);
     try {
-      const updatedUser = await UsersRepository.findOneAndUpdate(
+      await UsersRepository.findOneAndUpdate(
         { _id: id },
-        { $set: { name: name, email: email, password: password } }
+        {
+          $set: {
+            name: name,
+            email: encryptedEmail,
+            password: encryptedPassword,
+          },
+        }
       );
       return { status: "success" };
     } catch (error) {
@@ -55,10 +66,14 @@ export class UsersService implements iUsersService {
   }
 
   async login(email: string, password: string) {
-      const user = await UsersRepository.findOne({
-        email: email,
-        password: password,
-      });
+    const encryptedPassword = CryptoJS.SHA256(password).toString();
+    const encryptedEmail = CryptoJS.SHA256(email).toString();
+
+    const user = await UsersRepository.findOne({
+      email: encryptedEmail,
+      password: encryptedPassword,
+    });
       return user;
+    
   }
 }

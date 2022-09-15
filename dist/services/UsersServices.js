@@ -8,9 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const UsersRepository_1 = require("../repository/UsersRepository");
+const crypto_js_1 = __importDefault(require("crypto-js"));
 class UsersService {
     get(_id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -26,27 +30,37 @@ class UsersService {
     }
     userRegister(name, email, password, type) {
         return __awaiter(this, void 0, void 0, function* () {
-            const userIsRegistered = yield UsersRepository_1.UsersRepository.find({ email: email }).count({});
-            if (userIsRegistered == 0) {
+            const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
+            const encryptedEmail = crypto_js_1.default.SHA256(email).toString();
+            const userIsRegistered = yield UsersRepository_1.UsersRepository.find({ email: encryptedEmail }).count({});
+            if (userIsRegistered === 0) {
                 let result = new UsersRepository_1.UsersRepository({
                     name: name,
-                    email: email,
-                    password: password,
+                    email: encryptedEmail,
+                    password: encryptedPassword,
                     type: type,
                 });
                 result.save();
                 return result;
             }
             else {
-                let message = "Usuário já cadastrado";
+                let message = "user registered";
                 return message;
             }
         });
     }
     updateUser(id, name, email, password) {
         return __awaiter(this, void 0, void 0, function* () {
+            const encryptedPassword = crypto_js_1.default.SHA256(password);
+            const encryptedEmail = crypto_js_1.default.SHA256(email);
             try {
-                const updatedUser = yield UsersRepository_1.UsersRepository.findOneAndUpdate({ _id: id }, { $set: { name: name, email: email, password: password } });
+                yield UsersRepository_1.UsersRepository.findOneAndUpdate({ _id: id }, {
+                    $set: {
+                        name: name,
+                        email: encryptedEmail,
+                        password: encryptedPassword,
+                    },
+                });
                 return { status: "success" };
             }
             catch (error) {
@@ -62,9 +76,11 @@ class UsersService {
     }
     login(email, password) {
         return __awaiter(this, void 0, void 0, function* () {
+            const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
+            const encryptedEmail = crypto_js_1.default.SHA256(email).toString();
             const user = yield UsersRepository_1.UsersRepository.findOne({
-                email: email,
-                password: password,
+                email: encryptedEmail,
+                password: encryptedPassword,
             });
             return user;
         });

@@ -86,7 +86,7 @@ class UsersController {
                 const email = request.params.email;
                 const password = request.params.password;
                 let result = yield this._service.login(email, password);
-                return response.status(200).json(result);
+                return response.status(200).json({ result });
             }
             catch (error) {
                 response.status(500).json({ error: error.message || error.toString() });
