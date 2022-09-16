@@ -118,7 +118,7 @@ class UsersService {
             Clique no botão abaixo para iniciar processo:
             </p>
             <br><br>
-            <a width='100%' href='https://hm-design.vercel.app/forgotpassword/${encryptedEmail}'>
+            <a width='100%' href='https://hm-design.vercel.app/forgotpassword/${encryptedEmail}/${process.env.HASH_SECRET}'>
               <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
                 RECUPERAR SENHA!
               </button>

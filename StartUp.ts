@@ -18,7 +18,7 @@ class StartUp {
 
   routes() {
     let corsOptions = {
-      origin: "*",
+      origin: ["https://hm-design.vercel.app", "172.19.0.1"],
       "Access-Control-Allow-Origin": "*",
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       preflightContinue: false,

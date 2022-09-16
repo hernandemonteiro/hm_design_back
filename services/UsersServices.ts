@@ -79,6 +79,7 @@ export class UsersService implements iUsersService {
 
   async forgotPassword(email: string) {
     const encryptedEmail = CryptoJS.SHA256(email).toString();
+    const encryptedHash = CryptoJS.SHA256(process.env.HASH_SECRET).toString();
     const userIsRegistered = await UsersRepository.find({
       email: encryptedEmail,
     }).count({});
@@ -106,7 +107,7 @@ export class UsersService implements iUsersService {
             Clique no botão abaixo para iniciar processo:
             </p>
             <br><br>
-            <a width='100%' href='https://hm-design.vercel.app/forgotpassword/${encryptedEmail}'>
+            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/${encryptedEmail}/${encryptedHash}'>
               <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
                 RECUPERAR SENHA!
               </button>
