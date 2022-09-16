@@ -7,5 +7,5 @@ export const ProductsSchema = new mongoose.Schema({
   category: { type: String, required: true },
   images: { type: String, required: true },
   status: { type: String, required: true },
-  options: { type: String, required: true },
+  options: { type: String, required: false },
 });

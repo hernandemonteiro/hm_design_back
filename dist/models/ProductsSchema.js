@@ -12,5 +12,5 @@ exports.ProductsSchema = new mongoose_1.default.Schema({
     category: { type: String, required: true },
     images: { type: String, required: true },
     status: { type: String, required: true },
-    options: { type: String, required: true },
+    options: { type: String, required: false },
 });

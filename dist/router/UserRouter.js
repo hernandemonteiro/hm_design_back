@@ -60,4 +60,13 @@ userRouter.route("/users/:name/:email/:password/:type").put((req, res) => {
 userRouter.route("/login/:email/:password").get((req, res) => {
     return UsersController_1.default.login(req, res);
 });
+/*
+ * @description login route, generate a JWT;
+ * @param [email] used to find user;
+ * @param [password] used to find user;
+ * @return a JWT token;
+ */
+userRouter.route("/forgotPassword/:email").post((req, res) => {
+    return UsersController_1.default.forgotPassword(req, res);
+});
 exports.default = userRouter;

@@ -69,15 +69,26 @@ class UsersController {
     }
   }
 
-  async login(request: Request, response: Response){
-    try{
+  async login(request: Request, response: Response) {
+    try {
       const email: string = request.params.email;
       const password: string = request.params.password;
       let result = await this._service.login(email, password);
-      return response.status(200).json({result})
+      return response.status(200).json({ result });
     } catch (error: any) {
       response.status(500).json({ error: error.message || error.toString() });
     }
+  }
+
+  async forgotPassword(request: Request, response: Response) {
+    try {
+      const email = request.params.email;
+      let result = await this._service.forgotPassword(email);
+      response.status(200).json({ result });
+    } catch (error: any) {
+      response.status(500).json({ error: error.message || error.toString() });
+    }
+    
   }
 }
 

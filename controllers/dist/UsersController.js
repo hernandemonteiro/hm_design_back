@@ -179,6 +179,28 @@ var UsersController = /** @class */ (function () {
             });
         });
     };
+    UsersController.prototype.forgotPassword = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var email, result, error_7;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        email = request.params.email;
+                        return [4 /*yield*/, this._service.forgotPassword(email)];
+                    case 1:
+                        result = _a.sent();
+                        response.status(200).json({ result: result });
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_7 = _a.sent();
+                        response.status(500).json({ error: error_7.message || error_7.toString() });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return UsersController;
 }());
 exports["default"] = new UsersController();

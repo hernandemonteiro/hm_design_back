@@ -1,5 +1,6 @@
 import { iUsersService } from "../contracts/iUsersServices";
 import { UsersRepository } from "../repository/UsersRepository";
+const nodemailer = require("nodemailer");
 import CryptoJS from "crypto-js";
 
 export class UsersService implements iUsersService {
@@ -21,9 +22,9 @@ export class UsersService implements iUsersService {
   ) {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     const encryptedEmail = CryptoJS.SHA256(email).toString();
-    const userIsRegistered = await UsersRepository.find({ email: encryptedEmail }).count(
-      {}
-    );
+    const userIsRegistered = await UsersRepository.find({
+      email: encryptedEmail,
+    }).count({});
 
     if (userIsRegistered === 0) {
       let result = new UsersRepository({
@@ -73,7 +74,57 @@ export class UsersService implements iUsersService {
       email: encryptedEmail,
       password: encryptedPassword,
     });
-      return user;
-    
+    return user;
+  }
+
+  async forgotPassword(email: string) {
+    const encryptedEmail = CryptoJS.SHA256(email).toString();
+    const userIsRegistered = await UsersRepository.find({
+      email: encryptedEmail,
+    }).count({});
+    const transporter = nodemailer.createTransport({
+      service: "Hotmail",
+      auth: {
+        user: "hm_design_store@outlook.com",
+        pass: "Frangofrito23.",
+      },
+    });
+    const mailOptions = {
+      from: "hm_design_store@outlook.com",
+      to: email,
+      subject: "Recuperação de senha!",
+      html: `
+      <html>
+        <body style='display: flex; justify-content: center;
+          align-items: center; padding: 4%'>
+          <div style='width: 100%; text-align: center'>
+            <h1>HM Design</h1>
+            <br>
+            <p>
+            Você está prestes a recuperar sua senha!
+            <br><br>
+            Clique no botão abaixo para iniciar processo:
+            </p>
+            <br><br>
+            <a width='100%' href='https://hm-design.vercel.app/forgotpassword/${encryptedEmail}'>
+              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
+                RECUPERAR SENHA!
+              </button>
+            </a>
+          </div>
+        <body>
+      </html>
+      `,
+    };
+    if (userIsRegistered > 0) {
+      transporter.sendMail(mailOptions, function (error) {
+        if (error) {
+          return error;
+        }
+      });
+      return "Email enviado!";
+    } else {
+      return "Usuário não existe!";
+    }
   }
 }

@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const UsersRepository_1 = require("../repository/UsersRepository");
+const nodemailer = require("nodemailer");
 const crypto_js_1 = __importDefault(require("crypto-js"));
 class UsersService {
     get(_id) {
@@ -32,7 +33,9 @@ class UsersService {
         return __awaiter(this, void 0, void 0, function* () {
             const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
             const encryptedEmail = crypto_js_1.default.SHA256(email).toString();
-            const userIsRegistered = yield UsersRepository_1.UsersRepository.find({ email: encryptedEmail }).count({});
+            const userIsRegistered = yield UsersRepository_1.UsersRepository.find({
+                email: encryptedEmail,
+            }).count({});
             if (userIsRegistered === 0) {
                 let result = new UsersRepository_1.UsersRepository({
                     name: name,
@@ -83,6 +86,59 @@ class UsersService {
                 password: encryptedPassword,
             });
             return user;
+        });
+    }
+    forgotPassword(email) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const encryptedEmail = crypto_js_1.default.SHA256(email).toString();
+            const userIsRegistered = yield UsersRepository_1.UsersRepository.find({
+                email: encryptedEmail,
+            }).count({});
+            const transporter = nodemailer.createTransport({
+                service: "Hotmail",
+                auth: {
+                    user: "hm_design_store@outlook.com",
+                    pass: "Frangofrito23.",
+                },
+            });
+            const mailOptions = {
+                from: "hm_design_store@outlook.com",
+                to: email,
+                subject: "Recuperação de senha!",
+                html: `
+      <html>
+        <body style='display: flex; justify-content: center;
+          align-items: center; padding: 4%'>
+          <div style='width: 100%; text-align: center'>
+            <h1>HM Design</h1>
+            <br>
+            <p>
+            Você está prestes a recuperar sua senha!
+            <br><br>
+            Clique no botão abaixo para iniciar processo:
+            </p>
+            <br><br>
+            <a width='100%' href='https://hm-design.vercel.app/forgotpassword/${encryptedEmail}'>
+              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
+                RECUPERAR SENHA!
+              </button>
+            </a>
+          </div>
+        <body>
+      </html>
+      `,
+            };
+            if (userIsRegistered > 0) {
+                transporter.sendMail(mailOptions, function (error) {
+                    if (error) {
+                        return error;
+                    }
+                });
+                return "Email enviado!";
+            }
+            else {
+                return "Usuário não existe!";
+            }
         });
     }
 }

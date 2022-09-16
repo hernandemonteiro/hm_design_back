@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.UsersService = void 0;
 var UsersRepository_1 = require("../repository/UsersRepository");
+var nodemailer = require("nodemailer");
 var crypto_js_1 = require("crypto-js");
 var UsersService = /** @class */ (function () {
     function UsersService() {
@@ -76,7 +77,9 @@ var UsersService = /** @class */ (function () {
                     case 0:
                         encryptedPassword = crypto_js_1["default"].SHA256(password).toString();
                         encryptedEmail = crypto_js_1["default"].SHA256(email).toString();
-                        return [4 /*yield*/, UsersRepository_1.UsersRepository.find({ email: encryptedEmail }).count({})];
+                        return [4 /*yield*/, UsersRepository_1.UsersRepository.find({
+                                email: encryptedEmail
+                            }).count({})];
                     case 1:
                         userIsRegistered = _a.sent();
                         if (userIsRegistered === 0) {
@@ -155,6 +158,47 @@ var UsersService = /** @class */ (function () {
                     case 1:
                         user = _a.sent();
                         return [2 /*return*/, user];
+                }
+            });
+        });
+    };
+    UsersService.prototype.forgotPassword = function (email) {
+        return __awaiter(this, void 0, void 0, function () {
+            var encryptedEmail, userIsRegistered, transporter, mailOptions;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        encryptedEmail = crypto_js_1["default"].SHA256(email).toString();
+                        return [4 /*yield*/, UsersRepository_1.UsersRepository.find({
+                                email: encryptedEmail
+                            }).count({})];
+                    case 1:
+                        userIsRegistered = _a.sent();
+                        transporter = nodemailer.createTransport({
+                            service: "Hotmail",
+                            auth: {
+                                user: "hm_design_store@outlook.com",
+                                pass: "Frangofrito23."
+                            }
+                        });
+                        mailOptions = {
+                            from: "hm_design_store@outlook.com",
+                            to: email,
+                            subject: "Recuperação de senha!",
+                            html: "\n      <html>\n        <body style='display: flex; justify-content: center;\n          align-items: center; padding: 4%'>\n          <div style='width: 100%; text-align: center'>\n            <h1>HM Design</h1>\n            <br>\n            <p>\n            Voc\u00EA est\u00E1 prestes a recuperar sua senha!\n            <br><br>\n            Clique no bot\u00E3o abaixo para iniciar processo:\n            </p>\n            <br><br>\n            <a width='100%' href='https://hm-design.vercel.app/forgotpassword/" + encryptedEmail + "'>\n              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>\n                RECUPERAR SENHA!\n              </button>\n            </a>\n          </div>\n        <body>\n      </html>\n      "
+                        };
+                        if (userIsRegistered > 0) {
+                            transporter.sendMail(mailOptions, function (error) {
+                                if (error) {
+                                    return error;
+                                }
+                            });
+                            return [2 /*return*/, "Email enviado!"];
+                        }
+                        else {
+                            return [2 /*return*/, "Usuário não existe!"];
+                        }
+                        return [2 /*return*/];
                 }
             });
         });

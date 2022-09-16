@@ -8,4 +8,6 @@ export interface iUsersService {
   updateUser(id: string, name: string, email: string, password: string);
   
   login(email: string, password: string);
+
+  forgotPassword(email: string);
 }
