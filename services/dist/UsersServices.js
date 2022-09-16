@@ -178,7 +178,7 @@ var UsersService = /** @class */ (function () {
                             service: "Hotmail",
                             auth: {
                                 user: "hm_design_store@outlook.com",
-                                pass: "Frangofrito23."
+                                pass: process.env.EMAIL_PASSWORD
                             }
                         });
                         mailOptions = {
