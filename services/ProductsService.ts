@@ -35,7 +35,6 @@ export class ProductsService implements iProductsService {
     images: string,
     description: string,
     category: string,
-    status: string,
     options: string
   ) {
     let result = await new ProductsRepository({
@@ -44,7 +43,6 @@ export class ProductsService implements iProductsService {
       images: images,
       description: description,
       category: category,
-      status: status,
       options: options,
     });
     result.save();

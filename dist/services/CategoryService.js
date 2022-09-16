@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductsService = void 0;
+exports.CategoryService = void 0;
 const Result_1 = require("../infra/Result");
-const ProductsRepository_1 = require("../repository/ProductsRepository");
-class ProductsService {
+const CategoryRepository_1 = require("../repository/CategoryRepository");
+class CategoryService {
     get(_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.findById(_id);
+            let result = yield CategoryRepository_1.CategoryRepository.findById(_id);
             return result;
         });
     }
@@ -24,8 +24,8 @@ class ProductsService {
             let result = new Result_1.Result();
             result.Page = page;
             result.Qtd = qtd;
-            result.Total = yield ProductsRepository_1.ProductsRepository.count({});
-            result.Data = yield ProductsRepository_1.ProductsRepository.find({})
+            result.Total = yield CategoryRepository_1.CategoryRepository.count({});
+            result.Data = yield CategoryRepository_1.CategoryRepository.find({})
                 .skip(page * qtd - qtd)
                 .limit(qtd);
             return result;
@@ -33,41 +33,31 @@ class ProductsService {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.find({});
+            let result = yield CategoryRepository_1.CategoryRepository.find({});
             return result;
         });
     }
-    deleteProduct(id) {
+    registerCategory(category) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.findByIdAndDelete(id);
-            return result;
-        });
-    }
-    registerProduct(name, price, images, description, category, options) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let result = yield new ProductsRepository_1.ProductsRepository({
-                name: name,
-                price: price,
-                images: images,
-                description: description,
+            let result = yield new CategoryRepository_1.CategoryRepository({
                 category: category,
-                options: options,
             });
             result.save();
             return result;
         });
     }
-    updateProduct(id, name, price, images, description, status, options) {
+    deleteCategory(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield CategoryRepository_1.CategoryRepository.findByIdAndDelete(id);
+            return result;
+        });
+    }
+    updateCategory(id, category) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const updatedProduct = yield ProductsRepository_1.ProductsRepository.findOneAndUpdate({ _id: id }, {
+                const updatedCategory = yield CategoryRepository_1.CategoryRepository.findOneAndUpdate({ _id: id }, {
                     $set: {
-                        name: name,
-                        price: price,
-                        images: images,
-                        description: description,
-                        status: status,
-                        options: options,
+                        category: category,
                     },
                 });
                 return { status: "success" };
@@ -78,4 +68,4 @@ class ProductsService {
         });
     }
 }
-exports.ProductsService = ProductsService;
+exports.CategoryService = CategoryService;

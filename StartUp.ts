@@ -4,6 +4,7 @@ import userRouter from "./router/UserRouter";
 import productsRouter from "./router/ProductsRouter";
 import cartRouter from "./router/CartRouter";
 import orderRouter from "./router/OrderRouter";
+import categoryRouter from "./router/CategoryRouter";
 const cors = require("cors");
 
 class StartUp {
@@ -30,6 +31,7 @@ class StartUp {
     this.app.use("/", productsRouter);
     this.app.use("/", cartRouter);
     this.app.use("/", orderRouter);
+    this.app.use("/", categoryRouter)
   }
 }
 

@@ -1,11 +1,11 @@
-import { ProductsService } from "../services/ProductsService";
+import { CategoryService } from "../services/CategoryService";
 import { Request, Response } from "express";
 
-class ProductsController {
-  private _service: ProductsService;
+class CategoryController {
+  private _service: CategoryService;
 
   constructor() {
-    this._service = new ProductsService();
+    this._service = new CategoryService();
   }
 
   async get(request: Request, response: Response) {
@@ -38,56 +38,31 @@ class ProductsController {
     }
   }
 
-  async deleteProduct(request: Request, response: Response) {
+  async registerCategory(request: Request, response: Response) {
     try {
-      const id = request.params.id;
-      let result = await this._service.deleteProduct(id);
-      response.status(200).json({ result });
-    } catch (error) {
-      response.status(500).json("Error: " + error);
-    }
-  }
-
-  async registerProduct(request: Request, response: Response) {
-    try {
-      const name = request.params.name;
-      const price = request.params.price;
-      const description = request.params.description;
       const category = request.params.category;
-      const images = request.params.images;
-      const options = request.params.options;
-      let result = await this._service.registerProduct(
-        name,
-        price,
-        images,
-        description,
-        category,
-        options
-      );
+      let result = await this._service.registerCategory(category);
+      response.status(200).json({ result });
+    } catch (error: any) {
+      response.status(500).json({ error: error.message || error.toString() });
+    }
+  }
+
+  async deleteCategory(request: Request, response: Response) {
+    try {
+      const id = request.params.id;
+      let result = await this._service.deleteCategory(id);
       response.status(200).json({ result });
     } catch (error) {
       response.status(500).json("Error: " + error);
     }
   }
 
-  async updateProduct(request: Request, response: Response) {
+  async updateCategory(request: Request, response: Response) {
     try {
       const id = request.params.id;
-      const name = request.params.name;
-      const price = request.params.price;
-      const description = request.params.description;
-      const images = request.params.images;
-      const status = request.params.status;
-      const options = request.params.options;
-      let result = await this._service.updateProduct(
-        id,
-        name,
-        price,
-        description,
-        images,
-        status,
-        options
-      );
+      const category = request.params.category;
+      let result = await this._service.updateCategory(id, category);
       response.status(200).json({ result });
     } catch (error) {
       response.status(500).json("Error: " + error);
@@ -95,4 +70,4 @@ class ProductsController {
   }
 }
 
-export default new ProductsController();
+export default new CategoryController();

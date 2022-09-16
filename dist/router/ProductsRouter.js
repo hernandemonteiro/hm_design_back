@@ -19,7 +19,7 @@ productsRouter.route("/product/:id").delete((req, res) => {
     return ProductsController_1.default.deleteProduct(req, res);
 });
 productsRouter
-    .route("/product/:name/:price/:images/:description/:category/:status/:options")
+    .route("/product/:name/:price/:images/:description/:category/:options")
     .put((req, res) => {
     return ProductsController_1.default.registerProduct(req, res);
 });

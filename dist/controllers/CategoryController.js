@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ProductsService_1 = require("../services/ProductsService");
-class ProductsController {
+const CategoryService_1 = require("../services/CategoryService");
+class CategoryController {
     constructor() {
-        this._service = new ProductsService_1.ProductsService();
+        this._service = new CategoryService_1.CategoryService();
     }
     get(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -50,28 +50,23 @@ class ProductsController {
             }
         });
     }
-    deleteProduct(request, response) {
+    registerCategory(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const id = request.params.id;
-                let result = yield this._service.deleteProduct(id);
-                response.status(200).json({ result });
-            }
-            catch (error) {
-                response.status(500).json("Error: " + error);
-            }
-        });
-    }
-    registerProduct(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const name = request.params.name;
-                const price = request.params.price;
-                const description = request.params.description;
                 const category = request.params.category;
-                const images = request.params.images;
-                const options = request.params.options;
-                let result = yield this._service.registerProduct(name, price, images, description, category, options);
+                let result = yield this._service.registerCategory(category);
+                response.status(200).json({ result });
+            }
+            catch (error) {
+                response.status(500).json({ error: error.message || error.toString() });
+            }
+        });
+    }
+    deleteCategory(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const id = request.params.id;
+                let result = yield this._service.deleteCategory(id);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -79,17 +74,12 @@ class ProductsController {
             }
         });
     }
-    updateProduct(request, response) {
+    updateCategory(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id = request.params.id;
-                const name = request.params.name;
-                const price = request.params.price;
-                const description = request.params.description;
-                const images = request.params.images;
-                const status = request.params.status;
-                const options = request.params.options;
-                let result = yield this._service.updateProduct(id, name, price, description, images, status, options);
+                const category = request.params.category;
+                let result = yield this._service.updateCategory(id, category);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -98,4 +88,4 @@ class ProductsController {
         });
     }
 }
-exports.default = new ProductsController();
+exports.default = new CategoryController();
