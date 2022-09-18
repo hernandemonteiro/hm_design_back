@@ -23,7 +23,7 @@ forgotPasswordRouter.route("/confirmHash/:hash").get((req, res) => {
  /*
  * @description this route find a hash in forgotPassword Collection;
  * @param [hash] used to find hash;
- * @return [1] == Sucess or [0] == notfound;
+ * @return Sucess or Failure in string;
  */
  forgotPasswordRouter.route("/updatePassword/:hash/:password").put((req, res) => {
   return ForgotPasswordController.updatePassword(req, res);
