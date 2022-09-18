@@ -162,48 +162,6 @@ var UsersService = /** @class */ (function () {
             });
         });
     };
-    UsersService.prototype.forgotPassword = function (email) {
-        return __awaiter(this, void 0, void 0, function () {
-            var encryptedEmail, encryptedHash, userIsRegistered, transporter, mailOptions;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        encryptedEmail = crypto_js_1["default"].SHA256(email).toString();
-                        encryptedHash = crypto_js_1["default"].SHA256(process.env.HASH_SECRET).toString();
-                        return [4 /*yield*/, UsersRepository_1.UsersRepository.find({
-                                email: encryptedEmail
-                            }).count({})];
-                    case 1:
-                        userIsRegistered = _a.sent();
-                        transporter = nodemailer.createTransport({
-                            service: "Hotmail",
-                            auth: {
-                                user: "hm_design_store@outlook.com",
-                                pass: process.env.EMAIL_PASSWORD
-                            }
-                        });
-                        mailOptions = {
-                            from: "hm_design_store@outlook.com",
-                            to: email,
-                            subject: "Recuperação de senha!",
-                            html: "\n      <html>\n        <body style='display: flex; justify-content: center;\n          align-items: center; padding: 4%'>\n          <div style='width: 100%; text-align: center'>\n            <h1>HM Design</h1>\n            <br>\n            <p>\n            Voc\u00EA est\u00E1 prestes a recuperar sua senha!\n            <br><br>\n            Clique no bot\u00E3o abaixo para iniciar processo:\n            </p>\n            <br><br>\n            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/" + encryptedEmail + "/" + encryptedHash + "'>\n              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>\n                RECUPERAR SENHA!\n              </button>\n            </a>\n          </div>\n        <body>\n      </html>\n      "
-                        };
-                        if (userIsRegistered > 0) {
-                            transporter.sendMail(mailOptions, function (error) {
-                                if (error) {
-                                    return error;
-                                }
-                            });
-                            return [2 /*return*/, "Email enviado!"];
-                        }
-                        else {
-                            return [2 /*return*/, "Usuário não existe!"];
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
     return UsersService;
 }());
 exports.UsersService = UsersService;

@@ -79,17 +79,6 @@ class UsersController {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
-
-  async forgotPassword(request: Request, response: Response) {
-    try {
-      const email = request.params.email;
-      let result = await this._service.forgotPassword(email);
-      response.status(200).json({ result });
-    } catch (error: any) {
-      response.status(500).json({ error: error.message || error.toString() });
-    }
-    
-  }
 }
 
 export default new UsersController();

@@ -10,6 +10,7 @@ const ProductsRouter_1 = __importDefault(require("./router/ProductsRouter"));
 const CartRouter_1 = __importDefault(require("./router/CartRouter"));
 const OrderRouter_1 = __importDefault(require("./router/OrderRouter"));
 const CategoryRouter_1 = __importDefault(require("./router/CategoryRouter"));
+const ForgotPasswordRouter_1 = __importDefault(require("./router/ForgotPasswordRouter"));
 const cors = require("cors");
 class StartUp {
     constructor() {
@@ -32,6 +33,7 @@ class StartUp {
         this.app.use("/", CartRouter_1.default);
         this.app.use("/", OrderRouter_1.default);
         this.app.use("/", CategoryRouter_1.default);
+        this.app.use("/", ForgotPasswordRouter_1.default);
     }
 }
 exports.default = new StartUp();

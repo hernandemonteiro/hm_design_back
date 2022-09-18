@@ -93,17 +93,5 @@ class UsersController {
             }
         });
     }
-    forgotPassword(request, response) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const email = request.params.email;
-                let result = yield this._service.forgotPassword(email);
-                response.status(200).json({ result });
-            }
-            catch (error) {
-                response.status(500).json({ error: error.message || error.toString() });
-            }
-        });
-    }
 }
 exports.default = new UsersController();

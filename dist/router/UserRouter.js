@@ -24,7 +24,4 @@ userRouter.route("/users/:name/:email/:password/:type").put((req, res) => {
 userRouter.route("/login/:email/:password").get((req, res) => {
     return UsersController_1.default.login(req, res);
 });
-userRouter.route("/forgotPassword/:email").post((req, res) => {
-    return UsersController_1.default.forgotPassword(req, res);
-});
 exports.default = userRouter;
