@@ -59,7 +59,7 @@ userRouter.route("/users/:name/:email/:password/:type").put((req, res) => {
  * @param [password] used to find user;
  * @return a JWT token;
  */
-userRouter.route("/login/:email/:password").post((req, res) => {
+userRouter.route("/login/:email/:password").get((req, res) => {
   return UsersController.login(req, res);
 });
 
