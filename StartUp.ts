@@ -20,17 +20,17 @@ class StartUp {
   }
 
   routes() {
-    this.app.use(express.json());
+    // this.app.use(express.json());
     // this.app.use("*", function (req, res, next) {
-    //   const token = req.headers.token;
+    //   const Authenticate = req.headers;
     //   var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
     //   const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-    //   const tokenDecrypted = CryptoJS.AES.decrypt(token, secret, {
+    //   const tokenDecrypted = CryptoJS.AES.decrypt(Authenticate, secret, {
     //     iv: iv,
     //     mode: CryptoJS.mode.CBC,
     //     padding: CryptoJS.pad.Pkcs7,
     //   }).toString(CryptoJS.enc.Utf8);
-    //   console.log(token)
+    //   console.log(Authenticate)
     //   if (tokenDecrypted === process.env.HASH_SECRET) {
     //     next();
     //   } else {

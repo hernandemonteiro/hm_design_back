@@ -20,7 +20,6 @@ class StartUp {
         this.routes();
     }
     routes() {
-        this.app.use(express_1.default.json());
         this.app.use(cors({
             origin: ["http://localhost:3000", "https://hm-design.vercel.app"],
         }));
