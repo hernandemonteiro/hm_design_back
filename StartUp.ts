@@ -19,7 +19,7 @@ class StartUp {
   }
 
   routes() {
-    this.app.use(cors({ origin: 'http://example.com' }));
+    this.app.use(cors({origin: "https://hm-design.vercel.app"}));
     this.app.use("/", userRouter);
     this.app.use("/", productsRouter);
     this.app.use("/", cartRouter);
