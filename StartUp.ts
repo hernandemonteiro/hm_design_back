@@ -20,7 +20,7 @@ class StartUp {
 
   routes() {
     let corsOptions = {
-      origin: ['http://hm-design.vercel.app'],
+      origin: ['https://hm-design.vercel.app'],
       optionsSuccessStatus: 200
     };
 
