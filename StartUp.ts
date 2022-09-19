@@ -20,7 +20,7 @@ class StartUp {
 
   routes() {
     let corsOptions = {
-      origin: "http://example.com",
+      origin: false,
       optionsSuccessStatus: 200
     };
 

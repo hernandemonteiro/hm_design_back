@@ -21,7 +21,7 @@ class StartUp {
     }
     routes() {
         let corsOptions = {
-            origin: "*",
+            origin: false,
             optionsSuccessStatus: 200
         };
         this.app.use(cors(corsOptions));
