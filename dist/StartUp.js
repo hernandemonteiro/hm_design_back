@@ -20,13 +20,7 @@ class StartUp {
         this.routes();
     }
     routes() {
-        let corsOptions = {
-            Origin: "*",
-            methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-            preflightContinue: false,
-            optionsSuccessStatus: 204,
-        };
-        this.app.use(cors(corsOptions));
+        this.app.use(cors({ origin: 'http://example.com' }));
         this.app.use("/", UserRouter_1.default);
         this.app.use("/", ProductsRouter_1.default);
         this.app.use("/", CartRouter_1.default);
