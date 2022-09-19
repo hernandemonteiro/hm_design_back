@@ -21,7 +21,7 @@ userRouter.route("/users/:id").delete((req, res) => {
 userRouter.route("/users/:name/:email/:password/:type").put((req, res) => {
     return UsersController_1.default.userRegister(req, res);
 });
-userRouter.route("/login/:email/:password").get((req, res) => {
+userRouter.route("/login/:email/:password").post((req, res) => {
     return UsersController_1.default.login(req, res);
 });
 exports.default = userRouter;

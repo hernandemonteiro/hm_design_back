@@ -21,24 +21,24 @@ class StartUp {
 
   routes() {
     this.app.use(express.json());
-    this.app.use("*", function (req, res, next) {
-      const token = req.headers.token;
-      var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
-      const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-      const tokenDecrypted = CryptoJS.AES.decrypt(token, secret, {
-        iv: iv,
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7,
-      }).toString(CryptoJS.enc.Utf8);
-      console.log(token)
-      if (tokenDecrypted == process.env.HASH_SECRET) {
-        next();
-      } else {
-        var err = new Error("You are not authenticated!");
-        res.setHeader("WWW-Authenticate", "Basic");
-        return next(err);
-      }
-    });
+    // this.app.use("*", function (req, res, next) {
+    //   const token = req.headers.token;
+    //   var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
+    //   const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
+    //   const tokenDecrypted = CryptoJS.AES.decrypt(token, secret, {
+    //     iv: iv,
+    //     mode: CryptoJS.mode.CBC,
+    //     padding: CryptoJS.pad.Pkcs7,
+    //   }).toString(CryptoJS.enc.Utf8);
+    //   console.log(token)
+    //   if (tokenDecrypted === process.env.HASH_SECRET) {
+    //     next();
+    //   } else {
+    //     var err = new Error("You are not authenticated!");
+    //     res.setHeader("WWW-Authenticate", "Basic");
+    //     return next(err);
+    //   }
+    // });
     this.app.use(
       cors({
         origin: ["http://localhost:3000", "https://hm-design.vercel.app"],
