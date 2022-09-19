@@ -15,18 +15,19 @@ const cors = require("cors");
 class StartUp {
     constructor() {
         this._db = new db_1.default();
+        this.hashSecurity = `/${process.env.HASH_SECRET}/`;
         this.app = (0, express_1.default)();
         this._db.createConnection();
         this.routes();
     }
     routes() {
         this.app.use(cors({ origin: "https://hm-design.vercel.app" }));
-        this.app.use("/", UserRouter_1.default);
-        this.app.use("/", ProductsRouter_1.default);
-        this.app.use("/", CartRouter_1.default);
-        this.app.use("/", OrderRouter_1.default);
-        this.app.use("/", CategoryRouter_1.default);
-        this.app.use("/", ForgotPasswordRouter_1.default);
+        this.app.use(this.hashSecurity, UserRouter_1.default);
+        this.app.use(this.hashSecurity, ProductsRouter_1.default);
+        this.app.use(this.hashSecurity, CartRouter_1.default);
+        this.app.use(this.hashSecurity, OrderRouter_1.default);
+        this.app.use(this.hashSecurity, CategoryRouter_1.default);
+        this.app.use(this.hashSecurity, ForgotPasswordRouter_1.default);
     }
 }
 exports.default = new StartUp();
