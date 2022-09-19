@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var UsersServices_1 = require("../services/UsersServices");
+var crypto_js_1 = require("crypto-js");
 var UsersController = /** @class */ (function () {
     function UsersController() {
         this._service = new UsersServices_1.UsersService();
@@ -159,7 +160,7 @@ var UsersController = /** @class */ (function () {
     };
     UsersController.prototype.login = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var email, password, result, error_6;
+            var email, password, result, convertResult, iv, secret, jwt, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -169,7 +170,18 @@ var UsersController = /** @class */ (function () {
                         return [4 /*yield*/, this._service.login(email, password)];
                     case 1:
                         result = _a.sent();
-                        return [2 /*return*/, response.status(200).json({ result: result })];
+                        convertResult = JSON.stringify({
+                            id: result._id,
+                            type: result.type
+                        });
+                        iv = crypto_js_1["default"].enc.Base64.parse(process.env.HASH_SECRET);
+                        secret = crypto_js_1["default"].SHA256(process.env.HASH_SECRET);
+                        jwt = crypto_js_1["default"].AES.encrypt(convertResult, secret, {
+                            iv: iv,
+                            mode: crypto_js_1["default"].mode.CBC,
+                            padding: crypto_js_1["default"].pad.Pkcs7
+                        }).toString();
+                        return [2 /*return*/, response.status(200).json({ jwt: jwt })];
                     case 2:
                         error_6 = _a.sent();
                         response.status(500).json({ error: error_6.message || error_6.toString() });

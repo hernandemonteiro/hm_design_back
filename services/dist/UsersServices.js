@@ -38,7 +38,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 exports.UsersService = void 0;
 var UsersRepository_1 = require("../repository/UsersRepository");
-var nodemailer = require("nodemailer");
 var crypto_js_1 = require("crypto-js");
 var UsersService = /** @class */ (function () {
     function UsersService() {

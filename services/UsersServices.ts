@@ -1,8 +1,6 @@
 import { iUsersService } from "../contracts/iUsersServices";
 import { UsersRepository } from "../repository/UsersRepository";
-const nodemailer = require("nodemailer");
 import CryptoJS from "crypto-js";
-import { ForgotPasswordRepository } from "../repository/ForgotPasswordRepository";
 
 export class UsersService implements iUsersService {
   async get(_id: string) {
@@ -70,7 +68,6 @@ export class UsersService implements iUsersService {
   async login(email: string, password: string) {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     const encryptedEmail = CryptoJS.SHA256(email).toString();
-
     const user = await UsersRepository.findOne({
       email: encryptedEmail,
       password: encryptedPassword,

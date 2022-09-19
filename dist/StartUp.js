@@ -21,11 +21,8 @@ class StartUp {
     }
     routes() {
         let corsOptions = {
-            origin: "*",
-            "Access-Control-Allow-Origin": "*",
-            methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-            preflightContinue: false,
-            optionsSuccessStatus: 204,
+            origin: ['http://179.253.246.228', 'http://example.com'],
+            optionsSuccessStatus: 200
         };
         this.app.use(cors(corsOptions));
         this.app.use("/", UserRouter_1.default);

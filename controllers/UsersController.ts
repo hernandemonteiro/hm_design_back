@@ -1,5 +1,6 @@
 import { UsersService } from "../services/UsersServices";
 import { Request, Response } from "express";
+import CryptoJS from "crypto-js";
 
 class UsersController {
   private _service: UsersService;
@@ -74,7 +75,20 @@ class UsersController {
       const email: string = request.params.email;
       const password: string = request.params.password;
       let result = await this._service.login(email, password);
-      return response.status(200).json({ result });
+      const convertResult = JSON.stringify({
+        id: result._id,
+        type: result.type,
+      });
+      // encrypted hash;
+      var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
+      const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
+      const jwt = CryptoJS.AES.encrypt(convertResult, secret, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7,
+      }).toString();
+
+      return response.status(200).json({ jwt });
     } catch (error: any) {
       response.status(500).json({ error: error.message || error.toString() });
     }

@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const UsersRepository_1 = require("../repository/UsersRepository");
-const nodemailer = require("nodemailer");
 const crypto_js_1 = __importDefault(require("crypto-js"));
 class UsersService {
     get(_id) {
