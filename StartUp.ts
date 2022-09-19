@@ -41,7 +41,7 @@ class StartUp {
     // });
     this.app.use(
       cors({
-        origin: ["http://localhost:3000", "https://hm-design.vercel.app"],
+        origin: [process.env.ORIGIN, "https://hm-design.vercel.app"],
       })
     );
     this.app.use("/", userRouter);
