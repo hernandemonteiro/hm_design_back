@@ -20,8 +20,10 @@ class StartUp {
 
   routes() {
     let corsOptions = {
-      origin: false,
-      optionsSuccessStatus: 200
+      Origin: "*",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      preflightContinue: false,
+      optionsSuccessStatus: 204,
     };
 
     this.app.use(cors(corsOptions));
