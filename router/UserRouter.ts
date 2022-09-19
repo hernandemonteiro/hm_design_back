@@ -38,7 +38,8 @@ userRouter.route("/users/update/:id/:name/:email/:password").put((req, res) => {
  * @return a JSON with the deleted user;
  */
 userRouter.route("/users/:id").delete((req, res) => {
-  return UsersController.deleteUser(req, res);
+    return UsersController.deleteUser(req, res);
+  
 });
 
 /*
@@ -62,6 +63,5 @@ userRouter.route("/users/:name/:email/:password/:type").put((req, res) => {
 userRouter.route("/login/:email/:password").get((req, res) => {
   return UsersController.login(req, res);
 });
-
 
 export default userRouter;

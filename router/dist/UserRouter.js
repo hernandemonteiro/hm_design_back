@@ -54,7 +54,7 @@ userRouter.route("/users/:name/:email/:password/:type").put(function (req, res) 
  * @param [password] used to find user;
  * @return a JWT token;
  */
-userRouter.route("/login/:email/:password").post(function (req, res) {
+userRouter.route("/login/:email/:password").get(function (req, res) {
     return UsersController_1["default"].login(req, res);
 });
 exports["default"] = userRouter;
