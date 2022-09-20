@@ -23,7 +23,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
 
     // // configs to reposite the hashs
     const hashExists = await ForgotPasswordRepository.find({
-      hash: hash,
+      hash: `[${hash}]`,
     }).count({});
     const recoveryRepository = new ForgotPasswordRepository({
       hash: `[${hash}]`,
@@ -83,7 +83,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
 
   async confirmHash(hash: string) {
     const hashExists = await ForgotPasswordRepository.find({
-      hash: hash[0],
+      hash: hash,
     }).count({});
     return hashExists;
   }

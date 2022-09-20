@@ -33,7 +33,7 @@ class ForgotPasswordService {
                 email: encryptedEmail,
             }).count({});
             const hashExists = yield ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                hash: hash,
+                hash: `[${hash}]`,
             }).count({});
             const recoveryRepository = new ForgotPasswordRepository_1.ForgotPasswordRepository({
                 hash: `[${hash}]`,
@@ -91,7 +91,7 @@ class ForgotPasswordService {
     confirmHash(hash) {
         return __awaiter(this, void 0, void 0, function* () {
             const hashExists = yield ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                hash: hash[0],
+                hash: hash,
             }).count({});
             return hashExists;
         });

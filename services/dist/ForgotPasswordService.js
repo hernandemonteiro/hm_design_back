@@ -65,7 +65,7 @@ var ForgotPasswordService = /** @class */ (function () {
                     case 1:
                         userIsRegistered = _a.sent();
                         return [4 /*yield*/, ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                                hash: hash
+                                hash: "[" + hash + "]"
                             }).count({})];
                     case 2:
                         hashExists = _a.sent();
@@ -112,7 +112,7 @@ var ForgotPasswordService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                            hash: hash[0]
+                            hash: hash
                         }).count({})];
                     case 1:
                         hashExists = _a.sent();
