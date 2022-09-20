@@ -83,17 +83,16 @@ export class ForgotPasswordService implements iForgotPasswordService {
 
   async confirmHash(hash: string) {
     const hashExists = await ForgotPasswordRepository.find({
-      hash: hash,
+      hash: hash[0],
     }).count({});
     return hashExists;
   }
 
   async updatePassword(hash: string, password: string) {
-    const hashInitial = hash.replace("___", "/");
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
     const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-    const hashDecrypted = CryptoJS.AES.decrypt(hashInitial, secret, {
+    const hashDecrypted = CryptoJS.AES.decrypt(hash[0], secret, {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,

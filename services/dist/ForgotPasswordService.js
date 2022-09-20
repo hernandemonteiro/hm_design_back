@@ -112,7 +112,7 @@ var ForgotPasswordService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                            hash: hash
+                            hash: hash[0]
                         }).count({})];
                     case 1:
                         hashExists = _a.sent();
@@ -123,15 +123,14 @@ var ForgotPasswordService = /** @class */ (function () {
     };
     ForgotPasswordService.prototype.updatePassword = function (hash, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var hashInitial, encryptedPassword, iv, secret, hashDecrypted, deletehash, updatePassword;
+            var encryptedPassword, iv, secret, hashDecrypted, deletehash, updatePassword;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        hashInitial = hash.replace("___", "/");
                         encryptedPassword = crypto_js_1["default"].SHA256(password).toString();
                         iv = crypto_js_1["default"].enc.Base64.parse(process.env.HASH_SECRET);
                         secret = crypto_js_1["default"].SHA256(process.env.HASH_SECRET);
-                        hashDecrypted = crypto_js_1["default"].AES.decrypt(hashInitial, secret, {
+                        hashDecrypted = crypto_js_1["default"].AES.decrypt(hash[0], secret, {
                             iv: iv,
                             mode: crypto_js_1["default"].mode.CBC,
                             padding: crypto_js_1["default"].pad.Pkcs7

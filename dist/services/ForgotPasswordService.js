@@ -91,18 +91,17 @@ class ForgotPasswordService {
     confirmHash(hash) {
         return __awaiter(this, void 0, void 0, function* () {
             const hashExists = yield ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                hash: hash,
+                hash: hash[0],
             }).count({});
             return hashExists;
         });
     }
     updatePassword(hash, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const hashInitial = hash.replace("___", "/");
             const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
             var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
             const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
-            const hashDecrypted = crypto_js_1.default.AES.decrypt(hashInitial, secret, {
+            const hashDecrypted = crypto_js_1.default.AES.decrypt(hash[0], secret, {
                 iv: iv,
                 mode: crypto_js_1.default.mode.CBC,
                 padding: crypto_js_1.default.pad.Pkcs7,
