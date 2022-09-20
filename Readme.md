@@ -1,10 +1,8 @@
-# Hm-design - server
+# Hm-design - Back-end
 
 ## Description:
 
-this aplication is an back-end provider to hm-design e-commerce;
-### OS development:
-![Linux Mint](https://img.shields.io/badge/Linux%20Mint-87CF3E?style=for-the-badge&logo=Linux%20Mint&logoColor=white)
+print shop e-commerce back-end provider [hm-design];
 ### Development Languages and tests:
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
@@ -18,5 +16,5 @@ this aplication is an back-end provider to hm-design e-commerce;
 <br>
 [![server_hm_design - CI](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.yml/badge.svg)](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.yml)
 ### Platform Deploy:
-![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+[![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](https://server-two-liart.vercel.app/)
 
