@@ -46,7 +46,7 @@ var ForgotPasswordService = /** @class */ (function () {
     }
     ForgotPasswordService.prototype.forgotPassword = function (email) {
         return __awaiter(this, void 0, void 0, function () {
-            var encryptedEmail, iv, secret, hash, userIsRegistered, hashExists, recoveryRepository, transporter, mailOptions;
+            var encryptedEmail, iv, secret, hash, hashFormated, userIsRegistered, hashExists, recoveryRepository, transporter, mailOptions;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -57,20 +57,20 @@ var ForgotPasswordService = /** @class */ (function () {
                             iv: iv,
                             mode: crypto_js_1["default"].mode.CBC,
                             padding: crypto_js_1["default"].pad.Pkcs7
-                        })
-                            .toString();
+                        }).toString();
+                        hashFormated = hash.split("/").join("___");
                         return [4 /*yield*/, UsersRepository_1.UsersRepository.find({
                                 email: encryptedEmail
                             }).count({})];
                     case 1:
                         userIsRegistered = _a.sent();
                         return [4 /*yield*/, ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                                hash: "[" + hash + "]"
+                                hash: hashFormated
                             }).count({})];
                     case 2:
                         hashExists = _a.sent();
                         recoveryRepository = new ForgotPasswordRepository_1.ForgotPasswordRepository({
-                            hash: "[" + hash + "]"
+                            hash: hashFormated
                         });
                         transporter = nodemailer.createTransport({
                             service: "Hotmail",
@@ -83,7 +83,7 @@ var ForgotPasswordService = /** @class */ (function () {
                             from: "hm_design_store@outlook.com",
                             to: email,
                             subject: "Recuperação de senha!",
-                            html: "\n      <html>\n        <body style='display: flex; justify-content: center;\n          align-items: center; padding: 4%'>\n          <div style='width: 100%; text-align: center'>\n            <h1>HM Design</h1>\n            <br>\n            <p>\n            Voc\u00EA est\u00E1 prestes a recuperar sua senha!\n            <br><br>\n            Clique no bot\u00E3o abaixo para iniciar processo:\n            </p>\n            <br><br>\n            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/[" + hash + "]'>\n              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>\n                RECUPERAR SENHA!\n              </button>\n            </a>\n          </div>\n        <body>\n      </html>\n      "
+                            html: "\n      <html>\n        <body style='display: flex; justify-content: center;\n          align-items: center; padding: 4%'>\n          <div style='width: 100%; text-align: center'>\n            <h1>HM Design</h1>\n            <br>\n            <p>\n            Voc\u00EA est\u00E1 prestes a recuperar sua senha!\n            <br><br>\n            Clique no bot\u00E3o abaixo para iniciar processo:\n            </p>\n            <br><br>\n            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/" + hashFormated + "'>\n              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>\n                RECUPERAR SENHA!\n              </button>\n            </a>\n          </div>\n        <body>\n      </html>\n      "
                         };
                         if (userIsRegistered > 0) {
                             // send the email
@@ -123,19 +123,22 @@ var ForgotPasswordService = /** @class */ (function () {
     };
     ForgotPasswordService.prototype.updatePassword = function (hash, password) {
         return __awaiter(this, void 0, void 0, function () {
-            var encryptedPassword, iv, secret, hashDecrypted, deletehash, updatePassword;
+            var hashFormated, encryptedPassword, iv, secret, hashDecrypted, deletehash, updatePassword;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        hashFormated = hash.split("___").join("/");
                         encryptedPassword = crypto_js_1["default"].SHA256(password).toString();
                         iv = crypto_js_1["default"].enc.Base64.parse(process.env.HASH_SECRET);
                         secret = crypto_js_1["default"].SHA256(process.env.HASH_SECRET);
-                        hashDecrypted = crypto_js_1["default"].AES.decrypt(hash, secret, {
+                        hashDecrypted = crypto_js_1["default"].AES.decrypt(hashFormated, secret, {
                             iv: iv,
                             mode: crypto_js_1["default"].mode.CBC,
                             padding: crypto_js_1["default"].pad.Pkcs7
                         }).toString(crypto_js_1["default"].enc.Utf8);
-                        return [4 /*yield*/, ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({ hash: hash })];
+                        return [4 /*yield*/, ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({
+                                hash: hash
+                            })];
                     case 1:
                         deletehash = _a.sent();
                         return [4 /*yield*/, UsersRepository_1.UsersRepository.findOneAndUpdate({ email: hashDecrypted }, { $set: { password: encryptedPassword } })];

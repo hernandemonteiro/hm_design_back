@@ -13,9 +13,8 @@ export class ForgotPasswordService implements iForgotPasswordService {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
-    })
-      .toString()
-      
+    }).toString();
+    const hashFormated = hash.split("/").join("___");
     // verify if user is registered
     const userIsRegistered = await UsersRepository.find({
       email: encryptedEmail,
@@ -23,10 +22,10 @@ export class ForgotPasswordService implements iForgotPasswordService {
 
     // // configs to reposite the hashs
     const hashExists = await ForgotPasswordRepository.find({
-      hash: `[${hash}]`,
+      hash: hashFormated,
     }).count({});
     const recoveryRepository = new ForgotPasswordRepository({
-      hash: `[${hash}]`,
+      hash: hashFormated,
     });
 
     // configs to email sender
@@ -54,7 +53,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
             Clique no botão abaixo para iniciar processo:
             </p>
             <br><br>
-            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/[${hash}]'>
+            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/${hashFormated}'>
               <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
                 RECUPERAR SENHA!
               </button>
@@ -89,22 +88,25 @@ export class ForgotPasswordService implements iForgotPasswordService {
   }
 
   async updatePassword(hash: string, password: string) {
+    const hashFormated = hash.split("___").join("/");
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
     const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-    const hashDecrypted = CryptoJS.AES.decrypt(hash, secret, {
+    const hashDecrypted = CryptoJS.AES.decrypt(hashFormated, secret, {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
     }).toString(CryptoJS.enc.Utf8);
-    const deletehash = await ForgotPasswordRepository.findOneAndDelete({hash: hash});
+    const deletehash = await ForgotPasswordRepository.findOneAndDelete({
+      hash: hash,
+    });
     const updatePassword = await UsersRepository.findOneAndUpdate(
       { email: hashDecrypted },
       { $set: { password: encryptedPassword } }
     );
     // implement a method to delete the hash in the forgotPassword collection
 
-    if(updatePassword && deletehash){
+    if (updatePassword && deletehash) {
       return "Success";
     }
     return "Failure";

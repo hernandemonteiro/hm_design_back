@@ -27,16 +27,16 @@ class ForgotPasswordService {
                 iv: iv,
                 mode: crypto_js_1.default.mode.CBC,
                 padding: crypto_js_1.default.pad.Pkcs7,
-            })
-                .toString();
+            }).toString();
+            const hashFormated = hash.split("/").join("___");
             const userIsRegistered = yield UsersRepository_1.UsersRepository.find({
                 email: encryptedEmail,
             }).count({});
             const hashExists = yield ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                hash: `[${hash}]`,
+                hash: hashFormated,
             }).count({});
             const recoveryRepository = new ForgotPasswordRepository_1.ForgotPasswordRepository({
-                hash: `[${hash}]`,
+                hash: hashFormated,
             });
             const transporter = nodemailer.createTransport({
                 service: "Hotmail",
@@ -62,7 +62,7 @@ class ForgotPasswordService {
             Clique no botão abaixo para iniciar processo:
             </p>
             <br><br>
-            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/[${hash}]'>
+            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/${hashFormated}'>
               <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
                 RECUPERAR SENHA!
               </button>
@@ -98,15 +98,18 @@ class ForgotPasswordService {
     }
     updatePassword(hash, password) {
         return __awaiter(this, void 0, void 0, function* () {
+            const hashFormated = hash.split("___").join("/");
             const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
             var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
             const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
-            const hashDecrypted = crypto_js_1.default.AES.decrypt(hash, secret, {
+            const hashDecrypted = crypto_js_1.default.AES.decrypt(hashFormated, secret, {
                 iv: iv,
                 mode: crypto_js_1.default.mode.CBC,
                 padding: crypto_js_1.default.pad.Pkcs7,
             }).toString(crypto_js_1.default.enc.Utf8);
-            const deletehash = yield ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({ hash: hash });
+            const deletehash = yield ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({
+                hash: hash,
+            });
             const updatePassword = yield UsersRepository_1.UsersRepository.findOneAndUpdate({ email: hashDecrypted }, { $set: { password: encryptedPassword } });
             if (updatePassword && deletehash) {
                 return "Success";
