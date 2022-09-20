@@ -98,7 +98,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
       padding: CryptoJS.pad.Pkcs7,
     }).toString(CryptoJS.enc.Utf8);
     const deletehash = await ForgotPasswordRepository.findOneAndDelete({
-      hash: hashFormated,
+      hash: hash,
     });
     const updatePassword = await UsersRepository.findOneAndUpdate(
       { email: hashDecrypted },
