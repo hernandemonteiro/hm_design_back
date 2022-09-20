@@ -108,7 +108,7 @@ class ForgotPasswordService {
                 padding: crypto_js_1.default.pad.Pkcs7,
             }).toString(crypto_js_1.default.enc.Utf8);
             const deletehash = yield ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({
-                hash: hash,
+                hash: hashFormated,
             });
             const updatePassword = yield UsersRepository_1.UsersRepository.findOneAndUpdate({ email: hashDecrypted }, { $set: { password: encryptedPassword } });
             if (updatePassword && deletehash) {

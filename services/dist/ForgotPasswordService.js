@@ -137,7 +137,7 @@ var ForgotPasswordService = /** @class */ (function () {
                             padding: crypto_js_1["default"].pad.Pkcs7
                         }).toString(crypto_js_1["default"].enc.Utf8);
                         return [4 /*yield*/, ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({
-                                hash: hash
+                                hash: hashFormated
                             })];
                     case 1:
                         deletehash = _a.sent();
