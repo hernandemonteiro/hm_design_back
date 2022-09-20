@@ -58,8 +58,7 @@ var ForgotPasswordService = /** @class */ (function () {
                             mode: crypto_js_1["default"].mode.CBC,
                             padding: crypto_js_1["default"].pad.Pkcs7
                         })
-                            .toString()
-                            .replaceAll("/", "___");
+                            .toString();
                         return [4 /*yield*/, UsersRepository_1.UsersRepository.find({
                                 email: encryptedEmail
                             }).count({})];
@@ -84,7 +83,7 @@ var ForgotPasswordService = /** @class */ (function () {
                             from: "hm_design_store@outlook.com",
                             to: email,
                             subject: "Recuperação de senha!",
-                            html: "\n      <html>\n        <body style='display: flex; justify-content: center;\n          align-items: center; padding: 4%'>\n          <div style='width: 100%; text-align: center'>\n            <h1>HM Design</h1>\n            <br>\n            <p>\n            Voc\u00EA est\u00E1 prestes a recuperar sua senha!\n            <br><br>\n            Clique no bot\u00E3o abaixo para iniciar processo:\n            </p>\n            <br><br>\n            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/" + hash + "'>\n              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>\n                RECUPERAR SENHA!\n              </button>\n            </a>\n          </div>\n        <body>\n      </html>\n      "
+                            html: "\n      <html>\n        <body style='display: flex; justify-content: center;\n          align-items: center; padding: 4%'>\n          <div style='width: 100%; text-align: center'>\n            <h1>HM Design</h1>\n            <br>\n            <p>\n            Voc\u00EA est\u00E1 prestes a recuperar sua senha!\n            <br><br>\n            Clique no bot\u00E3o abaixo para iniciar processo:\n            </p>\n            <br><br>\n            <a width='100%' href='https://hm-design.vercel.app/recoverypassword?hash=" + hash + "'>\n              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>\n                RECUPERAR SENHA!\n              </button>\n            </a>\n          </div>\n        <body>\n      </html>\n      "
                         };
                         if (userIsRegistered > 0) {
                             // send the email
