@@ -30,9 +30,7 @@ class StartUp {
     this.app.use("*", function (req, res, next) {
       const Authenticate = req.headers["x-access-token"];
       if (!Authenticate) {
-        var err = new Error("You are not authenticated!");
-        res.setHeader("WWW-Authenticate", "Basic");
-        return next(err);
+        res.send("You are not authenticated!");
       }
       var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
       const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
@@ -44,9 +42,7 @@ class StartUp {
       if (tokenDecrypted === process.env.HASH_SECRET) {
         next();
       } else {
-        var err = new Error("You are not authenticated!");
-        res.setHeader("WWW-Authenticate", "Basic");
-        return next(err);
+        res.send("You are not authenticated!");
       }
     });
     this.app.use("/", userRouter);
