@@ -26,7 +26,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
       hash: hash,
     }).count({});
     const recoveryRepository = new ForgotPasswordRepository({
-      hash: hash,
+      hash: `[${hash}]`,
     });
 
     // configs to email sender
@@ -92,7 +92,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
     const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-    const hashDecrypted = CryptoJS.AES.decrypt(hash[0], secret, {
+    const hashDecrypted = CryptoJS.AES.decrypt(hash, secret, {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,

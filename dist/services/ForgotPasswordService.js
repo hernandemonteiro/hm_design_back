@@ -36,7 +36,7 @@ class ForgotPasswordService {
                 hash: hash,
             }).count({});
             const recoveryRepository = new ForgotPasswordRepository_1.ForgotPasswordRepository({
-                hash: hash,
+                hash: `[${hash}]`,
             });
             const transporter = nodemailer.createTransport({
                 service: "Hotmail",
@@ -101,7 +101,7 @@ class ForgotPasswordService {
             const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
             var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
             const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
-            const hashDecrypted = crypto_js_1.default.AES.decrypt(hash[0], secret, {
+            const hashDecrypted = crypto_js_1.default.AES.decrypt(hash, secret, {
                 iv: iv,
                 mode: crypto_js_1.default.mode.CBC,
                 padding: crypto_js_1.default.pad.Pkcs7,
