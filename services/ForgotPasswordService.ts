@@ -15,6 +15,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
       padding: CryptoJS.pad.Pkcs7,
     })
       .toString()
+      .replaceAll("/", "___");
       
     // verify if user is registered
     const userIsRegistered = await UsersRepository.find({
@@ -54,7 +55,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
             Clique no botão abaixo para iniciar processo:
             </p>
             <br><br>
-            <a width='100%' href='https://hm-design.vercel.app/recoverypassword?hash=${hash}'>
+            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/${hash}'>
               <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
                 RECUPERAR SENHA!
               </button>

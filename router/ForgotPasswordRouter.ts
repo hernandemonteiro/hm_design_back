@@ -16,7 +16,7 @@ forgotPasswordRouter.route("/forgotPassword/:email").post((req, res) => {
  * @param [hash] used to find hash;
  * @return [1] == Sucess or [0] == notfound;
  */
-forgotPasswordRouter.route("/confirmHash").get((req, res) => {
+forgotPasswordRouter.route("/confirmHash/:hash").get((req, res) => {
   return ForgotPasswordController.confirmHash(req, res);
 });
 
@@ -25,7 +25,7 @@ forgotPasswordRouter.route("/confirmHash").get((req, res) => {
  * @param [hash] used to find hash;
  * @return Sucess or Failure in string;
  */
- forgotPasswordRouter.route("/updatePassword/:password").put((req, res) => {
+ forgotPasswordRouter.route("/updatePassword/:hash/:password").put((req, res) => {
   return ForgotPasswordController.updatePassword(req, res);
 });
   

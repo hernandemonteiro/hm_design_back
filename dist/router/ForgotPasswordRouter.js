@@ -9,10 +9,10 @@ const forgotPasswordRouter = (0, express_1.default)();
 forgotPasswordRouter.route("/forgotPassword/:email").post((req, res) => {
     return ForgotPasswordController_1.default.forgotPassword(req, res);
 });
-forgotPasswordRouter.route("/confirmHash").get((req, res) => {
+forgotPasswordRouter.route("/confirmHash/:hash").get((req, res) => {
     return ForgotPasswordController_1.default.confirmHash(req, res);
 });
-forgotPasswordRouter.route("/updatePassword/:password").put((req, res) => {
+forgotPasswordRouter.route("/updatePassword/:hash/:password").put((req, res) => {
     return ForgotPasswordController_1.default.updatePassword(req, res);
 });
 exports.default = forgotPasswordRouter;
