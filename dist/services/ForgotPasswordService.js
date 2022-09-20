@@ -28,8 +28,7 @@ class ForgotPasswordService {
                 mode: crypto_js_1.default.mode.CBC,
                 padding: crypto_js_1.default.pad.Pkcs7,
             })
-                .toString()
-                .replaceAll("/", "___");
+                .toString();
             const userIsRegistered = yield UsersRepository_1.UsersRepository.find({
                 email: encryptedEmail,
             }).count({});
@@ -63,7 +62,7 @@ class ForgotPasswordService {
             Clique no botão abaixo para iniciar processo:
             </p>
             <br><br>
-            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/${hash}'>
+            <a width='100%' href='https://hm-design.vercel.app/recoverypassword?hash=${hash}'>
               <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>
                 RECUPERAR SENHA!
               </button>

@@ -24,7 +24,7 @@ class StartUp {
         this.app.use(express_1.default.json());
         this.app.use(cors({
             exposedHeaders: ["x-access-token"],
-            origin: ["http://localhost:3000", "https://hm-design.vercel.app"],
+            origin: [process.env.ORIGIN, "https://hm-design.vercel.app"],
         }));
         this.app.use("*", function (req, res, next) {
             const Authenticate = req.headers["x-access-token"];

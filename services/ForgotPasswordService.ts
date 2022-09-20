@@ -15,7 +15,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
       padding: CryptoJS.pad.Pkcs7,
     })
       .toString()
-
+      
     // verify if user is registered
     const userIsRegistered = await UsersRepository.find({
       email: encryptedEmail,
