@@ -21,38 +21,34 @@ class StartUp {
 
   routes() {
     this.app.use(express.json());
-    this.app.use("*", function (req, res, next) {
-      const method = req.method;
-      const Authenticate = req.body.authorization;
-      switch (method) {
-        case "DELETE":
-        case "POST":
-        case "PUT":
-          var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
-          const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-          const tokenDecrypted = CryptoJS.AES.decrypt(Authenticate, secret, {
-            iv: iv,
-            mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.Pkcs7,
-          }).toString(CryptoJS.enc.Utf8);
-          if (tokenDecrypted === process.env.HASH_SECRET) {
-            next();
-          } else {
-            var err = new Error("You are not authenticated!");
-            res.setHeader("WWW-Authenticate", "Basic");
-            return next(err);
-          }
-          break;
-        case "GET":
-          next();
-          break;
-      }
-    });
     this.app.use(
       cors({
+        exposedHeaders: ["x-access-token"],
         origin: ["http://localhost:3000", "https://hm-design.vercel.app"],
       })
     );
+    this.app.use("*", function (req, res, next) {
+      const Authenticate = req.headers["x-access-token"];
+      if (!Authenticate) {
+        var err = new Error("You are not authenticated!");
+        res.setHeader("WWW-Authenticate", "Basic");
+        return next(err);
+      }
+      var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
+      const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
+      const tokenDecrypted = CryptoJS.AES.decrypt(Authenticate, secret, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7,
+      }).toString(CryptoJS.enc.Utf8);
+      if (tokenDecrypted === process.env.HASH_SECRET) {
+        next();
+      } else {
+        var err = new Error("You are not authenticated!");
+        res.setHeader("WWW-Authenticate", "Basic");
+        return next(err);
+      }
+    });
     this.app.use("/", userRouter);
     this.app.use("/", productsRouter);
     this.app.use("/", cartRouter);

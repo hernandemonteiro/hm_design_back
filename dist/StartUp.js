@@ -22,37 +22,33 @@ class StartUp {
     }
     routes() {
         this.app.use(express_1.default.json());
-        this.app.use("*", function (req, res, next) {
-            const method = req.method;
-            const Authenticate = req.body.authorization;
-            switch (method) {
-                case "DELETE":
-                case "POST":
-                case "PUT":
-                    var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
-                    const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
-                    const tokenDecrypted = crypto_js_1.default.AES.decrypt(Authenticate, secret, {
-                        iv: iv,
-                        mode: crypto_js_1.default.mode.CBC,
-                        padding: crypto_js_1.default.pad.Pkcs7,
-                    }).toString(crypto_js_1.default.enc.Utf8);
-                    if (tokenDecrypted === process.env.HASH_SECRET) {
-                        next();
-                    }
-                    else {
-                        var err = new Error("You are not authenticated!");
-                        res.setHeader("WWW-Authenticate", "Basic");
-                        return next(err);
-                    }
-                    break;
-                case "GET":
-                    next();
-                    break;
-            }
-        });
         this.app.use(cors({
+            exposedHeaders: ["x-access-token"],
             origin: ["http://localhost:3000", "https://hm-design.vercel.app"],
         }));
+        this.app.use("*", function (req, res, next) {
+            const Authenticate = req.headers["x-access-token"];
+            if (!Authenticate) {
+                var err = new Error("You are not authenticated!");
+                res.setHeader("WWW-Authenticate", "Basic");
+                return next(err);
+            }
+            var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
+            const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
+            const tokenDecrypted = crypto_js_1.default.AES.decrypt(Authenticate, secret, {
+                iv: iv,
+                mode: crypto_js_1.default.mode.CBC,
+                padding: crypto_js_1.default.pad.Pkcs7,
+            }).toString(crypto_js_1.default.enc.Utf8);
+            if (tokenDecrypted === process.env.HASH_SECRET) {
+                next();
+            }
+            else {
+                var err = new Error("You are not authenticated!");
+                res.setHeader("WWW-Authenticate", "Basic");
+                return next(err);
+            }
+        });
         this.app.use("/", UserRouter_1.default);
         this.app.use("/", ProductsRouter_1.default);
         this.app.use("/", CartRouter_1.default);

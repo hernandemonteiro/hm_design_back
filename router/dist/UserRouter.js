@@ -45,7 +45,7 @@ userRouter.route("/users/:id")["delete"](function (req, res) {
  * @param [type] define 1 == user, 0 == Admin;
  * @return a JSON with status: success || Error: message
  */
-userRouter.route("/users/:name/:email/:password/:type").put(function (req, res) {
+userRouter.route("/users/:name/:email/:password/:type").post(function (req, res) {
     return UsersController_1["default"].userRegister(req, res);
 });
 /*

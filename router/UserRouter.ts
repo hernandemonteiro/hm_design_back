@@ -50,7 +50,7 @@ userRouter.route("/users/:id").delete((req, res) => {
  * @param [type] define 1 == user, 0 == Admin;
  * @return a JSON with status: success || Error: message
  */
-userRouter.route("/users/:name/:email/:password/:type").put((req, res) => {
+userRouter.route("/users/:name/:email/:password/:type").post((req, res) => {
   return UsersController.userRegister(req, res);
 });
 
