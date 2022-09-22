@@ -27,9 +27,9 @@ class StartUp {
         origin: [process.env.ORIGIN, "https://hm-design.vercel.app"],
       })
     );
-    this.app.route("/loaderio-017c727f60db5fe1d77d54b67fa9d288").get(
-      (req, res) => res.send("loaderio-017c727f60db5fe1d77d54b67fa9d288")
-    )
+    this.app.use("/loaderio-017c727f60db5fe1d77d54b67fa9d288", function (req, res) {
+      res.send("loaderio-017c727f60db5fe1d77d54b67fa9d288")
+    })
     this.app.use("*", function (req, res, next) {
       const Authenticate = req.headers["x-access-token"];
       if (!Authenticate) {
