@@ -75,12 +75,12 @@ var ForgotPasswordService = /** @class */ (function () {
                         transporter = nodemailer.createTransport({
                             service: "Hotmail",
                             auth: {
-                                user: "hm_design_store@outlook.com",
+                                user: process.env.EMAIL_HM,
                                 pass: process.env.EMAIL_PASSWORD
                             }
                         });
                         mailOptions = {
-                            from: "hm_design_store@outlook.com",
+                            from: process.env.EMAIL_HM,
                             to: email,
                             subject: "Recuperação de senha!",
                             html: "\n      <html>\n        <body style='display: flex; justify-content: center;\n          align-items: center; padding: 4%'>\n          <div style='width: 100%; text-align: center'>\n            <h1>HM Design</h1>\n            <br>\n            <p>\n            Voc\u00EA est\u00E1 prestes a recuperar sua senha!\n            <br><br>\n            Clique no bot\u00E3o abaixo para iniciar processo:\n            </p>\n            <br><br>\n            <a width='100%' href='https://hm-design.vercel.app/recoverypassword/" + hashFormated + "'>\n              <button style='padding: 4%; color: white; border-radius: 25px; background-color: green'>\n                RECUPERAR SENHA!\n              </button>\n            </a>\n          </div>\n        <body>\n      </html>\n      "

@@ -32,12 +32,12 @@ export class ForgotPasswordService implements iForgotPasswordService {
     const transporter = nodemailer.createTransport({
       service: "Hotmail",
       auth: {
-        user: "hm_design_store@outlook.com",
+        user: process.env.EMAIL_HM,
         pass: process.env.EMAIL_PASSWORD,
       },
     });
     const mailOptions = {
-      from: "hm_design_store@outlook.com",
+      from: process.env.EMAIL_HM,
       to: email,
       subject: "Recuperação de senha!",
       html: `
