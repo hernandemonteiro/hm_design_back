@@ -50,6 +50,7 @@ class StartUp {
             }
             img {
               width: 75%;
+              filter: drop-shadow(0 0 1rem black);
             }
             @media (max-width: 800px) {
               div {
