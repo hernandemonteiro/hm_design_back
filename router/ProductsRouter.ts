@@ -29,7 +29,7 @@ productsRouter.route("/product/:id").get((req, res) => {
   return ProductsController.getById(req, res);
 });
 
-productsRouter.route("/products/:category").get((req, res) => {
+productsRouter.route("/products/category/:category").get((req, res) => {
   return ProductsController.getPerCategory(req, res);
 })
 
