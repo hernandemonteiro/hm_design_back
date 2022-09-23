@@ -26,7 +26,7 @@ productsRouter.route("/products/:page/:qtd").get(function (req, res) {
 productsRouter.route("/product/:id").get(function (req, res) {
     return ProductsController_1["default"].getById(req, res);
 });
-productsRouter.route("/products/category/:category").get(function (req, res) {
+productsRouter.route("/productspercategory/:category").get(function (req, res) {
     return ProductsController_1["default"].getPerCategory(req, res);
 });
 /*
