@@ -31,39 +31,54 @@ class StartUp {
             const errorPage = `<!DOCTYPE html>
       <html>
         <head>
-          <meta charset="utf-8">
+          <meta charset="utf-8" />
+          <style>
+            * {
+              margin: 0px;
+              padding: 0px;
+            }
+            body {
+              display: flex;
+              width: 100%;
+              height: 100vh;
+              justify-content: center;
+              align-items: center;
+            }
+            div {
+              text-align: center;
+              padding: 15%;
+            }
+            img {
+              width: 75%;
+            }
+            @media (max-width: 800px) {
+              div {
+                padding: 2%;
+              }
+              img {
+                width: 100%;
+              }
+            }
+            @media only screen and (min-device-width: 120px) and (max-device-width: 800px) {
+              div {
+                padding: 2%;
+                overflow: hidden;
+              }
+              img {
+                width: 110%;
+              }
+            }
+          </style>
         </head>
         <body>
-        <style>
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
-        img {
-            width: 50%
-        }
-        @media (max-width: 600px){
-            img {
-                width: 75%;
-            }
-        }
-    </style>
-    You are not Authenticated
-    <div
-      style="
-        display: flex;
-        width: 100%;
-        height: 95vh;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-    
-      <img src="https://drive.google.com/uc?export=view&id=1kIzxkYaX5j-1AzdIIb28B2bnQnMb8Uu8" />
-    </div>
+          <div>
+            <h1>You are not Authenticated</h1><br />
+            <img
+              src="https://drive.google.com/uc?export=view&id=1kIzxkYaX5j-1AzdIIb28B2bnQnMb8Uu8"
+            />
+          </div>
         </body>
-      </html>
-    `;
+      </html>`;
             if (!Authenticate) {
                 res.send(errorPage);
             }
