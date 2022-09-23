@@ -41,7 +41,7 @@ class StartUp {
             body {
               display: flex;
               width: 100%;
-              height: 90vh;
+              height: 70vh;
               justify-content: center;
               align-items: center;
             }
