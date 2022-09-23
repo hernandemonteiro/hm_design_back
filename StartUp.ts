@@ -57,7 +57,7 @@ class StartUp {
         align-items: center;
       "
     >
-      <img src="../error/401.png" />
+      <img src="./401.png" />
     </div>
         </body>
       </html>
