@@ -48,15 +48,17 @@ class StartUp {
             }
         }
     </style>
+    You are not Authenticated
     <div
       style="
         display: flex;
-        height: 100vh;
+        height: 95vh;
         justify-content: center;
         align-items: center;
       "
     >
-      <img src="./error/401.png" />
+    
+      <img src="https://drive.google.com/uc?export=view&id=1kIzxkYaX5j-1AzdIIb28B2bnQnMb8Uu8" />
     </div>
         </body>
       </html>
