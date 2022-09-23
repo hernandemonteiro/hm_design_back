@@ -9,20 +9,23 @@ const productsRouter = (0, express_1.default)();
 productsRouter.route("/products").get((req, res) => {
     return ProductsController_1.default.getAll(req, res);
 });
-productsRouter.route("/products/:page/:qtd").get((req, res) => {
+productsRouter.route("/products/pages/:page/:qtd").get((req, res) => {
     return ProductsController_1.default.get(req, res);
 });
 productsRouter.route("/product/:id").get((req, res) => {
     return ProductsController_1.default.getById(req, res);
 });
-productsRouter.route("/productspercategory/:category").get((req, res) => {
+productsRouter.route("/products/category/:category").get((req, res) => {
     return ProductsController_1.default.getPerCategory(req, res);
 });
-productsRouter.route("/product/:id").delete((req, res) => {
+productsRouter.route("/products/search/:search").get((req, res) => {
+    return ProductsController_1.default.getPerSearch(req, res);
+});
+productsRouter.route("/product/delete/:id").delete((req, res) => {
     return ProductsController_1.default.deleteProduct(req, res);
 });
 productsRouter
-    .route("/product/:name/:price/:images/:description/:category/:options")
+    .route("/product/register/:name/:price/:images/:description/:category/:options")
     .put((req, res) => {
     return ProductsController_1.default.registerProduct(req, res);
 });

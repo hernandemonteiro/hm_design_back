@@ -48,6 +48,16 @@ class ProductsController {
     }
   }
 
+  async getPerSearch(request: Request, response: Response){
+    try {
+      const search = request.params.search;
+      let result = await this._service.getPerSearch(search);
+      response.status(200).json({ result });
+    } catch (error) {
+      response.status(500).json("Error: " + error);
+    }
+  }
+
   async deleteProduct(request: Request, response: Response) {
     try {
       const id = request.params.id;

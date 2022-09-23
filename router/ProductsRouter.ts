@@ -16,7 +16,7 @@ productsRouter.route("/products").get((req, res) => {
  * @params [page] [qtd] limits in page with a quantity;
  * @return a JSON with all products limited by pages and qtd;
  */
-productsRouter.route("/products/:page/:qtd").get((req, res) => {
+productsRouter.route("/products/pages/:page/:qtd").get((req, res) => {
   return ProductsController.get(req, res);
 });
 
@@ -29,15 +29,29 @@ productsRouter.route("/product/:id").get((req, res) => {
   return ProductsController.getById(req, res);
 });
 
-productsRouter.route("/productspercategory/:category").get((req, res) => {
+/*
+ * @description get products per category;
+ * @param [category] category to fin a product;
+ * @return a JSON with products;
+ */
+productsRouter.route("/products/category/:category").get((req, res) => {
   return ProductsController.getPerCategory(req, res);
+})
+
+/*
+ * @description get products per category;
+ * @param [category] category to fin a product;
+ * @return a JSON with products;
+ */
+productsRouter.route("/products/search/:search").get((req, res) => {
+  return ProductsController.getPerSearch(req, res);
 })
 
 /*
  * @description this route delete one product by id;
  * @param [id] find the product to delete;
  */
-productsRouter.route("/product/:id").delete((req, res) => {
+productsRouter.route("/product/delete/:id").delete((req, res) => {
   return ProductsController.deleteProduct(req, res);
 });
 
@@ -52,7 +66,7 @@ productsRouter.route("/product/:id").delete((req, res) => {
  * @param [options] product options in array format;
  */
 productsRouter
-  .route("/product/:name/:price/:images/:description/:category/:options")
+  .route("/product/register/:name/:price/:images/:description/:category/:options")
   .put((req, res) => {
     return ProductsController.registerProduct(req, res);
   });

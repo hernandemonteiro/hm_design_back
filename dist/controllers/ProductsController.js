@@ -62,6 +62,18 @@ class ProductsController {
             }
         });
     }
+    getPerSearch(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const search = request.params.search;
+                let result = yield this._service.getPerSearch(search);
+                response.status(200).json({ result });
+            }
+            catch (error) {
+                response.status(500).json("Error: " + error);
+            }
+        });
+    }
     deleteProduct(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

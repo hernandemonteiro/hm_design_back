@@ -28,4 +28,6 @@ export interface iProductsService {
   );
 
   getPerCategory(category: string);
+
+  getPerSearch(search: string);
 }

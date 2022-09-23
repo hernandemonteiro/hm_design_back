@@ -29,6 +29,11 @@ export class ProductsService implements iProductsService {
     return result;
   }
 
+  async getPerSearch(search: string) {
+    let result = await ProductsRepository.find({$or: [{name: {'$regex': search, '$options': 'i'} }, {description: {'$regex': search, '$options': 'i'} }]});
+    return result;
+  }
+
   async deleteProduct(id: string) {
     let result = await ProductsRepository.findByIdAndDelete(id);
     return result;
