@@ -38,6 +38,16 @@ class ProductsController {
     }
   }
 
+  async getPerCategory(request: Request, response: Response) {
+    try {
+      const category = request.params.category;
+      let result = await this._service.getPerCategory(category);
+      response.status(200).json({ result });
+    } catch (error: any) {
+      response.status(500).json({ error: error.message || error.toString() });
+    }
+  }
+
   async deleteProduct(request: Request, response: Response) {
     try {
       const id = request.params.id;

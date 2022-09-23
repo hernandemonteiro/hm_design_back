@@ -29,8 +29,41 @@ class StartUp {
     );
     this.app.use("*", function (req, res, next) {
       const Authenticate = req.headers["x-access-token"];
+      const errorPage = `<!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+        </head>
+        <body>
+        <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        img {
+            width: 50%
+        }
+        @media (max-width: 600px){
+            img {
+                width: 80%;
+            }
+        }
+    </style>
+    <div
+      style="
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <img src="./error/401.png" />
+    </div>
+        </body>
+      </html>
+    `;
       if (!Authenticate) {
-        res.send("You are not authenticated!");
+        res.send(errorPage);
       }
       var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
       const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
@@ -42,7 +75,7 @@ class StartUp {
       if (tokenDecrypted === process.env.HASH_SECRET) {
         next();
       } else {
-        res.send("You are not authenticated!");
+        res.send(errorPage);
       }
     });
     this.app.use("/", userRouter);

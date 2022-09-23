@@ -26,6 +26,9 @@ productsRouter.route("/products/:page/:qtd").get(function (req, res) {
 productsRouter.route("/product/:id").get(function (req, res) {
     return ProductsController_1["default"].getById(req, res);
 });
+productsRouter.route("/products/:category").get(function (req, res) {
+    return ProductsController_1["default"].getPerCategory(req, res);
+});
 /*
  * @description this route delete one product by id;
  * @param [id] find the product to delete;

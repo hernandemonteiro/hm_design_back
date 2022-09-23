@@ -29,6 +29,10 @@ productsRouter.route("/product/:id").get((req, res) => {
   return ProductsController.getById(req, res);
 });
 
+productsRouter.route("/products/:category").get((req, res) => {
+  return ProductsController.getPerCategory(req, res);
+})
+
 /*
  * @description this route delete one product by id;
  * @param [id] find the product to delete;

@@ -26,13 +26,43 @@ class StartUp {
             exposedHeaders: ["x-access-token"],
             origin: [process.env.ORIGIN, "https://hm-design.vercel.app"],
         }));
-        this.app.use("/loaderio-017c727f60db5fe1d77d54b67fa9d288", function (req, res) {
-            res.send("loaderio-017c727f60db5fe1d77d54b67fa9d288");
-        });
         this.app.use("*", function (req, res, next) {
             const Authenticate = req.headers["x-access-token"];
+            const errorPage = `<!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+        </head>
+        <body>
+        <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        img {
+            width: 50%
+        }
+        @media (max-width: 600px){
+            img {
+                width: 80%;
+            }
+        }
+    </style>
+    <div
+      style="
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <img src="./error/401.png" />
+    </div>
+        </body>
+      </html>
+    `;
             if (!Authenticate) {
-                res.send("You are not authenticated!");
+                res.send(errorPage);
             }
             var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
             const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
@@ -45,7 +75,7 @@ class StartUp {
                 next();
             }
             else {
-                res.send("You are not authenticated!");
+                res.send(errorPage);
             }
         });
         this.app.use("/", UserRouter_1.default);

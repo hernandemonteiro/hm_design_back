@@ -24,6 +24,11 @@ export class ProductsService implements iProductsService {
     return result;
   }
 
+  async getPerCategory(category: string) {
+    let result = await ProductsRepository.find({category: category});
+    return result;
+  }
+
   async deleteProduct(id: string) {
     let result = await ProductsRepository.findByIdAndDelete(id);
     return result;

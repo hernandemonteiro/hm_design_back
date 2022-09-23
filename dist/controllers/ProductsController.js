@@ -50,6 +50,18 @@ class ProductsController {
             }
         });
     }
+    getPerCategory(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const category = request.params.category;
+                let result = yield this._service.getPerCategory(category);
+                response.status(200).json({ result });
+            }
+            catch (error) {
+                response.status(500).json({ error: error.message || error.toString() });
+            }
+        });
+    }
     deleteProduct(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

@@ -26,4 +26,6 @@ export interface iProductsService {
     status: string,
     options: string
   );
+
+  getPerCategory(category: string);
 }

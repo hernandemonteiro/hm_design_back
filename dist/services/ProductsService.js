@@ -37,6 +37,12 @@ class ProductsService {
             return result;
         });
     }
+    getPerCategory(category) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let result = yield ProductsRepository_1.ProductsRepository.find({ category: category });
+            return result;
+        });
+    }
     deleteProduct(id) {
         return __awaiter(this, void 0, void 0, function* () {
             let result = yield ProductsRepository_1.ProductsRepository.findByIdAndDelete(id);

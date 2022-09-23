@@ -107,9 +107,31 @@ var ProductsController = /** @class */ (function () {
             });
         });
     };
+    ProductsController.prototype.getPerCategory = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var category, result, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        category = request.params.category;
+                        return [4 /*yield*/, this._service.getPerCategory(category)];
+                    case 1:
+                        result = _a.sent();
+                        response.status(200).json({ result: result });
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _a.sent();
+                        response.status(500).json({ error: error_4.message || error_4.toString() });
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     ProductsController.prototype.deleteProduct = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, result, error_4;
+            var id, result, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -121,8 +143,8 @@ var ProductsController = /** @class */ (function () {
                         response.status(200).json({ result: result });
                         return [3 /*break*/, 3];
                     case 2:
-                        error_4 = _a.sent();
-                        response.status(500).json("Error: " + error_4);
+                        error_5 = _a.sent();
+                        response.status(500).json("Error: " + error_5);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -131,7 +153,7 @@ var ProductsController = /** @class */ (function () {
     };
     ProductsController.prototype.registerProduct = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var name, price, description, category, images, options, result, error_5;
+            var name, price, description, category, images, options, result, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -148,8 +170,8 @@ var ProductsController = /** @class */ (function () {
                         response.status(200).json({ result: result });
                         return [3 /*break*/, 3];
                     case 2:
-                        error_5 = _a.sent();
-                        response.status(500).json("Error: " + error_5);
+                        error_6 = _a.sent();
+                        response.status(500).json("Error: " + error_6);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -158,7 +180,7 @@ var ProductsController = /** @class */ (function () {
     };
     ProductsController.prototype.updateProduct = function (request, response) {
         return __awaiter(this, void 0, void 0, function () {
-            var id, name, price, description, images, status, options, result, error_6;
+            var id, name, price, description, images, status, options, result, error_7;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -176,8 +198,8 @@ var ProductsController = /** @class */ (function () {
                         response.status(200).json({ result: result });
                         return [3 /*break*/, 3];
                     case 2:
-                        error_6 = _a.sent();
-                        response.status(500).json("Error: " + error_6);
+                        error_7 = _a.sent();
+                        response.status(500).json("Error: " + error_7);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
