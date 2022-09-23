@@ -44,7 +44,7 @@ class StartUp {
         }
         @media (max-width: 600px){
             img {
-                width: 80%;
+                width: 97%;
             }
         }
     </style>
