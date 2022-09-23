@@ -44,7 +44,7 @@ class StartUp {
         }
         @media (max-width: 600px){
             img {
-                width: 97%;
+                width: 75%;
             }
         }
     </style>
@@ -52,6 +52,7 @@ class StartUp {
     <div
       style="
         display: flex;
+        width: 100%;
         height: 95vh;
         justify-content: center;
         align-items: center;
