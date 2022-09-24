@@ -31,7 +31,7 @@ productsRouter.route("/product/:id").get((req, res) => {
 
 /*
  * @description get products per category;
- * @param [category] category to fin a product;
+ * @param [category] category to find a product;
  * @return a JSON with products;
  */
 productsRouter.route("/products/category/:category").get((req, res) => {
@@ -39,8 +39,8 @@ productsRouter.route("/products/category/:category").get((req, res) => {
 })
 
 /*
- * @description get products per category;
- * @param [category] category to fin a product;
+ * @description get products per search;
+ * @param [search] search to find a product by name or description;
  * @return a JSON with products;
  */
 productsRouter.route("/products/search/:search").get((req, res) => {
