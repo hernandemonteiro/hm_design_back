@@ -75,7 +75,7 @@ class StartUp {
           <div>
             <h1>You are not Authenticated</h1><br />
             <img
-              src="https://drive.google.com/uc?export=view&id=1kIzxkYaX5j-1AzdIIb28B2bnQnMb8Uu8"
+              src="https://drive.google.com/uc?export=view&id=1wJDZcEPfFGJ2WqvJX_2zFuBVeeRryo7B"
             />
           </div>
         </body>
