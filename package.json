@@ -7,8 +7,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "nodemon ./dist/index.js",
-    "build": "tsc",
+    "start": "tsc & nodemon ./dist/index.js",
     "dev": "tsc -w & nodemon ./dist/index.js",
     "test": "jest"
   },
