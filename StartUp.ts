@@ -42,6 +42,7 @@ class StartUp {
               display: flex;
               width: 100%;
               background-color: black;
+              color: white;
               height: 70vh;
               justify-content: center;
               align-items: center;
@@ -52,7 +53,6 @@ class StartUp {
             }
             img {
               width: 75%;
-              filter: drop-shadow(0 0 0.3rem black);
             }
             @media (max-width: 800px) {
               div {
