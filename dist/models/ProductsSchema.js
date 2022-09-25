@@ -10,6 +10,6 @@ exports.ProductsSchema = new mongoose_1.default.Schema({
     price: { type: String, required: true },
     description: { type: String, required: true },
     category: { type: String, required: true },
-    images: { type: Array, required: true },
+    images: { type: Array, required: false },
     options: { type: Array, required: false },
 });

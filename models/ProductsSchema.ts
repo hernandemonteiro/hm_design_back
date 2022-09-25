@@ -5,6 +5,6 @@ export const ProductsSchema = new mongoose.Schema({
   price: { type: String, required: true },
   description: { type: String, required: true },
   category: { type: String, required: true },
-  images: { type: Array, required: true },
+  images: { type: Array, required: false },
   options: { type: Array, required: false },
 });
