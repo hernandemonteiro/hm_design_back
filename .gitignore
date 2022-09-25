@@ -3,7 +3,3 @@ node_modules
 
 # ambient variables
 .env
-
-# other folders
-cloudStorage
-localTests
