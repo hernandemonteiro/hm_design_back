@@ -30,8 +30,8 @@ export class ForgotPasswordService implements iForgotPasswordService {
 
     // configs to email sender
     const transporter = nodemailer.createTransport({
-       host: "smtp.office365.com",
-      port: 587,
+       host: "outlook.office365.com",
+      port: 993,
       secure: false,
       auth: {
         user: process.env.EMAIL_HM,
