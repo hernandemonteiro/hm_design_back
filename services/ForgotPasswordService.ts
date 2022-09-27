@@ -65,16 +65,18 @@ export class ForgotPasswordService implements iForgotPasswordService {
     };
     if (userIsRegistered > 0) {
       // send the email
-      transporter.sendMail(mailOptions, function (error) {
-        if (error) {
-          return error;
-        }
-      });
+      transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    return error;
+  } else {
+    return "Email enviado!";
+  }
+});
       // save the records of hash in the repository;
       if (hashExists === 0) {
         recoveryRepository.save();
       }
-      return "Email enviado!";
+      
     } else {
       return "Usuário não existe!";
     }
