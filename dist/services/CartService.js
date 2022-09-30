@@ -61,3 +61,4 @@ class CartService {
     }
 }
 exports.CartService = CartService;
+exports.default = new CartService();

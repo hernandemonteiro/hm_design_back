@@ -84,3 +84,4 @@ export class CartService implements iCartService {
     }
   }
 }
+export default new CartService();
