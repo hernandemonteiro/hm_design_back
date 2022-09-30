@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const StartUp_1 = __importDefault(require("./StartUp"));
-let port = 8080;
+const port = 8080;
 StartUp_1.default.app.listen(port, function () {
     console.log("Starting up in port: " + port);
 });

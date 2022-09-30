@@ -19,7 +19,7 @@ class CategoryController {
             try {
                 const page = request.params.page ? parseInt(request.params.page) : 1;
                 const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
-                let result = yield this._service.getAllWithLimit(page, qtd);
+                const result = yield this._service.getAllWithLimit(page, qtd);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -30,7 +30,7 @@ class CategoryController {
     getAll(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                let result = yield this._service.getAll();
+                const result = yield this._service.getAll();
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -42,7 +42,7 @@ class CategoryController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const _id = request.params.id;
-                let result = yield this._service.get(_id);
+                const result = yield this._service.get(_id);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -54,7 +54,7 @@ class CategoryController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const category = request.params.category;
-                let result = yield this._service.registerCategory(category);
+                const result = yield this._service.registerCategory(category);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -66,7 +66,7 @@ class CategoryController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id = request.params.id;
-                let result = yield this._service.deleteCategory(id);
+                const result = yield this._service.deleteCategory(id);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -79,7 +79,7 @@ class CategoryController {
             try {
                 const id = request.params.id;
                 const category = request.params.category;
-                let result = yield this._service.updateCategory(id, category);
+                const result = yield this._service.updateCategory(id, category);
                 response.status(200).json({ result });
             }
             catch (error) {

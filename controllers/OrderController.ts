@@ -12,18 +12,18 @@ class OrderController {
     try {
       const page = request.params.page ? parseInt(request.params.page) : 1;
       const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
-      let result = await this._service.getAllWithLimit(page, qtd);
+      const result = await this._service.getAllWithLimit(page, qtd);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async getAll(request: Request, response: Response) {
     try {
-      let result = await this._service.getAll();
+      const result = await this._service.getAll();
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -31,9 +31,9 @@ class OrderController {
   async getById(request: Request, response: Response) {
     try {
       const _id = request.params.id;
-      let result = await this._service.get(_id);
+      const result = await this._service.get(_id);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -44,14 +44,14 @@ class OrderController {
       const address = request.params.address;
       const order_id = request.params.order_id;
       const status = request.params.status;
-      let result = await this._service.registerOrder(
+      const result = await this._service.registerOrder(
         user_id,
         address,
         order_id,
         status
       );
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -59,7 +59,7 @@ class OrderController {
   async deleteOrder(request: Request, response: Response) {
     try {
       const id = request.params.id;
-      let result = await this._service.deleteOrder(id);
+      const result = await this._service.deleteOrder(id);
       response.status(200).json({ result });
     } catch (error) {
       response.status(500).json("Error: " + error);
@@ -73,7 +73,7 @@ class OrderController {
       const address = request.params.address;
       const order_id = request.params.order_id;
       const status = request.params.status;
-      let result = await this._service.updateOrder(
+      const result = await this._service.updateOrder(
         id,
         user_id,
         address,

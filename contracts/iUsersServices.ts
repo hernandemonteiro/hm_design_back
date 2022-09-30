@@ -1,5 +1,5 @@
 export interface iUsersService {
-  get(id: string): any;
+  get(id: string);
 
   deleteUser(_id: string);
 

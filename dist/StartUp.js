@@ -12,7 +12,7 @@ const OrderRouter_1 = __importDefault(require("./router/OrderRouter"));
 const CategoryRouter_1 = __importDefault(require("./router/CategoryRouter"));
 const ForgotPasswordRouter_1 = __importDefault(require("./router/ForgotPasswordRouter"));
 const crypto_js_1 = __importDefault(require("crypto-js"));
-const cors = require("cors");
+const cors_1 = __importDefault(require("cors"));
 class StartUp {
     constructor() {
         this._db = new db_1.default();
@@ -22,7 +22,7 @@ class StartUp {
     }
     routes() {
         this.app.use(express_1.default.json());
-        this.app.use(cors({
+        this.app.use((0, cors_1.default)({
             exposedHeaders: ["x-access-token"],
             origin: [process.env.ORIGIN, "https://hm-design.vercel.app"],
         }));
@@ -84,7 +84,7 @@ class StartUp {
             if (!Authenticate) {
                 res.send(errorPage);
             }
-            var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
+            const iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
             const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
             const tokenDecrypted = crypto_js_1.default.AES.decrypt(Authenticate, secret, {
                 iv: iv,

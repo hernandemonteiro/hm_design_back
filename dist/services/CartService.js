@@ -15,13 +15,13 @@ const CartRepository_1 = require("../repository/CartRepository");
 class CartService {
     get(_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield CartRepository_1.CartRepository.findById(_id);
+            const result = yield CartRepository_1.CartRepository.findById(_id);
             return result;
         });
     }
     getAllWithLimit(page, qtd) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = new Result_1.Result();
+            const result = new Result_1.Result();
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield CartRepository_1.CartRepository.count({});
@@ -33,7 +33,7 @@ class CartService {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield CartRepository_1.CartRepository.find({});
+            const result = yield CartRepository_1.CartRepository.find({});
             return result;
         });
     }
@@ -62,7 +62,7 @@ class CartService {
     updateProductCart(id, user_id, quantity, product_id, product, unit_price, total_price, status) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const updatedOrder = yield CartRepository_1.CartRepository.findOneAndUpdate({ _id: id }, {
+                yield CartRepository_1.CartRepository.findOneAndUpdate({ _id: id }, {
                     $set: {
                         user_id: user_id,
                         quantity: quantity,

@@ -1,13 +1,13 @@
 import { Result } from "../infra/Result";
 
 export interface iCartService {
-  get(id: string): any;
+  get(id: string);
 
   getAll();
   
   getAllWithLimit(qtd: number, page: number): Promise<Result>;
 
-  deleteProductCart(_id: string): any;
+  deleteProductCart(_id: string);
 
   registerProductCart(
     user_id: string,

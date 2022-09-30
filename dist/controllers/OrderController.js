@@ -19,7 +19,7 @@ class OrderController {
             try {
                 const page = request.params.page ? parseInt(request.params.page) : 1;
                 const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
-                let result = yield this._service.getAllWithLimit(page, qtd);
+                const result = yield this._service.getAllWithLimit(page, qtd);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -30,7 +30,7 @@ class OrderController {
     getAll(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                let result = yield this._service.getAll();
+                const result = yield this._service.getAll();
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -42,7 +42,7 @@ class OrderController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const _id = request.params.id;
-                let result = yield this._service.get(_id);
+                const result = yield this._service.get(_id);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -57,7 +57,7 @@ class OrderController {
                 const address = request.params.address;
                 const order_id = request.params.order_id;
                 const status = request.params.status;
-                let result = yield this._service.registerOrder(user_id, address, order_id, status);
+                const result = yield this._service.registerOrder(user_id, address, order_id, status);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -69,7 +69,7 @@ class OrderController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const id = request.params.id;
-                let result = yield this._service.deleteOrder(id);
+                const result = yield this._service.deleteOrder(id);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -85,7 +85,7 @@ class OrderController {
                 const address = request.params.address;
                 const order_id = request.params.order_id;
                 const status = request.params.status;
-                let result = yield this._service.updateOrder(id, user_id, address, order_id, status);
+                const result = yield this._service.updateOrder(id, user_id, address, order_id, status);
                 response.status(200).json({ result });
             }
             catch (error) {

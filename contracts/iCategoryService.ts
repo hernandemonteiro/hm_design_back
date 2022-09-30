@@ -1,7 +1,7 @@
 import { Result } from "../infra/Result";
 
 export interface iCategoryService {
-  get(id: string): any;
+  get(id: string);
 
   getAllWithLimit(qtd: number, page: number): Promise<Result>;
 

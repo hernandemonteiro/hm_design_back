@@ -4,12 +4,12 @@ import CryptoJS from "crypto-js";
 
 export class UsersService implements iUsersService {
   async get(_id: string) {
-    let result = await UsersRepository.findById(_id);
+    const result = await UsersRepository.findById(_id);
     return result;
   }
 
   async getAll() {
-    let result = await UsersRepository.find({});
+    const result = await UsersRepository.find({});
     return result;
   }
 
@@ -26,7 +26,7 @@ export class UsersService implements iUsersService {
     }).count({});
 
     if (userIsRegistered === 0) {
-      let result = new UsersRepository({
+      const result = new UsersRepository({
         name: name,
         email: encryptedEmail,
         password: encryptedPassword,
@@ -36,7 +36,7 @@ export class UsersService implements iUsersService {
       result.save();
       return result;
     } else {
-      let message = "user registered";
+      const message = "user registered";
       return message;
     }
   }

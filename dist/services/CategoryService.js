@@ -15,13 +15,13 @@ const CategoryRepository_1 = require("../repository/CategoryRepository");
 class CategoryService {
     get(_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield CategoryRepository_1.CategoryRepository.findById(_id);
+            const result = yield CategoryRepository_1.CategoryRepository.findById(_id);
             return result;
         });
     }
     getAllWithLimit(page, qtd) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = new Result_1.Result();
+            const result = new Result_1.Result();
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield CategoryRepository_1.CategoryRepository.count({});
@@ -33,13 +33,13 @@ class CategoryService {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield CategoryRepository_1.CategoryRepository.find({});
+            const result = yield CategoryRepository_1.CategoryRepository.find({});
             return result;
         });
     }
     registerCategory(category) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield new CategoryRepository_1.CategoryRepository({
+            const result = yield new CategoryRepository_1.CategoryRepository({
                 category: category,
             });
             result.save();
@@ -48,14 +48,14 @@ class CategoryService {
     }
     deleteCategory(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield CategoryRepository_1.CategoryRepository.findByIdAndDelete(id);
+            const result = yield CategoryRepository_1.CategoryRepository.findByIdAndDelete(id);
             return result;
         });
     }
     updateCategory(id, category) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const updatedCategory = yield CategoryRepository_1.CategoryRepository.findOneAndUpdate({ _id: id }, {
+                yield CategoryRepository_1.CategoryRepository.findOneAndUpdate({ _id: id }, {
                     $set: {
                         category: category,
                     },

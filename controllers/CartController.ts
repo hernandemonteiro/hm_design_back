@@ -12,18 +12,18 @@ class CartController {
     try {
       const page = request.params.page ? parseInt(request.params.page) : 1;
       const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
-      let result = await this._service.getAllWithLimit(page, qtd);
+      const result = await this._service.getAllWithLimit(page, qtd);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async getAll(request: Request, response: Response) {
     try {
-      let result = await this._service.getAll();
+      const result = await this._service.getAll();
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -31,19 +31,19 @@ class CartController {
   async getById(request: Request, response: Response) {
     try {
       const _id = request.params.id;
-      let result = await this._service.get(_id);
+      const result = await this._service.get(_id);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async deleteProductCart(request: Request, response: Response) {
     try {
-      const _id: any = request.params.id;
-      let result = await this._service.deleteProductCart(_id);
+      const _id = request.params.id;
+      const result = await this._service.deleteProductCart(_id);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -58,7 +58,7 @@ class CartController {
       const total_price = request.params.total_price;
       const order_id = request.params.order_id;
       const status = request.params.status;
-      let result = await this._service.registerProductCart(
+      const result = await this._service.registerProductCart(
         user_id,
         quantity,
         product_id,
@@ -69,7 +69,7 @@ class CartController {
         status
       );
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -84,7 +84,7 @@ class CartController {
       const unit_price = request.params.unit_price;
       const total_price = request.params.total_price;
       const status = request.params.status;
-      let result = await this._service.updateProductCart(
+      const result = await this._service.updateProductCart(
         id,
         user_id,
         quantity,
@@ -95,7 +95,7 @@ class CartController {
         status
       );
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }

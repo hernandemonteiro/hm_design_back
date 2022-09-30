@@ -15,13 +15,13 @@ const OrderRepository_1 = require("../repository/OrderRepository");
 class OrderService {
     get(_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield OrderRepository_1.OrderRepository.findById(_id);
+            const result = yield OrderRepository_1.OrderRepository.findById(_id);
             return result;
         });
     }
     getAllWithLimit(page, qtd) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = new Result_1.Result();
+            const result = new Result_1.Result();
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield OrderRepository_1.OrderRepository.count({});
@@ -33,13 +33,13 @@ class OrderService {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield OrderRepository_1.OrderRepository.find({});
+            const result = yield OrderRepository_1.OrderRepository.find({});
             return result;
         });
     }
     registerOrder(user_id, address, order_id, status) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield new OrderRepository_1.OrderRepository({
+            const result = yield new OrderRepository_1.OrderRepository({
                 user_id: user_id,
                 address: address,
                 order_id: order_id,
@@ -51,14 +51,14 @@ class OrderService {
     }
     deleteOrder(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield OrderRepository_1.OrderRepository.findByIdAndDelete(id);
+            const result = yield OrderRepository_1.OrderRepository.findByIdAndDelete(id);
             return result;
         });
     }
     updateOrder(id, user_id, address, order_id, status) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const updatedOrder = yield OrderRepository_1.OrderRepository.findOneAndUpdate({ _id: id }, {
+                yield OrderRepository_1.OrderRepository.findOneAndUpdate({ _id: id }, {
                     $set: {
                         user_id: user_id,
                         address: address,

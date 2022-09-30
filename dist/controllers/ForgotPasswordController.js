@@ -18,7 +18,7 @@ class ForgotPasswordController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const email = request.params.email;
-                let result = yield this._service.forgotPassword(email);
+                const result = yield this._service.forgotPassword(email);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -30,7 +30,7 @@ class ForgotPasswordController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const hash = request.params.hash;
-                let result = yield this._service.confirmHash(hash);
+                const result = yield this._service.confirmHash(hash);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -43,7 +43,7 @@ class ForgotPasswordController {
             try {
                 const hash = request.params.hash;
                 const password = request.params.password;
-                let result = yield this._service.updatePassword(hash, password);
+                const result = yield this._service.updatePassword(hash, password);
                 response.status(200).json({ result });
             }
             catch (error) {

@@ -4,12 +4,12 @@ import { CategoryRepository } from "../repository/CategoryRepository";
 
 export class CategoryService implements iCategoryService {
   async get(_id: string) {
-    let result = await CategoryRepository.findById(_id);
+    const result = await CategoryRepository.findById(_id);
     return result;
   }
 
   async getAllWithLimit(page: number, qtd: number): Promise<Result> {
-    let result = new Result();
+    const result = new Result();
     result.Page = page;
     result.Qtd = qtd;
     result.Total = await CategoryRepository.count({});
@@ -20,12 +20,12 @@ export class CategoryService implements iCategoryService {
   }
 
   async getAll() {
-    let result = await CategoryRepository.find({});
+    const result = await CategoryRepository.find({});
     return result;
   }
 
   async registerCategory(category: string) {
-    let result = await new CategoryRepository({
+    const result = await new CategoryRepository({
       category: category,
     });
     result.save();
@@ -33,13 +33,13 @@ export class CategoryService implements iCategoryService {
   }
 
   async deleteCategory(id: string) {
-    let result = await CategoryRepository.findByIdAndDelete(id);
+    const result = await CategoryRepository.findByIdAndDelete(id);
     return result;
   }
 
   async updateCategory(id: string, category: string) {
     try {
-      const updatedCategory = await CategoryRepository.findOneAndUpdate(
+      await CategoryRepository.findOneAndUpdate(
         { _id: id },
         {
           $set: {

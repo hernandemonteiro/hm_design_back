@@ -21,7 +21,7 @@ class UsersController {
     getAll(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                let result = yield this._service.getAll();
+                const result = yield this._service.getAll();
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -34,7 +34,7 @@ class UsersController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const _id = request.params.id;
-                let result = yield this._service.get(_id);
+                const result = yield this._service.get(_id);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -49,7 +49,7 @@ class UsersController {
                 const email = request.params.email;
                 const password = request.params.password;
                 const type = request.params.type;
-                let result = yield this._service.userRegister(name, email, password, type);
+                const result = yield this._service.userRegister(name, email, password, type);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -64,7 +64,7 @@ class UsersController {
                 const name = request.params.name;
                 const email = request.params.email;
                 const password = request.params.password;
-                let result = yield this._service.updateUser(id, name, email, password);
+                const result = yield this._service.updateUser(id, name, email, password);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -76,7 +76,7 @@ class UsersController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const _id = request.params.id;
-                let result = yield this._service.deleteUser(_id);
+                const result = yield this._service.deleteUser(_id);
                 response.status(200).json({ result });
             }
             catch (error) {
@@ -89,12 +89,12 @@ class UsersController {
             try {
                 const email = request.params.email;
                 const password = request.params.password;
-                let result = yield this._service.login(email, password);
+                const result = yield this._service.login(email, password);
                 const convertResult = JSON.stringify({
                     id: result._id,
                     type: result.type,
                 });
-                var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
+                const iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
                 const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
                 const jwt = crypto_js_1.default.AES.encrypt(convertResult, secret, {
                     iv: iv,

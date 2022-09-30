@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
 import Database from "./infra/db";
 import userRouter from "./router/UserRouter";
 import productsRouter from "./router/ProductsRouter";
@@ -7,8 +7,7 @@ import orderRouter from "./router/OrderRouter";
 import categoryRouter from "./router/CategoryRouter";
 import forgotPasswordRouter from "./router/ForgotPasswordRouter";
 import CryptoJS from "crypto-js";
-
-const cors = require("cors");
+import cors from "cors";
 
 class StartUp {
   public app: Application;
@@ -85,7 +84,7 @@ class StartUp {
       if (!Authenticate) {
         res.send(errorPage);
       }
-      var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
+      const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
       const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
       const tokenDecrypted = CryptoJS.AES.decrypt(Authenticate, secret, {
         iv: iv,

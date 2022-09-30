@@ -4,12 +4,12 @@ import { CartRepository } from "../repository/CartRepository";
 
 export class CartService implements iCartService {
   async get(_id: string) {
-    let result = await CartRepository.findById(_id);
+    const result = await CartRepository.findById(_id);
     return result;
   }
 
   async getAllWithLimit(page: number, qtd: number): Promise<Result> {
-    let result = new Result();
+    const result = new Result();
     result.Page = page;
     result.Qtd = qtd;
     result.Total = await CartRepository.count({});
@@ -20,7 +20,7 @@ export class CartService implements iCartService {
   }
 
   async getAll() {
-    let result = await CartRepository.find({});
+    const result = await CartRepository.find({});
     return result;
   }
 
@@ -64,7 +64,7 @@ export class CartService implements iCartService {
     status: string
   ) {
     try {
-      const updatedOrder = await CartRepository.findOneAndUpdate(
+      await CartRepository.findOneAndUpdate(
         { _id: id },
         {
           $set: {

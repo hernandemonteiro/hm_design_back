@@ -92,7 +92,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
   async updatePassword(hash: string, password: string) {
     const hashFormated = hash.split("___").join("/");
     const encryptedPassword = CryptoJS.SHA256(password).toString();
-    var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
+    const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
     const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
     const hashDecrypted = CryptoJS.AES.decrypt(hashFormated, secret, {
       iv: iv,

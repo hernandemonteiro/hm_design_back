@@ -4,12 +4,12 @@ import { ProductsRepository } from "../repository/ProductsRepository";
 
 export class ProductsService implements iProductsService {
   async get(_id: string) {
-    let result = await ProductsRepository.findById(_id);
+    const result = await ProductsRepository.findById(_id);
     return result;
   }
 
   async getAllWithLimit(page: number, qtd: number): Promise<Result> {
-    let result = new Result();
+    const result = new Result();
     result.Page = page;
     result.Qtd = qtd;
     result.Total = await ProductsRepository.count({});
@@ -20,22 +20,27 @@ export class ProductsService implements iProductsService {
   }
 
   async getAll() {
-    let result = await ProductsRepository.find({});
+    const result = await ProductsRepository.find({});
     return result;
   }
 
   async getPerCategory(category: string) {
-    let result = await ProductsRepository.find({category: category});
+    const result = await ProductsRepository.find({ category: category });
     return result;
   }
 
   async getPerSearch(search: string) {
-    let result = await ProductsRepository.find({$or: [{name: {'$regex': search, '$options': 'i'} }, {description: {'$regex': search, '$options': 'i'} }]});
+    const result = await ProductsRepository.find({
+      $or: [
+        { name: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+      ],
+    });
     return result;
   }
 
   async deleteProduct(id: string) {
-    let result = await ProductsRepository.findByIdAndDelete(id);
+    const result = await ProductsRepository.findByIdAndDelete(id);
     return result;
   }
 
@@ -47,7 +52,7 @@ export class ProductsService implements iProductsService {
     category: string,
     options: string
   ) {
-    let result = await new ProductsRepository({
+    const result = await new ProductsRepository({
       name: name,
       price: price,
       images: images,
@@ -69,7 +74,7 @@ export class ProductsService implements iProductsService {
     options: string
   ) {
     try {
-      const updatedProduct = await ProductsRepository.findOneAndUpdate(
+      await ProductsRepository.findOneAndUpdate(
         { _id: id },
         {
           $set: {

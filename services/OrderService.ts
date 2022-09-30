@@ -4,12 +4,12 @@ import { OrderRepository } from "../repository/OrderRepository";
 
 export class OrderService implements iOrderService {
   async get(_id: string) {
-    let result = await OrderRepository.findById(_id);
+    const result = await OrderRepository.findById(_id);
     return result;
   }
 
   async getAllWithLimit(page: number, qtd: number): Promise<Result> {
-    let result = new Result();
+    const result = new Result();
     result.Page = page;
     result.Qtd = qtd;
     result.Total = await OrderRepository.count({});
@@ -20,7 +20,7 @@ export class OrderService implements iOrderService {
   }
 
   async getAll() {
-    let result = await OrderRepository.find({});
+    const result = await OrderRepository.find({});
     return result;
   }
 
@@ -30,7 +30,7 @@ export class OrderService implements iOrderService {
     order_id: string,
     status: string
   ) {
-    let result = await new OrderRepository({
+    const result = await new OrderRepository({
       user_id: user_id,
       address: address,
       order_id: order_id,
@@ -41,7 +41,7 @@ export class OrderService implements iOrderService {
   }
 
   async deleteOrder(id: string) {
-    let result = await OrderRepository.findByIdAndDelete(id);
+    const result = await OrderRepository.findByIdAndDelete(id);
     return result;
   }
 
@@ -53,7 +53,7 @@ export class OrderService implements iOrderService {
     status: string
   ) {
     try {
-      const updatedOrder = await OrderRepository.findOneAndUpdate(
+      await OrderRepository.findOneAndUpdate(
         { _id: id },
         {
           $set: {

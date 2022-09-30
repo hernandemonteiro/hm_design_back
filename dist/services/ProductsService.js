@@ -15,13 +15,13 @@ const ProductsRepository_1 = require("../repository/ProductsRepository");
 class ProductsService {
     get(_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.findById(_id);
+            const result = yield ProductsRepository_1.ProductsRepository.findById(_id);
             return result;
         });
     }
     getAllWithLimit(page, qtd) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = new Result_1.Result();
+            const result = new Result_1.Result();
             result.Page = page;
             result.Qtd = qtd;
             result.Total = yield ProductsRepository_1.ProductsRepository.count({});
@@ -33,31 +33,36 @@ class ProductsService {
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.find({});
+            const result = yield ProductsRepository_1.ProductsRepository.find({});
             return result;
         });
     }
     getPerCategory(category) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.find({ category: category });
+            const result = yield ProductsRepository_1.ProductsRepository.find({ category: category });
             return result;
         });
     }
     getPerSearch(search) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.find({ $or: [{ name: { '$regex': search, '$options': 'i' } }, { description: { '$regex': search, '$options': 'i' } }] });
+            const result = yield ProductsRepository_1.ProductsRepository.find({
+                $or: [
+                    { name: { $regex: search, $options: "i" } },
+                    { description: { $regex: search, $options: "i" } },
+                ],
+            });
             return result;
         });
     }
     deleteProduct(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield ProductsRepository_1.ProductsRepository.findByIdAndDelete(id);
+            const result = yield ProductsRepository_1.ProductsRepository.findByIdAndDelete(id);
             return result;
         });
     }
     registerProduct(name, price, images, description, category, options) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield new ProductsRepository_1.ProductsRepository({
+            const result = yield new ProductsRepository_1.ProductsRepository({
                 name: name,
                 price: price,
                 images: images,
@@ -72,7 +77,7 @@ class ProductsService {
     updateProduct(id, name, price, images, description, status, options) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const updatedProduct = yield ProductsRepository_1.ProductsRepository.findOneAndUpdate({ _id: id }, {
+                yield ProductsRepository_1.ProductsRepository.findOneAndUpdate({ _id: id }, {
                     $set: {
                         name: name,
                         price: price,

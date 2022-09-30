@@ -18,13 +18,13 @@ const crypto_js_1 = __importDefault(require("crypto-js"));
 class UsersService {
     get(_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield UsersRepository_1.UsersRepository.findById(_id);
+            const result = yield UsersRepository_1.UsersRepository.findById(_id);
             return result;
         });
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield UsersRepository_1.UsersRepository.find({});
+            const result = yield UsersRepository_1.UsersRepository.find({});
             return result;
         });
     }
@@ -36,7 +36,7 @@ class UsersService {
                 email: encryptedEmail,
             }).count({});
             if (userIsRegistered === 0) {
-                let result = new UsersRepository_1.UsersRepository({
+                const result = new UsersRepository_1.UsersRepository({
                     name: name,
                     email: encryptedEmail,
                     password: encryptedPassword,
@@ -46,7 +46,7 @@ class UsersService {
                 return result;
             }
             else {
-                let message = "user registered";
+                const message = "user registered";
                 return message;
             }
         });

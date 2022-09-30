@@ -14,14 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ForgotPasswordService = void 0;
 const UsersRepository_1 = require("../repository/UsersRepository");
-const nodemailer = require("nodemailer");
+const nodemailer_1 = __importDefault(require("nodemailer"));
 const crypto_js_1 = __importDefault(require("crypto-js"));
 const ForgotPasswordRepository_1 = require("../repository/ForgotPasswordRepository");
 class ForgotPasswordService {
     forgotPassword(email) {
         return __awaiter(this, void 0, void 0, function* () {
             const encryptedEmail = crypto_js_1.default.SHA256(email).toString();
-            var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
+            const iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
             const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
             const hash = crypto_js_1.default.AES.encrypt(encryptedEmail, secret, {
                 iv: iv,
@@ -38,7 +38,7 @@ class ForgotPasswordService {
             const recoveryRepository = new ForgotPasswordRepository_1.ForgotPasswordRepository({
                 hash: hashFormated,
             });
-            const transporter = nodemailer.createTransport({
+            const transporter = nodemailer_1.default.createTransport({
                 service: "Hotmail",
                 auth: {
                     user: process.env.EMAIL_HM,
@@ -100,7 +100,7 @@ class ForgotPasswordService {
         return __awaiter(this, void 0, void 0, function* () {
             const hashFormated = hash.split("___").join("/");
             const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
-            var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
+            const iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
             const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
             const hashDecrypted = crypto_js_1.default.AES.decrypt(hashFormated, secret, {
                 iv: iv,

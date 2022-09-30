@@ -11,9 +11,9 @@ class UsersController {
 
   async getAll(request: Request, response: Response) {
     try {
-      let result = await this._service.getAll();
+      const result = await this._service.getAll();
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
       console.log(error);
     }
@@ -22,27 +22,27 @@ class UsersController {
   async getById(request: Request, response: Response) {
     try {
       const _id = request.params.id;
-      let result = await this._service.get(_id);
+      const result = await this._service.get(_id);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async userRegister(request: Request, response: Response) {
     try {
-      const name: any = request.params.name;
-      const email: any = request.params.email;
-      const password: any = request.params.password;
-      const type: any = request.params.type;
-      let result = await this._service.userRegister(
+      const name: string = request.params.name;
+      const email: string = request.params.email;
+      const password: string = request.params.password;
+      const type: string = request.params.type;
+      const result = await this._service.userRegister(
         name,
         email,
         password,
         type
       );
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -53,9 +53,9 @@ class UsersController {
       const name: string = request.params.name;
       const email: string = request.params.email;
       const password: string = request.params.password;
-      let result = await this._service.updateUser(id, name, email, password);
+      const result = await this._service.updateUser(id, name, email, password);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -63,9 +63,9 @@ class UsersController {
   async deleteUser(request: Request, response: Response) {
     try {
       const _id: string = request.params.id;
-      let result = await this._service.deleteUser(_id);
+      const result = await this._service.deleteUser(_id);
       response.status(200).json({ result });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
@@ -74,13 +74,13 @@ class UsersController {
     try {
       const email: string = request.params.email;
       const password: string = request.params.password;
-      let result = await this._service.login(email, password);
+      const result = await this._service.login(email, password);
       const convertResult = JSON.stringify({
         id: result._id,
         type: result.type,
       });
       // encrypted hash;
-      var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
+      const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
       const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
       const jwt = CryptoJS.AES.encrypt(convertResult, secret, {
         iv: iv,
@@ -89,7 +89,7 @@ class UsersController {
       }).toString();
 
       return response.status(200).json({ jwt });
-    } catch (error: any) {
+    } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
