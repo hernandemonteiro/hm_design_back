@@ -1,55 +1,45 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ForgotPasswordService = void 0;
 const UsersRepository_1 = require("../repository/UsersRepository");
-const nodemailer_1 = __importDefault(require("nodemailer"));
+const nodemailer = require("nodemailer");
 const crypto_js_1 = __importDefault(require("crypto-js"));
 const ForgotPasswordRepository_1 = require("../repository/ForgotPasswordRepository");
 class ForgotPasswordService {
-    forgotPassword(email) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const encryptedEmail = crypto_js_1.default.SHA256(email).toString();
-            const iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
-            const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
-            const hash = crypto_js_1.default.AES.encrypt(encryptedEmail, secret, {
-                iv: iv,
-                mode: crypto_js_1.default.mode.CBC,
-                padding: crypto_js_1.default.pad.Pkcs7,
-            }).toString();
-            const hashFormated = hash.split("/").join("___");
-            const userIsRegistered = yield UsersRepository_1.UsersRepository.find({
-                email: encryptedEmail,
-            }).count({});
-            const hashExists = yield ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                hash: hashFormated,
-            }).count({});
-            const recoveryRepository = new ForgotPasswordRepository_1.ForgotPasswordRepository({
-                hash: hashFormated,
-            });
-            const transporter = nodemailer_1.default.createTransport({
-                service: "Hotmail",
-                auth: {
-                    user: process.env.EMAIL_HM,
-                    pass: process.env.EMAIL_PASSWORD,
-                },
-            });
-            const mailOptions = {
-                from: process.env.EMAIL_HM,
-                to: email,
-                subject: "Recuperação de senha!",
-                html: `
+    async forgotPassword(email) {
+        const encryptedEmail = crypto_js_1.default.SHA256(email).toString();
+        var iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
+        const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
+        const hash = crypto_js_1.default.AES.encrypt(encryptedEmail, secret, {
+            iv: iv,
+            mode: crypto_js_1.default.mode.CBC,
+            padding: crypto_js_1.default.pad.Pkcs7,
+        }).toString();
+        const hashFormated = hash.split("/").join("___");
+        const userIsRegistered = await UsersRepository_1.UsersRepository.find({
+            email: encryptedEmail,
+        }).count({});
+        const hashExists = await ForgotPasswordRepository_1.ForgotPasswordRepository.find({
+            hash: hashFormated,
+        }).count({});
+        const recoveryRepository = new ForgotPasswordRepository_1.ForgotPasswordRepository({
+            hash: hashFormated,
+        });
+        const transporter = nodemailer.createTransport({
+            service: 'Hotmail',
+            auth: {
+                user: process.env.EMAIL_HM,
+                pass: process.env.EMAIL_PASSWORD,
+            }
+        });
+        const mailOptions = {
+            from: process.env.EMAIL_HM,
+            to: email,
+            subject: "Recuperação de senha!",
+            html: `
       <html>
         <body style='display: flex; justify-content: center;
           align-items: center; padding: 4%'>
@@ -71,51 +61,48 @@ class ForgotPasswordService {
         <body>
       </html>
       `,
-            };
-            if (userIsRegistered > 0) {
-                transporter.sendMail(mailOptions, function (error) {
-                    if (error) {
-                        return error;
-                    }
-                });
-                if (hashExists === 0) {
-                    recoveryRepository.save();
+        };
+        if (userIsRegistered > 0) {
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    return error;
                 }
-                return "Email enviado!";
-            }
-            else {
-                return "Usuário não existe!";
-            }
-        });
-    }
-    confirmHash(hash) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const hashExists = yield ForgotPasswordRepository_1.ForgotPasswordRepository.find({
-                hash: hash,
-            }).count({});
-            return hashExists;
-        });
-    }
-    updatePassword(hash, password) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const hashFormated = hash.split("___").join("/");
-            const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
-            const iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
-            const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
-            const hashDecrypted = crypto_js_1.default.AES.decrypt(hashFormated, secret, {
-                iv: iv,
-                mode: crypto_js_1.default.mode.CBC,
-                padding: crypto_js_1.default.pad.Pkcs7,
-            }).toString(crypto_js_1.default.enc.Utf8);
-            const deletehash = yield ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({
-                hash: hash,
+                else {
+                    return "Email enviado!";
+                }
             });
-            const updatePassword = yield UsersRepository_1.UsersRepository.findOneAndUpdate({ email: hashDecrypted }, { $set: { password: encryptedPassword } });
-            if (updatePassword && deletehash) {
-                return "Success";
+            if (hashExists === 0) {
+                recoveryRepository.save();
             }
-            return "Failure";
+        }
+        else {
+            return "Usuário não existe!";
+        }
+    }
+    async confirmHash(hash) {
+        const hashExists = await ForgotPasswordRepository_1.ForgotPasswordRepository.find({
+            hash: hash,
+        }).count({});
+        return hashExists;
+    }
+    async updatePassword(hash, password) {
+        const hashFormated = hash.split("___").join("/");
+        const encryptedPassword = crypto_js_1.default.SHA256(password).toString();
+        const iv = crypto_js_1.default.enc.Base64.parse(process.env.HASH_SECRET);
+        const secret = crypto_js_1.default.SHA256(process.env.HASH_SECRET);
+        const hashDecrypted = crypto_js_1.default.AES.decrypt(hashFormated, secret, {
+            iv: iv,
+            mode: crypto_js_1.default.mode.CBC,
+            padding: crypto_js_1.default.pad.Pkcs7,
+        }).toString(crypto_js_1.default.enc.Utf8);
+        const deletehash = await ForgotPasswordRepository_1.ForgotPasswordRepository.findOneAndDelete({
+            hash: hash,
         });
+        const updatePassword = await UsersRepository_1.UsersRepository.findOneAndUpdate({ email: hashDecrypted }, { $set: { password: encryptedPassword } });
+        if (updatePassword && deletehash) {
+            return "Success";
+        }
+        return "Failure";
     }
 }
 exports.ForgotPasswordService = ForgotPasswordService;

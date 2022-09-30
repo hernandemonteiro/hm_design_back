@@ -14,8 +14,9 @@ const ForgotPasswordRouter_1 = __importDefault(require("./router/ForgotPasswordR
 const crypto_js_1 = __importDefault(require("crypto-js"));
 const cors_1 = __importDefault(require("cors"));
 class StartUp {
+    app;
+    _db = new db_1.default();
     constructor() {
-        this._db = new db_1.default();
         this.app = (0, express_1.default)();
         this._db.createConnection();
         this.routes();
