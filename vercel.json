@@ -1,15 +1,12 @@
 {
-  "version": 2,
-  "public": true,
-  "builds": [
-    {
-      "src": "./dist/index.js"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/dist/"
-    }
-  ]
-}
+    "version": 2,
+    "public": true,
+    "builds": [{
+        "src": "./dist/index.js",
+        "use": "node"
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "/dist/"
+    }]
+  }
