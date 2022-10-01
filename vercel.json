@@ -1,9 +1,10 @@
 {
     "version": 2,
     "public": true,
+    "buildCommand": "npm run compile",
     "builds": [{
         "src": "./dist/index.js",
-        "use": "node"
+        "use": "@vercel/node"
     }],
     "routes": [{
         "src": "/(.*)",
