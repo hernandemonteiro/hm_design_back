@@ -7,9 +7,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "npm run compile & nodemon ./dist/index.js",
-    "compile": "tsc",
-    "dev": "tsc -w & nodemon ./dist/index.js",
+    "start": "nodemon ./index.ts",
     "lint": "npx eslint .",
     "test": "jest --detectOpenHandles"
   },
