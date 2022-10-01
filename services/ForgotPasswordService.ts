@@ -1,13 +1,13 @@
 import { iForgotPasswordService } from "../contracts/iForgotPasswordService";
 import { UsersRepository } from "../repository/UsersRepository";
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 import CryptoJS from "crypto-js";
 import { ForgotPasswordRepository } from "../repository/ForgotPasswordRepository";
 
 export class ForgotPasswordService implements iForgotPasswordService {
   async forgotPassword(email: string) {
     const encryptedEmail = CryptoJS.SHA256(email).toString();
-    var iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
+    const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
     const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
     const hash = CryptoJS.AES.encrypt(encryptedEmail, secret, {
       iv: iv,
@@ -65,7 +65,7 @@ export class ForgotPasswordService implements iForgotPasswordService {
     };
     if (userIsRegistered > 0) {
       // send the email
-      transporter.sendMail(mailOptions, function(error, info){
+      transporter.sendMail(mailOptions, function(error){
   if (error) {
     return error;
   } else {
