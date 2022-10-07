@@ -1,5 +1,4 @@
 import { UsersService } from "../services/UsersServices";
-import { Request, Response } from "express";
 import CryptoJS from "crypto-js";
 
 class UsersController {
@@ -9,7 +8,7 @@ class UsersController {
     this._service = new UsersService();
   }
 
-  async getAll(request: Request, response: Response) {
+  async getAll(request, response) {
     try {
       const result = await this._service.getAll();
       response.status(200).json({ result });
@@ -19,7 +18,7 @@ class UsersController {
     }
   }
 
-  async getById(request: Request, response: Response) {
+  async getById(request, response) {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id);
@@ -29,7 +28,7 @@ class UsersController {
     }
   }
 
-  async userRegister(request: Request, response: Response) {
+  async userRegister(request, response) {
     try {
       const name: string = request.params.name;
       const email: string = request.params.email;
@@ -47,7 +46,7 @@ class UsersController {
     }
   }
 
-  async updateUser(request: Request, response: Response) {
+  async updateUser(request, response) {
     try {
       const id: string = request.params.id;
       const name: string = request.params.name;
@@ -60,7 +59,7 @@ class UsersController {
     }
   }
 
-  async deleteUser(request: Request, response: Response) {
+  async deleteUser(request, response) {
     try {
       const _id: string = request.params.id;
       const result = await this._service.deleteUser(_id);
@@ -70,7 +69,7 @@ class UsersController {
     }
   }
 
-  async login(request: Request, response: Response) {
+  async login(request, response) {
     try {
       const email: string = request.params.email;
       const password: string = request.params.password;

@@ -1,5 +1,4 @@
 import { ProductsService } from "../services/ProductsService";
-import { Request, Response } from "express";
 
 class ProductsController {
   private _service: ProductsService;
@@ -8,7 +7,7 @@ class ProductsController {
     this._service = new ProductsService();
   }
 
-  async get(request: Request, response: Response) {
+  async get(request, response) {
     try {
       const page = request.params.page ? parseInt(request.params.page) : 1;
       const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
@@ -19,7 +18,7 @@ class ProductsController {
     }
   }
 
-  async getAll(request: Request, response: Response) {
+  async getAll(request, response) {
     try {
       const result = await this._service.getAll();
       response.status(200).json({ result });
@@ -28,7 +27,7 @@ class ProductsController {
     }
   }
 
-  async getById(request: Request, response: Response) {
+  async getById(request, response) {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id);
@@ -38,7 +37,7 @@ class ProductsController {
     }
   }
 
-  async getPerCategory(request: Request, response: Response) {
+  async getPerCategory(request, response) {
     try {
       const category = request.params.category;
       const result = await this._service.getPerCategory(category);
@@ -48,7 +47,7 @@ class ProductsController {
     }
   }
 
-  async getPerSearch(request: Request, response: Response){
+  async getPerSearch(request, response){
     try {
       const search = request.params.search;
       const result = await this._service.getPerSearch(search);
@@ -58,7 +57,7 @@ class ProductsController {
     }
   }
 
-  async deleteProduct(request: Request, response: Response) {
+  async deleteProduct(request, response) {
     try {
       const id = request.params.id;
       const result = await this._service.deleteProduct(id);
@@ -68,7 +67,7 @@ class ProductsController {
     }
   }
 
-  async registerProduct(request: Request, response: Response) {
+  async registerProduct(request, response) {
     try {
       const name = request.params.name;
       const price = request.params.price;
@@ -90,7 +89,7 @@ class ProductsController {
     }
   }
 
-  async updateProduct(request: Request, response: Response) {
+  async updateProduct(request, response) {
     try {
       const id = request.params.id;
       const name = request.params.name;

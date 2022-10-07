@@ -1,14 +1,12 @@
 import { CartService } from "../services/CartService";
-import { Request, Response } from "express";
 
 class CartController {
   private _service: CartService;
-
   constructor() {
     this._service = new CartService();
   }
 
-  async get(request: Request, response: Response) {
+  async get(request, response) {
     try {
       const page = request.params.page ? parseInt(request.params.page) : 1;
       const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
@@ -19,7 +17,7 @@ class CartController {
     }
   }
 
-  async getAll(request: Request, response: Response) {
+  async getAll(request, response) {
     try {
       const result = await this._service.getAll();
       response.status(200).json({ result });
@@ -28,17 +26,17 @@ class CartController {
     }
   }
 
-  async getById(request: Request, response: Response) {
+  async getById(request, response) {
     try {
       const _id = request.params.id;
-      const result = await this._service.get(_id);
+      const result = await this._service.get(_id)
       response.status(200).json({ result });
     } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
-  async deleteProductCart(request: Request, response: Response) {
+  async deleteProductCart(request, response) {
     try {
       const _id = request.params.id;
       const result = await this._service.deleteProductCart(_id);
@@ -48,7 +46,7 @@ class CartController {
     }
   }
 
-  async registerProductCart(request: Request, response: Response) {
+  async registerProductCart(request, response) {
     try {
       const user_id = request.params.user_id;
       const quantity = request.params.quantity;
@@ -74,7 +72,7 @@ class CartController {
     }
   }
 
-  async updateProductCart(request: Request, response: Response) {
+  async updateProductCart(request, response) {
     try {
       const id = request.params.id;
       const user_id = request.params.user_id;

@@ -1,5 +1,4 @@
 import { ForgotPasswordService } from "../services/ForgotPasswordService";
-import { Request, Response } from "express";
 
 class ForgotPasswordController {
   private _service: ForgotPasswordService;
@@ -8,7 +7,7 @@ class ForgotPasswordController {
     this._service = new ForgotPasswordService();
   }
 
-  async forgotPassword(request: Request, response: Response) {
+  async forgotPassword(request, response) {
     try {
       const email = request.params.email;
       const result = await this._service.forgotPassword(email);
@@ -18,7 +17,7 @@ class ForgotPasswordController {
     }
   }
 
-  async confirmHash(request: Request, response: Response){
+  async confirmHash(request, response){
     try {
       const hash = request.params.hash;
       const result = await this._service.confirmHash(hash);
@@ -28,7 +27,7 @@ class ForgotPasswordController {
     }
   }
 
-  async updatePassword(request: Request, response: Response){
+  async updatePassword(request, response){
     try {
       const hash = request.params.hash;
       const password = request.params.password;

@@ -1,5 +1,4 @@
 import { OrderService } from "../services/OrderService";
-import { Request, Response } from "express";
 
 class OrderController {
   private _service: OrderService;
@@ -8,7 +7,7 @@ class OrderController {
     this._service = new OrderService();
   }
 
-  async get(request: Request, response: Response) {
+  async get(request, response) {
     try {
       const page = request.params.page ? parseInt(request.params.page) : 1;
       const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
@@ -19,7 +18,7 @@ class OrderController {
     }
   }
 
-  async getAll(request: Request, response: Response) {
+  async getAll(request, response) {
     try {
       const result = await this._service.getAll();
       response.status(200).json({ result });
@@ -28,7 +27,7 @@ class OrderController {
     }
   }
 
-  async getById(request: Request, response: Response) {
+  async getById(request, response) {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id);
@@ -38,7 +37,7 @@ class OrderController {
     }
   }
 
-  async registerOrder(request: Request, response: Response) {
+  async registerOrder(request, response) {
     try {
       const user_id = request.params.user_id;
       const address = request.params.address;
@@ -56,7 +55,7 @@ class OrderController {
     }
   }
 
-  async deleteOrder(request: Request, response: Response) {
+  async deleteOrder(request, response) {
     try {
       const id = request.params.id;
       const result = await this._service.deleteOrder(id);
@@ -66,7 +65,7 @@ class OrderController {
     }
   }
 
-  async updateOrder(request: Request, response: Response){
+  async updateOrder(request, response){
     try {
       const id = request.params.id;
       const user_id = request.params.user_id;

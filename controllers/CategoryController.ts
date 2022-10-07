@@ -1,5 +1,4 @@
 import { CategoryService } from "../services/CategoryService";
-import { Request, Response } from "express";
 
 class CategoryController {
   private _service: CategoryService;
@@ -8,7 +7,7 @@ class CategoryController {
     this._service = new CategoryService();
   }
 
-  async get(request: Request, response: Response) {
+  async get(request, response) {
     try {
       const page = request.params.page ? parseInt(request.params.page) : 1;
       const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
@@ -19,7 +18,7 @@ class CategoryController {
     }
   }
 
-  async getAll(request: Request, response: Response) {
+  async getAll(request, response) {
     try {
       const result = await this._service.getAll();
       response.status(200).json({ result });
@@ -28,7 +27,7 @@ class CategoryController {
     }
   }
 
-  async getById(request: Request, response: Response) {
+  async getById(request, response) {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id);
@@ -38,7 +37,7 @@ class CategoryController {
     }
   }
 
-  async registerCategory(request: Request, response: Response) {
+  async registerCategory(request, response) {
     try {
       const category = request.params.category;
       const result = await this._service.registerCategory(category);
@@ -48,7 +47,7 @@ class CategoryController {
     }
   }
 
-  async deleteCategory(request: Request, response: Response) {
+  async deleteCategory(request, response) {
     try {
       const id = request.params.id;
       const result = await this._service.deleteCategory(id);
@@ -58,7 +57,7 @@ class CategoryController {
     }
   }
 
-  async updateCategory(request: Request, response: Response) {
+  async updateCategory(request, response) {
     try {
       const id = request.params.id;
       const category = request.params.category;
