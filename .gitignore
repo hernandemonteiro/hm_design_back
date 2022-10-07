@@ -3,3 +3,6 @@ node_modules
 
 # ambient variables
 .env
+
+# coverage test
+coverage
