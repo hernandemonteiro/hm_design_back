@@ -8,7 +8,7 @@ import {
 import ForgotPasswordController from "../../../controllers/ForgotPasswordController";
 import ForgotPasswordService from "../../../services/ForgotPasswordService";
 
-jest.mock("../../services/ForgotPasswordService");
+jest.mock("../../../services/ForgotPasswordService");
 
 describe("Forgot Password tests", () => {
   it("send an email to recovery password", async () => {

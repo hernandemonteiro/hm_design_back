@@ -8,7 +8,7 @@ import {
 import CategoryController from "../../../controllers/CategoryController";
 import CategoryService from "../../../services/CategoryService";
 
-jest.mock("../../services/CategoryService");
+jest.mock("../../../services/CategoryService");
 
 describe("Cart tests for Controllers", () => {
   it("Get all categorys limited by pages", async () => {

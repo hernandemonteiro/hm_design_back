@@ -8,7 +8,7 @@ import {
 import ProductsController from "../../../controllers/ProductsController";
 import ProductsService from "../../../services/ProductsService";
 
-jest.mock("../../services/ProductsService");
+jest.mock("../../../services/ProductsService");
 
 describe("Products tests", () => {
   it("get all products with limit pages", async () => {
