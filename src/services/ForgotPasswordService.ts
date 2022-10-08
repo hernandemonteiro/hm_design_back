@@ -30,11 +30,11 @@ export class ForgotPasswordService implements iForgotPasswordService {
 
     // configs to email sender
     const transporter = nodemailer.createTransport({
-    service: 'Hotmail',         
+      service: "Hotmail",
       auth: {
         user: process.env.EMAIL_HM,
         pass: process.env.EMAIL_PASSWORD,
-      }
+      },
     });
     const mailOptions = {
       from: process.env.EMAIL_HM,
@@ -65,18 +65,17 @@ export class ForgotPasswordService implements iForgotPasswordService {
     };
     if (userIsRegistered > 0) {
       // send the email
-      transporter.sendMail(mailOptions, function(error){
-  if (error) {
-    return error;
-  } else {
-    return "Email enviado!";
-  }
-});
+      transporter.sendMail(mailOptions, function (error) {
+        if (error) {
+          return error;
+        } else {
+          return "Email enviado!";
+        }
+      });
       // save the records of hash in the repository;
       if (hashExists === 0) {
         recoveryRepository.save();
       }
-      
     } else {
       return "Usuário não existe!";
     }
@@ -114,3 +113,4 @@ export class ForgotPasswordService implements iForgotPasswordService {
     return "Failure";
   }
 }
+export default new ForgotPasswordService();

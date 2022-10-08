@@ -4,9 +4,9 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "./utils/controllers.factory";
-import OrderController from "../../controllers/OrderController";
-import OrderService from "../../services/OrderService";
+} from "../utils/controllers.factory";
+import OrderController from "../../../controllers/OrderController";
+import OrderService from "../../../services/OrderService";
 
 jest.mock("../../services/OrderService");
 
@@ -23,11 +23,11 @@ describe("Order tests", () => {
     await OrderController.get(req, res);
     reqErrorTest(OrderService.getAllWithLimit);
     await OrderController.get(req, res);
+    commonExpectsReturn(res, OrderService.getAllWithLimit);
     expect(OrderService.getAllWithLimit).toHaveBeenCalledWith(
       req.params.page,
       req.params.qtd
     );
-    commonExpectsReturn(res, OrderService.getAllWithLimit);
   });
 
   it("get all orders", async () => {
@@ -38,6 +38,7 @@ describe("Order tests", () => {
     reqErrorTest(OrderService.getAll);
     await OrderController.getAll({}, res);
     commonExpectsReturn(res, OrderService.getAll);
+    expect(OrderService.getAll).toHaveBeenCalledWith();
   });
 
   it("get an order by id", async () => {

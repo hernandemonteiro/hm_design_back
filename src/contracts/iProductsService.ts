@@ -23,6 +23,7 @@ export interface iProductsService {
     price: string,
     images: string,
     description: string,
+    category: string,
     status: string,
     options: string
   );

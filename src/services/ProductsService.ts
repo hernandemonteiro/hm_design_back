@@ -70,26 +70,26 @@ export class ProductsService implements iProductsService {
     price: string,
     images: string,
     description: string,
+    category: string,
     status: string,
     options: string
   ) {
-    try {
-      await ProductsRepository.findOneAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            name: name,
-            price: price,
-            images: images,
-            description: description,
-            status: status,
-            options: options,
-          },
-        }
-      );
-      return { status: "success" };
-    } catch (error) {
-      return { status: "Error: " + error.toString() };
-    }
+    await ProductsRepository.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          name: name,
+          price: price,
+          images: images,
+          description: description,
+          category: category,
+          status: status,
+          options: options,
+        },
+      }
+    );
+    return { status: "success" };
   }
 }
+
+export default new ProductsService();

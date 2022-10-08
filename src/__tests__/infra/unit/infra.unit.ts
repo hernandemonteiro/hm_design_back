@@ -1,6 +1,6 @@
 import { describe, it, jest } from "@jest/globals";
-import Database from "../../infra/db";
-import { Result } from "../../infra/Result";
+import Database from "../../../infra/db";
+import { Result } from "../../../infra/Result";
 
 jest.mock("../../infra/db");
 describe("infra tests", () => {

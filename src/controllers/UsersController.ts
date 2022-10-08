@@ -1,5 +1,4 @@
 import { UsersService } from "../services/UsersServices";
-import CryptoJS from "crypto-js";
 
 class UsersController {
   private _service: UsersService;
@@ -11,10 +10,9 @@ class UsersController {
   async getAll(request, response) {
     try {
       const result = await this._service.getAll();
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
-      console.log(error);
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
@@ -22,9 +20,9 @@ class UsersController {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id);
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
@@ -40,9 +38,9 @@ class UsersController {
         password,
         type
       );
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
@@ -53,9 +51,9 @@ class UsersController {
       const email: string = request.params.email;
       const password: string = request.params.password;
       const result = await this._service.updateUser(id, name, email, password);
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
@@ -63,9 +61,9 @@ class UsersController {
     try {
       const _id: string = request.params.id;
       const result = await this._service.deleteUser(_id);
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
@@ -74,22 +72,9 @@ class UsersController {
       const email: string = request.params.email;
       const password: string = request.params.password;
       const result = await this._service.login(email, password);
-      const convertResult = JSON.stringify({
-        id: result._id,
-        type: result.type,
-      });
-      // encrypted hash;
-      const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
-      const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-      const jwt = CryptoJS.AES.encrypt(convertResult, secret, {
-        iv: iv,
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7,
-      }).toString();
-
-      return response.status(200).json({ jwt });
+      return response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 }

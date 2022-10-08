@@ -4,9 +4,9 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "./utils/controllers.factory";
-import CartController from "../../controllers/CartController";
-import CartService from "../../services/CartService";
+} from "../utils/controllers.factory";
+import CartController from "../../../controllers/CartController";
+import CartService from "../../../services/CartService";
 
 jest.mock("../../services/CartService");
 describe("Cart tests for Controllers", () => {
@@ -22,11 +22,11 @@ describe("Cart tests for Controllers", () => {
     await CartController.get(req, res);
     reqErrorTest(CartService.getAllWithLimit);
     await CartController.get(req, res);
+    commonExpectsReturn(res, CartService.getAllWithLimit);
     expect(CartService.getAllWithLimit).toHaveBeenCalledWith(
       req.params.page,
       req.params.qtd
     );
-    commonExpectsReturn(res, CartService.getAllWithLimit);
   });
 
   it("Get all products", async () => {
@@ -37,6 +37,7 @@ describe("Cart tests for Controllers", () => {
     reqErrorTest(CartService.getAll);
     await CartController.getAll(req, res);
     commonExpectsReturn(res, CartService.getAll);
+    expect(CartService.getAll).toHaveBeenCalledWith();
   });
 
   it("Get product by id", async () => {
@@ -51,6 +52,7 @@ describe("Cart tests for Controllers", () => {
     reqErrorTest(CartService.get);
     await CartController.getById(req, res);
     commonExpectsReturn(res, CartService.get);
+    expect(CartService.get).toHaveBeenCalledWith(req.params.id);
   });
 
   it("delete product by id", async () => {
@@ -65,6 +67,7 @@ describe("Cart tests for Controllers", () => {
     reqErrorTest(CartService.deleteProductCart);
     await CartController.deleteProductCart(req, res);
     commonExpectsReturn(res, CartService.deleteProductCart);
+    expect(CartService.deleteProductCart).toHaveBeenCalledWith(req.params.id);
   });
 
   it("register a product", async () => {
@@ -86,6 +89,16 @@ describe("Cart tests for Controllers", () => {
     reqErrorTest(CartService.registerProductCart);
     await CartController.registerProductCart(req, res);
     commonExpectsReturn(res, CartService.registerProductCart);
+    expect(CartService.registerProductCart).toHaveBeenCalledWith(
+      req.params.user_id,
+      req.params.quantity,
+      req.params.product_id,
+      req.params.product,
+      req.params.unit_price,
+      req.params.total_price,
+      req.params.order_id,
+      req.params.status
+    );
   });
   it("update a product", async () => {
     const res = resConfig();
@@ -98,7 +111,6 @@ describe("Cart tests for Controllers", () => {
         product: "Product test",
         unit_price: "1.00",
         total_price: "1.00",
-        order_id: "order_id",
         status: "test coverage",
       },
     };
@@ -107,6 +119,15 @@ describe("Cart tests for Controllers", () => {
     reqErrorTest(CartService.updateProductCart);
     await CartController.updateProductCart(req, res);
     commonExpectsReturn(res, CartService.updateProductCart);
-    
+    expect(CartService.updateProductCart).toHaveBeenCalledWith(
+      req.params.id,
+      req.params.user_id,
+      req.params.quantity,
+      req.params.product_id,
+      req.params.product,
+      req.params.unit_price,
+      req.params.total_price,
+      req.params.status
+    );
   });
 });
