@@ -11,9 +11,7 @@ export function resConfig() {
 
 // simulate an error:
 export function reqErrorTest(mockFn) {
-  jest.mocked(mockFn).mockImplementation(() => {
-    throw new Error("test error");
-  });
+  jest.mocked(mockFn).mockRejectedValueOnce("test error");
 }
 
 // simulate a object return:

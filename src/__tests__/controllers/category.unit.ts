@@ -4,7 +4,7 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "./controllers.utils";
+} from "./utils/controllers.factory";
 import CategoryController from "../../controllers/CategoryController";
 import CategoryService from "../../services/CategoryService";
 

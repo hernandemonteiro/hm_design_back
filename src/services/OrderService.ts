@@ -52,21 +52,19 @@ export class OrderService implements iOrderService {
     order_id: string,
     status: string
   ) {
-    try {
-      await OrderRepository.findOneAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            user_id: user_id,
-            address: address,
-            order_id: order_id,
-            status: status,
-          },
-        }
-      );
-      return { status: "success" };
-    } catch (error) {
-      return { status: "Error: " + error.toString() };
-    }
+    await OrderRepository.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          user_id: user_id,
+          address: address,
+          order_id: order_id,
+          status: status,
+        },
+      }
+    );
+    return { status: "success" };
   }
 }
+
+export default new OrderService();

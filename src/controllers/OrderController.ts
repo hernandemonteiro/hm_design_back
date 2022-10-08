@@ -9,8 +9,8 @@ class OrderController {
 
   async get(request, response) {
     try {
-      const page = request.params.page ? parseInt(request.params.page) : 1;
-      const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
+      const page = request.params.page;
+      const qtd = request.params.qtd;
       const result = await this._service.getAllWithLimit(page, qtd);
       response.status(200).json( result );
     } catch (error) {
