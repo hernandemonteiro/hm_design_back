@@ -8,21 +8,21 @@ class CartController {
 
   async get(request, response) {
     try {
-      const page = request.params.page ? parseInt(request.params.page) : 1;
-      const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
+      const page = request.params.page;
+      const qtd = request.params.qtd;
       const result = await this._service.getAllWithLimit(page, qtd);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
   async getAll(request, response) {
     try {
       const result = await this._service.getAll();
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -30,9 +30,9 @@ class CartController {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id)
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -40,9 +40,9 @@ class CartController {
     try {
       const _id = request.params.id;
       const result = await this._service.deleteProductCart(_id);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -66,9 +66,9 @@ class CartController {
         order_id,
         status
       );
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -92,9 +92,9 @@ class CartController {
         total_price,
         status
       );
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 }

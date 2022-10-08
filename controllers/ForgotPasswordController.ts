@@ -11,9 +11,9 @@ class ForgotPasswordController {
     try {
       const email = request.params.email;
       const result = await this._service.forgotPassword(email);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -21,9 +21,9 @@ class ForgotPasswordController {
     try {
       const hash = request.params.hash;
       const result = await this._service.confirmHash(hash);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -32,9 +32,9 @@ class ForgotPasswordController {
       const hash = request.params.hash;
       const password = request.params.password;
       const result = await this._service.updatePassword(hash, password);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 }

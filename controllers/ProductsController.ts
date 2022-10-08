@@ -12,18 +12,18 @@ class ProductsController {
       const page = request.params.page ? parseInt(request.params.page) : 1;
       const qtd = request.params.qtd ? parseInt(request.params.qtd) : 10;
       const result = await this._service.getAllWithLimit(page, qtd);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
   async getAll(request, response) {
     try {
       const result = await this._service.getAll();
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -31,9 +31,9 @@ class ProductsController {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -41,9 +41,9 @@ class ProductsController {
     try {
       const category = request.params.category;
       const result = await this._service.getPerCategory(category);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -51,9 +51,9 @@ class ProductsController {
     try {
       const search = request.params.search;
       const result = await this._service.getPerSearch(search);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json("Error: " + error);
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -61,9 +61,9 @@ class ProductsController {
     try {
       const id = request.params.id;
       const result = await this._service.deleteProduct(id);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json("Error: " + error);
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -83,9 +83,9 @@ class ProductsController {
         category,
         options
       );
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json("Error: " + error);
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -107,9 +107,9 @@ class ProductsController {
         status,
         options
       );
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json("Error: " + error);
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 }

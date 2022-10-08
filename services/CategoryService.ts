@@ -38,18 +38,16 @@ export class CategoryService implements iCategoryService {
   }
 
   async updateCategory(id: string, category: string) {
-    try {
-      await CategoryRepository.findOneAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            category: category,
-          },
-        }
-      );
-      return { status: "success" };
-    } catch (error) {
-      return { status: "Error: " + error.toString() };
-    }
+    await CategoryRepository.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          category: category,
+        },
+      }
+    );
+    return { status: "success" };
   }
 }
+
+export default new CategoryService();

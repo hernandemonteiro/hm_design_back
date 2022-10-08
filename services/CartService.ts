@@ -1,3 +1,4 @@
+import { Document } from "mongoose";
 import { iCartService } from "../contracts/iCartService";
 import { Result } from "../infra/Result";
 import { CartRepository } from "../repository/CartRepository";
@@ -8,7 +9,7 @@ export class CartService implements iCartService {
     return result;
   }
 
-  async getAllWithLimit(page: number, qtd: number): Promise<Result> {
+  async getAllWithLimit(page: number, qtd: number): Promise<Result | Document> {
     const result = new Result();
     result.Page = page;
     result.Qtd = qtd;
@@ -63,25 +64,21 @@ export class CartService implements iCartService {
     total_price: string,
     status: string
   ) {
-    try {
-      await CartRepository.findOneAndUpdate(
-        { _id: id },
-        {
-          $set: {
-            user_id: user_id,
-            quantity: quantity,
-            product_id: product_id,
-            product: product,
-            unit_price: unit_price,
-            total_price: total_price,
-            status: status,
-          },
-        }
-      );
-      return { status: "success" };
-    } catch (error) {
-      return { status: "Error: " + error.toString() };
-    }
+    await CartRepository.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          user_id: user_id,
+          quantity: quantity,
+          product_id: product_id,
+          product: product,
+          unit_price: unit_price,
+          total_price: total_price,
+          status: status,
+        },
+      }
+    );
+    return { status: "success" };
   }
 }
 export default new CartService();

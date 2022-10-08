@@ -11,9 +11,9 @@ class UsersController {
   async getAll(request, response) {
     try {
       const result = await this._service.getAll();
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
       console.log(error);
     }
   }
@@ -22,9 +22,9 @@ class UsersController {
     try {
       const _id = request.params.id;
       const result = await this._service.get(_id);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -40,9 +40,9 @@ class UsersController {
         password,
         type
       );
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -53,9 +53,9 @@ class UsersController {
       const email: string = request.params.email;
       const password: string = request.params.password;
       const result = await this._service.updateUser(id, name, email, password);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -63,9 +63,9 @@ class UsersController {
     try {
       const _id: string = request.params.id;
       const result = await this._service.deleteUser(_id);
-      response.status(200).json({ result });
+      response.status(200).json( result );
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 
@@ -89,7 +89,7 @@ class UsersController {
 
       return response.status(200).json({ jwt });
     } catch (error) {
-      response.status(500).json({ error: error.message || error.toString() });
+      response.status(500).json({ error: error.message  || error.toString()});
     }
   }
 }

@@ -1,65 +1,75 @@
-import { describe, it, jest } from "@jest/globals";
-import { resConfig } from "./utils";
+import { describe, it, jest, expect } from "@jest/globals";
+import {
+  resConfig,
+  reqErrorTest,
+  documentReturn,
+  commonExpectsReturn,
+} from "./controllers.utils";
 import CartController from "../../controllers/CartController";
 import CartService from "../../services/CartService";
 
 jest.mock("../../services/CartService");
 describe("Cart tests for Controllers", () => {
-  it("Get all products limited by pages", () => {
-    const resSuccess = resConfig("get success");
-    const reqSuccess = {
+  it("Get all products limited by pages", async () => {
+    const res = resConfig();
+    const req = {
       params: {
         page: 1,
         qtd: 10,
       },
     };
-    jest.mocked(CartService.getAllWithLimit).mockResolvedValueOnce(null);
-    CartController.get(reqSuccess, resSuccess);
-    const resFailure = resConfig("get failure");
-    const reqFailure = {};
-    CartController.get(reqFailure, resFailure);
-  });
-  it("Get all products", () => {
-    const resSuccess = resConfig("getAll success");
-    const resFailure = resConfig("getAll failure");
-    const req = {};
-    jest.mocked(CartService.getAll).mockResolvedValueOnce(null);
-    CartController.getAll(req, resSuccess);
-    jest.mocked(CartService.getAll).mockImplementation(() => {
-      throw new Error("Error Match");
-    });
-    CartController.getAll(req, resFailure);
+    documentReturn(CartService.getAllWithLimit);
+    await CartController.get(req, res);
+    reqErrorTest(CartService.getAllWithLimit);
+    await CartController.get(req, res);
+    expect(CartService.getAllWithLimit).toHaveBeenCalledWith(
+      req.params.page,
+      req.params.qtd
+    );
+    commonExpectsReturn(res, CartService.getAllWithLimit);
   });
 
-  it("Get product by id", () => {
-    const resSuccess = resConfig("getByID success");
-    const reqSuccess = {
+  it("Get all products", async () => {
+    const res = resConfig();
+    const req = {};
+    documentReturn(CartService.getAll);
+    await CartController.getAll(req, res);
+    reqErrorTest(CartService.getAll);
+    await CartController.getAll(req, res);
+    commonExpectsReturn(res, CartService.getAll);
+  });
+
+  it("Get product by id", async () => {
+    const res = resConfig();
+    const req = {
       params: {
         id: "id_test",
       },
     };
-    jest.mocked(CartService.get).mockResolvedValueOnce(null);
-    CartController.getById(reqSuccess, resSuccess);
-    const resFailure = resConfig("getByID failure");
-    const reqFailure = {};
-    CartController.getById(reqFailure, resFailure);
+    documentReturn(CartService.get);
+    await CartController.getById(req, res);
+    reqErrorTest(CartService.get);
+    await CartController.getById(req, res);
+    commonExpectsReturn(res, CartService.get);
   });
-  it("delete product by id", () => {
-    const resSuccess = resConfig("deleteProductCart success");
-    const reqSuccess = {
+
+  it("delete product by id", async () => {
+    const res = resConfig();
+    const req = {
       params: {
         id: "id_test",
       },
     };
-    jest.mocked(CartService.deleteProductCart).mockResolvedValueOnce(null);
-    CartController.deleteProductCart(reqSuccess, resSuccess);
-    const resFailure = resConfig("deleteProductCart failure");
-    const reqFailure = {};
-    CartController.deleteProductCart(reqFailure, resFailure);
+    documentReturn(CartService.deleteProductCart);
+    await CartController.deleteProductCart(req, res);
+    reqErrorTest(CartService.deleteProductCart);
+    await CartController.deleteProductCart(req, res);
+    commonExpectsReturn(res, CartService.deleteProductCart);
   });
-  it("registering an product", () => {
-    const resSuccess = resConfig("registerProductCart success");
-    const reqSuccess = {
+
+  it("register a product", async () => {
+    const res = resConfig();
+    const req = {
       params: {
         user_id: "user_id",
         quantity: "1",
@@ -71,15 +81,15 @@ describe("Cart tests for Controllers", () => {
         status: "test coverage",
       },
     };
-    jest.mocked(CartService.registerProductCart).mockResolvedValueOnce(null);
-    CartController.registerProductCart(reqSuccess, resSuccess);
-    const resFailure = resConfig("registerProductCart failure");
-    const reqFailure = {};
-    CartController.registerProductCart(reqFailure, resFailure);
+    documentReturn(CartService.registerProductCart);
+    await CartController.registerProductCart(req, res);
+    reqErrorTest(CartService.registerProductCart);
+    await CartController.registerProductCart(req, res);
+    commonExpectsReturn(res, CartService.registerProductCart);
   });
-  it("registering an product", () => {
-    const resSuccess = resConfig("updateProductCart success");
-    const reqSuccess = {
+  it("update a product", async () => {
+    const res = resConfig();
+    const req = {
       params: {
         id: "id",
         user_id: "user_id",
@@ -92,10 +102,11 @@ describe("Cart tests for Controllers", () => {
         status: "test coverage",
       },
     };
-    jest.mocked(CartService.updateProductCart).mockResolvedValueOnce(null);
-    CartController.updateProductCart(reqSuccess, resSuccess);
-    const resFailure = resConfig("updateProductCart failure");
-    const reqFailure = {};
-    CartController.updateProductCart(reqFailure, resFailure);
+    documentReturn(CartService.updateProductCart);
+    await CartController.updateProductCart(req, res);
+    reqErrorTest(CartService.updateProductCart);
+    await CartController.updateProductCart(req, res);
+    commonExpectsReturn(res, CartService.updateProductCart);
+    
   });
 });
