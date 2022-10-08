@@ -1,11 +1,11 @@
 import express, { Application } from "express";
-import Database from "./src/infra/db";
-import userRouter from "./src/router/UserRouter";
-import productsRouter from "./src/router/ProductsRouter";
-import cartRouter from "./src/router/CartRouter";
-import orderRouter from "./src/router/OrderRouter";
-import categoryRouter from "./src/router/CategoryRouter";
-import forgotPasswordRouter from "./src/router/ForgotPasswordRouter";
+import Database from "./infra/db";
+import userRouter from "./router/UserRouter";
+import productsRouter from "./router/ProductsRouter";
+import cartRouter from "./router/CartRouter";
+import orderRouter from "./router/OrderRouter";
+import categoryRouter from "./router/CategoryRouter";
+import forgotPasswordRouter from "./router/ForgotPasswordRouter";
 import CryptoJS from "crypto-js";
 import cors from "cors";
 
