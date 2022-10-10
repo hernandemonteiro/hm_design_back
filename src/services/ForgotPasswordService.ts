@@ -15,16 +15,14 @@ export class ForgotPasswordService implements iForgotPasswordService {
       padding: CryptoJS.pad.Pkcs7,
     }).toString();
     const hashFormated = hash.split("/").join("___");
+
     // verify if user is registered
-    const userIsRegistered = await UsersRepository.find({
+    const userIsRegistered = await UsersRepository.count({
       email: encryptedEmail,
-    }).count({});
+    });
 
     // // configs to reposite the hashs
-    const hashExists = await ForgotPasswordRepository.find({
-      hash: hashFormated,
-    }).count({});
-    const recoveryRepository = new ForgotPasswordRepository({
+    const hashExists = await ForgotPasswordRepository.count({
       hash: hashFormated,
     });
 
@@ -64,27 +62,23 @@ export class ForgotPasswordService implements iForgotPasswordService {
       `,
     };
     if (userIsRegistered > 0) {
-      // send the email
-      transporter.sendMail(mailOptions, function (error) {
-        if (error) {
-          return error;
-        } else {
-          return "Email enviado!";
-        }
-      });
       // save the records of hash in the repository;
       if (hashExists === 0) {
-        recoveryRepository.save();
+        ForgotPasswordRepository.create({
+          hash: hashFormated,
+        });
       }
+      // send the email
+      transporter.sendMail(mailOptions, (error) =>
+        error ? error : "Email enviado!"
+      );
     } else {
       return "Usuário não existe!";
     }
   }
 
   async confirmHash(hash: string) {
-    const hashExists = await ForgotPasswordRepository.find({
-      hash: hash,
-    }).count({});
+    const hashExists = await ForgotPasswordRepository.count({ hash: hash });
     return hashExists;
   }
 
@@ -98,19 +92,21 @@ export class ForgotPasswordService implements iForgotPasswordService {
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7,
     }).toString(CryptoJS.enc.Utf8);
+
     const deletehash = await ForgotPasswordRepository.findOneAndDelete({
       hash: hash,
     });
+
     const updatePassword = await UsersRepository.findOneAndUpdate(
       { email: hashDecrypted },
       { $set: { password: encryptedPassword } }
     );
-    // implement a method to delete the hash in the forgotPassword collection
 
     if (updatePassword && deletehash) {
       return "Success";
+    } else {
+      return "Failure";
     }
-    return "Failure";
   }
 }
 export default new ForgotPasswordService();

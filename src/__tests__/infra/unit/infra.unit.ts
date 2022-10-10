@@ -4,7 +4,7 @@ import { Result } from "../../../infra/Result";
 
 jest.mock("../../../infra/db");
 describe("infra tests", () => {
-  it("create a database instance", () => { new Database() });
+  // it("create a database instance", () => Database.createConnection());
   it("return an Result request interface", () => {
     const result = new Result();
     result.Page = 1;

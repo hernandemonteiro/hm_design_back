@@ -30,13 +30,12 @@ export class OrderService implements iOrderService {
     order_id: string,
     status: string
   ) {
-    const result = await new OrderRepository({
+    const result = await OrderRepository.create({
       user_id: user_id,
       address: address,
       order_id: order_id,
       status: status,
     });
-    result.save();
     return result;
   }
 

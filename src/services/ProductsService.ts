@@ -52,7 +52,7 @@ export class ProductsService implements iProductsService {
     category: string,
     options: string
   ) {
-    const result = await new ProductsRepository({
+    const result = await ProductsRepository.create({
       name: name,
       price: price,
       images: images,
@@ -60,7 +60,6 @@ export class ProductsService implements iProductsService {
       category: category,
       options: options,
     });
-    result.save();
     return result;
   }
 

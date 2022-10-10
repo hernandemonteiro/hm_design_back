@@ -1,4 +1,4 @@
-import { jest, expect } from "@jest/globals";
+import { jest, expect, beforeEach, afterEach } from "@jest/globals";
 
 // basic config to a Response:
 export function resConfig() {
@@ -36,4 +36,25 @@ export function commonExpectsReturn(res, service) {
 
   // error status:
   expect(res.status.mock.calls[1][0]).toBe(500);
+}
+
+// common expects return to services:
+export function commonExpectsServicesReturn(mockFn) {
+  // test the response:
+  expect(mockFn.status).toBe("success");
+}
+
+// environment variables mock;
+export  function dotEnvMock(){
+  const env = process.env;
+
+  beforeEach(() => {
+    jest.resetModules();
+    process.env = { ...env };
+  });
+
+  afterEach(() => {
+    process.env = env;
+  });
+
 }

@@ -4,7 +4,7 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "../utils/controllers.factory";
+} from "../../utils/factory";
 import ForgotPasswordController from "../../../controllers/ForgotPasswordController";
 import ForgotPasswordService from "../../../services/ForgotPasswordService";
 

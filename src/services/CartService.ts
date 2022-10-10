@@ -40,7 +40,7 @@ export class CartService implements iCartService {
     order_id: string,
     status: string
   ) {
-    const registeredProduct = new CartRepository({
+    const registered = CartRepository.create({
       user_id: user_id,
       quantity: quantity,
       product_id: product_id,
@@ -50,8 +50,8 @@ export class CartService implements iCartService {
       order_id: order_id,
       status: status,
     });
-    registeredProduct.save();
-    return registeredProduct;
+
+    return registered;
   }
 
   async updateProductCart(

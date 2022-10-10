@@ -11,7 +11,7 @@ import cors from "cors";
 
 class StartUp {
   public app: Application;
-  private _db: Database = new Database();
+  private _db = Database;
 
   constructor() {
     this.app = express();

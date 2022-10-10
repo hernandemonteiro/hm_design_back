@@ -21,19 +21,17 @@ export class UsersService implements iUsersService {
   ) {
     const encryptedPassword = CryptoJS.SHA256(password).toString();
     const encryptedEmail = CryptoJS.SHA256(email).toString();
-    const userIsRegistered = await UsersRepository.find({
+    const userIsRegistered = await UsersRepository.count({
       email: encryptedEmail,
-    }).count({});
+    });
 
     if (userIsRegistered === 0) {
-      const result = new UsersRepository({
+      const result = await UsersRepository.create({
         name: name,
         email: encryptedEmail,
         password: encryptedPassword,
         type: type,
       });
-
-      result.save();
       return result;
     } else {
       const message = "user registered";

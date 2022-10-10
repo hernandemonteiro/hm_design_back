@@ -4,7 +4,7 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "../utils/controllers.factory";
+} from "../../utils/factory";
 import UsersController from "../../../controllers/UsersController";
 import UsersService from "../../../services/UsersServices";
 

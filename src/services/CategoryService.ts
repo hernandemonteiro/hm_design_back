@@ -25,10 +25,9 @@ export class CategoryService implements iCategoryService {
   }
 
   async registerCategory(category: string) {
-    const result = await new CategoryRepository({
+    const result = await CategoryRepository.create({
       category: category,
     });
-    result.save();
     return result;
   }
 

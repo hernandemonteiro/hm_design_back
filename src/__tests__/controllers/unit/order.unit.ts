@@ -4,7 +4,7 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "../utils/controllers.factory";
+} from "../../utils/factory";
 import OrderController from "../../../controllers/OrderController";
 import OrderService from "../../../services/OrderService";
 
