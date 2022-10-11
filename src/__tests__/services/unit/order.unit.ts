@@ -1,8 +1,10 @@
-import { describe, it, jest } from "@jest/globals";
+import { describe, it, jest, expect } from "@jest/globals";
 import {
   documentReturn,
   commonExpectsServicesReturn,
+  resultPromise
 } from "../../utils/factory";
+import sinon from "sinon";
 import OrderService from "../../../services/OrderService";
 import { OrderRepository } from "../../../repository/OrderRepository";
 
@@ -16,6 +18,16 @@ describe("Orders service", () => {
   });
 
   //   getallwithlimit implements;
+  it("get all orders with limit pages", async () => {
+    jest.mocked(OrderRepository.count).mockResolvedValue(10);
+    resultPromise(OrderRepository);
+    const getAllWithLimit = await OrderService.getAllWithLimit(1, 1).then(
+      (res) => res.Data
+    );
+    expect(getAllWithLimit).toMatchObject({ status: "success" });
+    sinon.restore();
+    expect(OrderRepository.count).toHaveBeenCalledTimes(1);
+  });
 
   it("get all orders", async () => {
     documentReturn(OrderRepository.find);

@@ -1,4 +1,5 @@
 import { jest, expect, beforeEach, afterEach } from "@jest/globals";
+import sinon from "sinon";
 
 // basic config to a Response:
 export function resConfig() {
@@ -44,8 +45,23 @@ export function commonExpectsServicesReturn(mockFn) {
   expect(mockFn.status).toBe("success");
 }
 
+// test a skiped Result Object find;
+export function resultPromise(service) {
+  sinon.stub(service, "find").returns({
+    skip: (n) => {
+      return {
+        limit: (m) => {
+          return new Promise((resolve, reject) => {
+            resolve({ status: "success" });
+          });
+        },
+      };
+    },
+  });
+}
+
 // environment variables mock;
-export  function dotEnvMock(){
+export function dotEnvMock() {
   const env = process.env;
 
   beforeEach(() => {
@@ -56,5 +72,4 @@ export  function dotEnvMock(){
   afterEach(() => {
     process.env = env;
   });
-
 }

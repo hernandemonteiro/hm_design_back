@@ -1,8 +1,10 @@
-import { describe, it, jest } from "@jest/globals";
+import { describe, it, jest, expect } from "@jest/globals";
 import {
   documentReturn,
   commonExpectsServicesReturn,
+  resultPromise,
 } from "../../utils/factory";
+import sinon from "sinon";
 import CategoryService from "../../../services/CategoryService";
 import { CategoryRepository } from "../../../repository/CategoryRepository";
 
@@ -15,7 +17,16 @@ describe("Category services test", () => {
     commonExpectsServicesReturn(getByid);
   });
 
-  //   getallwithlimit implements;
+  it("get all categorys with limit pages", async () => {
+    jest.mocked(CategoryRepository.count).mockResolvedValue(10);
+    resultPromise(CategoryRepository);
+    const getAllWithLimit = await CategoryService.getAllWithLimit(1, 1).then(
+      (res) => res.Data
+    );
+    expect(getAllWithLimit).toMatchObject({ status: "success" });
+    sinon.restore();
+    expect(CategoryRepository.count).toHaveBeenCalledTimes(1);
+  });
 
   it("get all categorys", async () => {
     documentReturn(CategoryRepository.find);

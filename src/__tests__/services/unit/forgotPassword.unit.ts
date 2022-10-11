@@ -20,7 +20,7 @@ describe("Forgot Password service test", () => {
   // dot env mock call;
   dotEnvMock();
 
-  const sendMailMock = jest.fn(() => "success");
+  const sendMailMock = jest.fn();
   beforeEach(() => {
     sendMailMock.mockClear();
     nodemailer.createTransport.mockClear();

@@ -2,7 +2,9 @@ import { describe, it, jest, expect } from "@jest/globals";
 import {
   documentReturn,
   commonExpectsServicesReturn,
+  resultPromise,
 } from "../../utils/factory";
+import sinon from "sinon";
 import CartService from "../../../services/CartService";
 import { CartRepository } from "../../../repository/CartRepository";
 
@@ -15,10 +17,17 @@ describe("cart service tests", () => {
     commonExpectsServicesReturn(getByid);
   });
 
-  // it("get all products with limit pages", async () => {
-  //   const getAllWithLimit = await CartService.getAllWithLimit(1, 10);
-  //   commonExpectsServicesReturn(getAllWithLimit);
-  // });
+  it("get all products in cart with limit pages", async () => {
+    jest.mocked(CartRepository.count).mockResolvedValue(10);
+    resultPromise(CartRepository);
+    const getAllWithLimit = await CartService.getAllWithLimit(1, 1).then(
+      (res) => res.Data
+    );
+    console.log(getAllWithLimit);
+    expect(getAllWithLimit).toMatchObject({ status: "success" });
+    sinon.restore();
+    expect(CartRepository.count).toHaveBeenCalledTimes(1);
+  });
 
   it("get all products in cart without limits", async () => {
     documentReturn(CartRepository.find);

@@ -1,21 +1,33 @@
-import { describe, it, jest } from "@jest/globals";
+import { describe, it, jest, expect } from "@jest/globals";
 import {
   documentReturn,
   commonExpectsServicesReturn,
+  resultPromise
 } from "../../utils/factory";
+import sinon from "sinon";
 import ProductsService from "../../../services/ProductsService";
 import { ProductsRepository } from "../../../repository/ProductsRepository";
 
 jest.mock("../../../repository/ProductsRepository");
 
 describe("Products services tests", () => {
+
   it("get Product by id", async () => {
     documentReturn(ProductsRepository.findById);
     const getByID = await ProductsService.get("id");
     commonExpectsServicesReturn(getByID);
   });
 
-  //   getallwithlimit implements;
+  it("get all products with limit pages", async () => {
+    jest.mocked(ProductsRepository.count).mockResolvedValue(10);
+    resultPromise(ProductsRepository);
+    const getAllWithLimit = await ProductsService.getAllWithLimit(1, 1).then(
+      (res) => res.Data
+    );
+    expect(getAllWithLimit).toMatchObject({ status: "success" });
+    sinon.restore();
+    expect(ProductsRepository.count).toHaveBeenCalledTimes(1);
+  });
 
   it("get all Products", async () => {
     documentReturn(ProductsRepository.find);

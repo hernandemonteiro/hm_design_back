@@ -9,7 +9,7 @@ export class CartService implements iCartService {
     return result;
   }
 
-  async getAllWithLimit(page: number, qtd: number): Promise<Result | Document> {
+  async getAllWithLimit(page: number, qtd: number): Promise<Result> {
     const result = new Result();
     result.Page = page;
     result.Qtd = qtd;
