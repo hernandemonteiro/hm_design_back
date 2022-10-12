@@ -10,7 +10,7 @@
     "start": "nodemon ./index.ts",
     "lint": "npx eslint .",
     "test": "jest --coverage",
-    "build": "node ./index.ts"
+    "build": "npm run test && nodemon ./index.ts"
   },
   "keywords": [],
   "author": "Hernande monteiro",
