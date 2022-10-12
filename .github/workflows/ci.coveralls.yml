@@ -5,6 +5,9 @@ name: server_hm_design - CI
 
 on: [push, pull_request]
 
+service_name : travis-pro
+ repo_token : env.COVERALL_IO
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
