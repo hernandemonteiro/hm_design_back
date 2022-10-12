@@ -5,10 +5,6 @@
   "devCommand": "npm run test",
   "builds": [
     {
-      "src": "./src/__tests__/**",
-      "use": "@vercel/jest"
-    },
-    {
       "src": "./index.ts",
       "use": "@vercel/node"
     }
