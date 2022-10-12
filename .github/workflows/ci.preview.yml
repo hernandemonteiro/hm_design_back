@@ -1,9 +1,9 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: server_hm_design - CI
+name: CI/CD Development tests with vercel
 
-on: [push, pull_request]
+on: [push]
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v3
@@ -28,7 +27,6 @@ jobs:
       - run: npm i
       - run: npm run test
       - run: ls -la
-    #  preview tests 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
