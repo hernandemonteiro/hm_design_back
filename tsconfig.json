@@ -3,7 +3,7 @@
     "incremental": true,
     "target": "es2022",
     "allowJs": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "esModuleInterop": true,
     "noEmitOnError": true,
     "removeComments": true,
