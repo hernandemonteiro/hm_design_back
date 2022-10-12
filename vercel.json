@@ -1,7 +1,13 @@
 {
   "version": 2,
   "public": true,
-  "buildCommand": "npm run test && nodemon ./index.ts",
+  "buildCommand": "npm run test",
+  "builds": [
+    {
+      "src": "./index.ts",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
