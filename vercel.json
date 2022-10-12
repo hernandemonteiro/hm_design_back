@@ -1,9 +1,6 @@
 {
   "version": 2,
   "public": true,
-  "scripts": {
-    "test": "npm run test"
-  },
   "builds": [
     {
       "src": "./index.ts",
