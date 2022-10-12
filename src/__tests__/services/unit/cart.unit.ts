@@ -23,7 +23,6 @@ describe("cart service tests", () => {
     const getAllWithLimit = await CartService.getAllWithLimit(1, 1).then(
       (res) => res.Data
     );
-    console.log(getAllWithLimit);
     expect(getAllWithLimit).toMatchObject({ status: "success" });
     sinon.restore();
     expect(CartRepository.count).toHaveBeenCalledTimes(1);
