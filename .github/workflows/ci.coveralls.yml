@@ -1,6 +1,5 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-repo_token: ${{ secrets.COVERALL_IO }}
 
 name: server_hm_design - CI
 
@@ -25,3 +24,5 @@ jobs:
       - run: npm i
       - run: npm run test
       - run: ls -la
+
+repo_token: ${{ secrets.COVERALL_IO }}
