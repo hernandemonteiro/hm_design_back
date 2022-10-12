@@ -1,13 +1,7 @@
 {
   "version": 2,
   "public": true,
-  "builds": [
-    { "test": "npm run test" },
-    {
-      "src": "./index.ts",
-      "use": "@vercel/node"
-    }
-  ],
+  "buildCommand": "npm run test && @vercel/node ./index.ts",
   "routes": [
     {
       "src": "/(.*)",
