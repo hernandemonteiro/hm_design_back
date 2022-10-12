@@ -10,7 +10,7 @@
     "start": "nodemon ./index.ts",
     "lint": "npx eslint .",
     "test": "jest --coverage",
-    "build": "@vercel/node ./index.ts"
+    "build": "node ./index.ts"
   },
   "keywords": [],
   "author": "Hernande monteiro",
