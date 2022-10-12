@@ -7,7 +7,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "npm test && nodemon ./index.ts",
+    "start": "nodemon ./index.ts",
     "lint": "npx eslint .",
     "test": "jest --coverage"
   },
