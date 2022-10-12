@@ -25,4 +25,4 @@ jobs:
       - run: npm run test
       - run: ls -la
 
-repo_token: ${{ secrets.COVERALL_IO }}
+repo_token : oRQv3t9i2CllnOiI2BFWtKd6Q6KhvdhYy
