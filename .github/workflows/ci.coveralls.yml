@@ -1,13 +1,11 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+repo_token: ${{ secrets.COVERALL_IO }}
 
 name: server_hm_design - CI
 
 on: [push, pull_request]
 
-service_name : travis-pro
- repo_token : env.COVERALL_IO
- 
 jobs:
   build:
     runs-on: ubuntu-latest
