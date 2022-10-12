@@ -1,7 +1,8 @@
 {
   "version": 2,
   "public": true,
-  "buildCommand": "npm run test",
+  "installCommand": "npm install",
+  "devCommand": "npm run test",
   "builds": [
     {
       "src": "./index.ts",
