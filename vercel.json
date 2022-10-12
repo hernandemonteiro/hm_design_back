@@ -3,6 +3,7 @@
   "public": true,
   "builds": [
     {
+      "run": "npm run test",
       "src": "./index.ts",
       "use": "@vercel/node"
     }
