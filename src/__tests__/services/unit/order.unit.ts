@@ -2,7 +2,7 @@ import { describe, it, jest, expect } from "@jest/globals";
 import {
   documentReturn,
   commonExpectsServicesReturn,
-  resultPromise
+  resultPromise,
 } from "../../utils/factory";
 import sinon from "sinon";
 import OrderService from "../../../services/OrderService";
