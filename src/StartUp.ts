@@ -99,7 +99,7 @@ class StartUp {
     this.app.use(
       cors({
         exposedHeaders: ["x-access-token"],
-        origin: [process.env.ORIGIN, "https://hm-design.vercel.app"],
+        origin: "*",
       })
     );
 
