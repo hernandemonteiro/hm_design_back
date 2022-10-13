@@ -21,15 +21,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: | 
-          touch .env
-          echo HASH_TEST=${{ secrets.HASH_TEST }} >> .env
-          cat .env
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
+      - run: | 
+          touch .env
+          echo HASH_TEST=${{ secrets.HASH_TEST }} >> .env
+          cat .env
       - run: npm i
       - run: npm run test
       - run: ls -la
