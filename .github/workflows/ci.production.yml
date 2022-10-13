@@ -26,6 +26,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm i
+      - run: |
+          touch .env
+          echo HASH_TEST=${{ secrets.HASH_TEST }} >> .env
       - run: npm run test
       - run: ls -la
       - name: Install Vercel CLI
