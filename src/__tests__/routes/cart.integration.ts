@@ -20,11 +20,11 @@ describe("cart integration test", () => {
         "x-access-token": process.env.HASH_TEST,
       },
     })
-      .then((res) => console.log(res))
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
       console.log(fetchCart)
-      // .then((res) => {
-      //   return res;
-      // });
     // expect(fetchCart.status).toBe("success");
   });
 });
