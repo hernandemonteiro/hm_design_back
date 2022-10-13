@@ -8,18 +8,10 @@ on: [pull_request]
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PRODUCTION }}
-  HASH_TEST: ${{ secrets.HASH_TEST }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-  steps:
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1
-        with:
-            envkey_HASH_TEST: ${{ secrets.HASH_TEST }}
-            file_name: .env
 
     strategy:
       matrix:
@@ -33,6 +25,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm i
+      - name: Create env file
+       - run: |
+          touch .env
+          echo HASH_TEST=${HASH_TEST} > .env
+          cat .env
+        env: 
+          HASH_TEST: ${{ secrets.HASH_TEST }} 
       - run: npm run test
       - run: ls -la
       - name: Install Vercel CLI
