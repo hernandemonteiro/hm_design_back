@@ -31,8 +31,6 @@ jobs:
           touch .env
           echo HASH_TEST=${{ secrets.HASH_TEST }} >> .env
           cat .env
-      - run: ls -la
-      - run: vi .env
       - run: npm run test
       - run: ls -la
       - name: Install Vercel CLI
