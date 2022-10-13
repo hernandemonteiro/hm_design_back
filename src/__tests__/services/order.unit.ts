@@ -3,12 +3,12 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise,
-} from "../../utils/factory";
+} from "../utils/factory";
 import sinon from "sinon";
-import OrderService from "../../../services/OrderService";
-import { OrderRepository } from "../../../repository/OrderRepository";
+import OrderService from "../../services/OrderService";
+import { OrderRepository } from "../../repository/OrderRepository";
 
-jest.mock("../../../repository/OrderRepository");
+jest.mock("../../repository/OrderRepository");
 
 describe("Orders service", () => {
   it("get order by id", async () => {

@@ -4,11 +4,11 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "../../utils/factory";
-import OrderController from "../../../controllers/OrderController";
-import OrderService from "../../../services/OrderService";
+} from "../utils/factory";
+import OrderController from "../../controllers/OrderController";
+import OrderService from "../../services/OrderService";
 
-jest.mock("../../../services/OrderService");
+jest.mock("../../services/OrderService");
 
 describe("Order tests", () => {
   it("get all orders with limit pages", async () => {

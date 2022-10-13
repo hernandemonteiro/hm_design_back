@@ -4,11 +4,11 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "../../utils/factory";
-import CartController from "../../../controllers/CartController";
-import CartService from "../../../services/CartService";
+} from "../utils/factory";
+import CartController from "../../controllers/CartController";
+import CartService from "../../services/CartService";
 
-jest.mock("../../../services/CartService");
+jest.mock("../../services/CartService");
 describe("Cart tests for Controllers", () => {
   it("Get all products limited by pages", async () => {
     const res = resConfig();

@@ -3,11 +3,11 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   dotEnvMock,
-} from "../../utils/factory";
-import UsersService from "../../../services/UsersServices";
-import { UsersRepository } from "../../../repository/UsersRepository";
+} from "../utils/factory";
+import UsersService from "../../services/UsersServices";
+import { UsersRepository } from "../../repository/UsersRepository";
 
-jest.mock("../../../repository/UsersRepository");
+jest.mock("../../repository/UsersRepository");
 
 describe("User service test", () => {
   // dotenv mock:

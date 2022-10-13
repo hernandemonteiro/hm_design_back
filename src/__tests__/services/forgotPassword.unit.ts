@@ -6,14 +6,14 @@ import {
   beforeEach,
   afterEach,
 } from "@jest/globals";
-import { documentReturn, dotEnvMock } from "../../utils/factory";
+import { documentReturn, dotEnvMock } from "../utils/factory";
 import nodemailer from "nodemailer";
-import ForgotPasswordService from "../../../services/ForgotPasswordService";
-import { ForgotPasswordRepository } from "../../../repository/ForgotPasswordRepository";
-import { UsersRepository } from "../../../repository/UsersRepository";
+import ForgotPasswordService from "../../services/ForgotPasswordService";
+import { ForgotPasswordRepository } from "../../repository/ForgotPasswordRepository";
+import { UsersRepository } from "../../repository/UsersRepository";
 
-jest.mock("../../../repository/ForgotPasswordRepository");
-jest.mock("../../../repository/UsersRepository");
+jest.mock("../../repository/ForgotPasswordRepository");
+jest.mock("../../repository/UsersRepository");
 jest.mock("nodemailer");
 
 describe("Forgot Password service test", () => {

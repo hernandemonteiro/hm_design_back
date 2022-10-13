@@ -3,12 +3,12 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise
-} from "../../utils/factory";
+} from "../utils/factory";
 import sinon from "sinon";
-import ProductsService from "../../../services/ProductsService";
-import { ProductsRepository } from "../../../repository/ProductsRepository";
+import ProductsService from "../../services/ProductsService";
+import { ProductsRepository } from "../../repository/ProductsRepository";
 
-jest.mock("../../../repository/ProductsRepository");
+jest.mock("../../repository/ProductsRepository");
 
 describe("Products services tests", () => {
 

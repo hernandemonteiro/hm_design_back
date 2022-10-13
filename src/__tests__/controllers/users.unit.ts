@@ -4,11 +4,11 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "../../utils/factory";
-import UsersController from "../../../controllers/UsersController";
-import UsersService from "../../../services/UsersServices";
+} from "../utils/factory";
+import UsersController from "../../controllers/UsersController";
+import UsersService from "../../services/UsersServices";
 
-jest.mock("../../../services/UsersServices");
+jest.mock("../../services/UsersServices");
 
 describe("Users tests", () => {
   it("get all users", async () => {

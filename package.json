@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon ./index.ts",
     "lint": "npx eslint .",
-    "test": "jest --coverage"
+    "test": "jest --coverage --forceExit"
   },
   "keywords": [],
   "author": "Hernande monteiro",

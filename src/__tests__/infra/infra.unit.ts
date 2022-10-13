@@ -1,8 +1,8 @@
 import { describe, it, jest } from "@jest/globals";
-import Database from "../../../infra/db";
-import { Result } from "../../../infra/Result";
+// import Database from "../../infra/db";
+import { Result } from "../../infra/Result";
 
-jest.mock("../../../infra/db");
+jest.mock("../../infra/db");
 describe("infra tests", () => {
   // it("create a database instance", () => Database.createConnection());
   it("return an Result request interface", () => {

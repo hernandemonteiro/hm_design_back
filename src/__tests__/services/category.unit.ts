@@ -3,12 +3,12 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise,
-} from "../../utils/factory";
+} from "../utils/factory";
 import sinon from "sinon";
-import CategoryService from "../../../services/CategoryService";
-import { CategoryRepository } from "../../../repository/CategoryRepository";
+import CategoryService from "../../services/CategoryService";
+import { CategoryRepository } from "../../repository/CategoryRepository";
 
-jest.mock("../../../repository/CategoryRepository");
+jest.mock("../../repository/CategoryRepository");
 
 describe("Category services test", () => {
   it("get a category by ID", async () => {

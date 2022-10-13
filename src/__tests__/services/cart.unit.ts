@@ -3,12 +3,12 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise,
-} from "../../utils/factory";
+} from "../utils/factory";
 import sinon from "sinon";
-import CartService from "../../../services/CartService";
-import { CartRepository } from "../../../repository/CartRepository";
+import CartService from "../../services/CartService";
+import { CartRepository } from "../../repository/CartRepository";
 
-jest.mock("../../../repository/CartRepository");
+jest.mock("../../repository/CartRepository");
 
 describe("cart service tests", () => {
   it("get a product in cart by ID", async () => {
