@@ -14,6 +14,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    steps:
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1
+      with:
+          envkey_HASH_TEST: ${{ secrets.HASH_TEST }}
+          file_name: .env
+
     strategy:
       matrix:
         node-version: [16.x]
@@ -26,11 +33,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1
-          with:
-              envkey_HASH_TEST: ${{ secrets.HASH_TEST }}
-              file_name: .env
       - run: npm i
       - run: npm run test
       - run: ls -la
