@@ -9,7 +9,7 @@ jest.mock("../../infra/db");
 describe("cart integration test", () => {
   beforeAll(() => {
     jest.mocked(Database.createConnection);
-    StartUp.app.listen(8585);
+    StartUp.app.listen(8585, () => console.log("on air!"));
   });
   it("get all products", async () => {
     sinon.stub(CartRepository, "find").returns({ status: "success" });
