@@ -19,7 +19,8 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - uses: SpicyPizza/create-envfile@v1.3
+      - name: Make envfile
+          uses: SpicyPizza/create-envfile@v1.3
           with:
             envkey_HASH_TEST: ${{ secrets.HASH_TEST }}
             file_name: .env
