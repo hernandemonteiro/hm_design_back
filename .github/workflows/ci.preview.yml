@@ -7,9 +7,21 @@ on: [push]
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PRODUCTION}}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PRODUCTION }}
+  HASH_TEST: ${{ secrets.HASH_TEST }}
 
 jobs:
+  create-envfile:
+      runs-on: ubuntu-latest
+  
+      steps:
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_HASH_TEST: ${{ secrets.HASH_TEST }}
+          file_name: .env
+          fail_on_empty: false
+
   build:
     runs-on: ubuntu-latest
 
@@ -17,7 +29,7 @@ jobs:
       matrix:
         node-version: [16.x]
 
-    steps:
+      steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -25,13 +37,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm i
-      - name: Create env file
-       - run: |
-          touch .env
-          echo HASH_TEST=${HASH_TEST} > .env
-          cat .env
-        env: 
-          HASH_TEST: ${{ secrets.HASH_TEST }} 
       - run: npm run test
       - run: ls -la
       - name: Install Vercel CLI
@@ -41,4 +46,4 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
