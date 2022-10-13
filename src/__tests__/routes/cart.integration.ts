@@ -4,6 +4,8 @@ import StartUp from "../../StartUp";
 import Database from "../../infra/db";
 import sinon from "sinon";
 import { CartRepository } from "../../repository/CartRepository";
+import dotenv from 'dotenv';
+dotenv.config();
 
 jest.mock("../../infra/db");
 
