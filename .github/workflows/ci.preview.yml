@@ -9,17 +9,7 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PRODUCTION }}
 
-jobs:
-  create-envfile:
-    runs-on: ubuntu-latest
-  
-    steps:
-        - name: Make envfile
-          uses: SpicyPizza/create-envfile@v1.3
-          with:
-            envkey_HASH_TEST: ${{ secrets.HASH_TEST }}
-            file_name: .env
-            fail_on_empty: false
+jobs:      
 
   build:
     runs-on: ubuntu-latest
@@ -29,6 +19,12 @@ jobs:
         node-version: [16.x]
 
     steps:
+      - uses: SpicyPizza/create-envfile@v1.3
+          with:
+            envkey_HASH_TEST: ${{ secrets.HASH_TEST }}
+            file_name: .env
+            fail_on_empty: false
+      - run: ls -la
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
