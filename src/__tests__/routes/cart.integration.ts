@@ -16,6 +16,7 @@ describe("cart integration test", () => {
     const fetchCart = await fetch("http://localhost:8585/cart", {
       method: "GET",
       headers: {
+        // how i use the secrets to fix error in github?
         "x-access-token": process.env.HASH_TEST,
       },
     })
