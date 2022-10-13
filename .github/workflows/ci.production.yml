@@ -26,8 +26,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm i
-      - run: echo $HASH_TEST_ENV
-      - run: HASH_TEST=$HASH_TEST_ENV npm run test
+      - run: echo ${{ env.HASH_TEST }}
+      - run: HASH_TEST=${{ env.HASH_TEST }} npm run test
       - run: ls -la
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
