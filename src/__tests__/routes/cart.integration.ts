@@ -6,6 +6,7 @@ import sinon from "sinon";
 import { CartRepository } from "../../repository/CartRepository";
 
 jest.mock("../../infra/db");
+
 describe("cart integration test", () => {
   beforeAll(() => {
     jest.mocked(Database.createConnection);
@@ -20,11 +21,10 @@ describe("cart integration test", () => {
         "x-access-token": process.env.HASH_TEST,
       },
     })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
+      .then((Response) => Response.json())
+      .then((Response) => {
+        return Response;
       });
-      console.log(fetchCart)
-    // expect(fetchCart.status).toBe("success");
+    expect(fetchCart.status).toBe("success");
   });
 });
