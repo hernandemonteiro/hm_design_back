@@ -8,7 +8,7 @@ on: [pull_request]
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_PRODUCTION }}
-  HASH_TEST: ${{ secrets.HASH_TEST }}
+  HASH_TEST_ENV: ${{ secrets.HASH_TEST }}
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm i
-      - run: HASH_TEST=${{ secrets.HASH_TEST }} npm run test
+      - run: HASH__TEST=HASH_TEST_ENV npm run test
       - run: ls -la
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
