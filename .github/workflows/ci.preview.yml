@@ -24,12 +24,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: node -e "console.log(process.env.HASH_TEST)"
-        env:
-          HASH_TEST: ${{ secrets.HASH_TEST }}
+          cache: "npm"     
       - run: npm i
-      - run: npm test
+      - run: HASH_TEST=${{ secrets.HASH_TEST }} CI=true npx jest
+         env:
+          HASH_TEST: ${{ secrets.HASH_TEST }}
       - run: ls -la
       - name: Install Vercel CLI
         run: npm install --global vercel@latest

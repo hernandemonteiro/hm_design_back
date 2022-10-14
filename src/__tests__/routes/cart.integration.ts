@@ -16,7 +16,7 @@ describe("cart integration test", () => {
   });
   it("get all products", async () => {
     sinon.stub(CartRepository, "find").returns({ status: "success" });
-    const fetchCart = await fetch("https://server-two-liart.vercel.app/cart", {
+    const fetchCart = await fetch("http://localhost:8585/cart", {
       method: "GET",
       headers: {
         // how i use the secrets to fix error in github?
