@@ -74,8 +74,8 @@ class StartUp {
         </div>
       </body>
     </html>`;
-          
-    const tokenDecrypted = cryptoDecrypt(Authenticate);
+
+    const tokenDecrypted = Authenticate ? cryptoDecrypt(Authenticate) : "";
 
     if (tokenDecrypted === process.env.HASH_SECRET) {
       next();
