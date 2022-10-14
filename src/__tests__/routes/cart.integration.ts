@@ -19,7 +19,7 @@ describe("/cart", () => {
   it("get", async () => {
     sinonIntegrationSkips(CartRepository);
     const result = await fetchClient("/cart/1/10", "GET");
-    expect(result).toBe({
+    expect(result).toMatchObject({
       Qtd: "10",
       Page: "1",
       Total: 1,
