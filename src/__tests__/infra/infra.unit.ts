@@ -1,17 +1,12 @@
 import { describe, it, jest } from "@jest/globals";
-// import Database from "../../infra/db";
-import { Result } from "../../infra/Result";
+import Database from "../../infra/db";
+import mongoose from "mongoose";
 
-jest.mock("../../infra/db");
+jest.mock("mongoose");
+
 describe("infra tests", () => {
-  // it("create a database instance", () => Database.createConnection());
-  it("return an Result request interface", () => {
-    const result = new Result();
-    result.Page = 1;
-    result.Qtd = 10;
-    result.Total = 20;
-    result.Data = {
-      status: "success",
-    };
+  it("create a database instance", () => {
+    jest.mocked(mongoose.connect);
+    Database.createConnection();
   });
 });

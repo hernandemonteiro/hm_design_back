@@ -1,38 +1,59 @@
-import { jest, describe, it, expect, beforeAll } from "@jest/globals";
-import fetch from "node-fetch";
-import StartUp from "../../StartUp";
-import Database from "../../infra/db";
-import sinon from "sinon";
+import { describe, it, expect } from "@jest/globals";
 import { CartRepository } from "../../repository/CartRepository";
-import { dotEnvMock } from "../utils/factory";
-import dotEnv from "dotenv";
-dotEnv.config();
+import {
+  sinonIntegrationStubs,
+  sinonIntegrationSkips,
+  configClient,
+  fetchClient,
+} from "../utils/utils.integration.factory";
 
-jest.mock("../../infra/db");
-jest.mock("dotenv");
+describe("/cart", () => {
+  configClient();
 
-describe("cart integration test", () => {
-  dotEnvMock();
-
-  beforeAll(() => {
-    jest.mocked(Database.createConnection);
-    process.env.HASH_SECRET = "tester";
-    StartUp.app.listen(8585, () => console.log("on air!"));
+  it("getAll", async () => {
+    sinonIntegrationStubs(CartRepository);
+    const result = await fetchClient("/cart", "GET");
+    expect(result.status).toBe("find");
   });
 
-  it("get all products", async () => {
-    sinon.stub(CartRepository, "find").returns({ status: "success" });
-    const fetchCart = await fetch("http://localhost:8585/cart", {
-      method: "GET",
-      headers: {
-        // how i use the secrets to fix error in github?
-        "x-access-token": "/lZunqpAUMGBXlJ6fP2JSg==",
-      },
-    })
-      .then((Response) => Response.json())
-      .then((Response) => {
-        return Response;
-      });
-    expect(fetchCart.status).toBe("success");
+  it("get", async () => {
+    sinonIntegrationSkips(CartRepository);
+    const result = await fetchClient("/cart/1/10", "GET");
+    expect(result).toBe({
+      Qtd: "10",
+      Page: "1",
+      Total: 1,
+      Data: { status: "skipFunction" },
+    });
+  });
+
+  it("getByID", async () => {
+    sinonIntegrationStubs(CartRepository);
+    const result = await fetchClient("/cart/1", "GET");
+    expect(result.status).toBe("findByID");
+  });
+
+  it("register", async () => {
+    sinonIntegrationStubs(CartRepository);
+    const result = await fetchClient(
+      "/cart/register/user_id/2/2456/product/1.00/2.00/25541/test",
+      "PUT"
+    );
+    expect(result.status).toBe("create");
+  });
+
+  it("delete", async () => {
+    sinonIntegrationStubs(CartRepository);
+    const result = await fetchClient("/cart/1ad0sa!", "DELETE");
+    expect(result.status).toBe("findByIdAndDelete");
+  });
+
+  it("update", async () => {
+    sinonIntegrationStubs(CartRepository);
+    const result = await fetchClient(
+      "/cart/update/025415/0251/2/023hj5/product/1.00/2.00/test",
+      "PUT"
+    );
+    expect(result.status).toBe("findOneAndUpdate");
   });
 });

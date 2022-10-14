@@ -1,4 +1,3 @@
-import { Document } from "mongoose";
 import { iCartService } from "../contracts/iCartService";
 import { Result } from "../infra/Result";
 import { CartRepository } from "../repository/CartRepository";
@@ -40,7 +39,7 @@ export class CartService implements iCartService {
     order_id: string,
     status: string
   ) {
-    const registered = CartRepository.create({
+    const registered = await CartRepository.create({
       user_id: user_id,
       quantity: quantity,
       product_id: product_id,
@@ -64,7 +63,7 @@ export class CartService implements iCartService {
     total_price: string,
     status: string
   ) {
-    await CartRepository.findOneAndUpdate(
+    const updated = await CartRepository.findOneAndUpdate(
       { _id: id },
       {
         $set: {
@@ -78,7 +77,7 @@ export class CartService implements iCartService {
         },
       }
     );
-    return { status: "success" };
+    return updated;
   }
 }
 export default new CartService();

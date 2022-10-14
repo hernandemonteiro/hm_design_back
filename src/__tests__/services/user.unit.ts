@@ -3,7 +3,7 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   dotEnvMock,
-} from "../utils/factory";
+} from "../utils/utils.unit.factory";
 import UsersService from "../../services/UsersServices";
 import { UsersRepository } from "../../repository/UsersRepository";
 

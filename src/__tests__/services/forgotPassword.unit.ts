@@ -6,7 +6,7 @@ import {
   beforeEach,
   afterEach,
 } from "@jest/globals";
-import { documentReturn, dotEnvMock } from "../utils/factory";
+import { documentReturn, dotEnvMock } from "../utils/utils.unit.factory";
 import nodemailer from "nodemailer";
 import ForgotPasswordService from "../../services/ForgotPasswordService";
 import { ForgotPasswordRepository } from "../../repository/ForgotPasswordRepository";

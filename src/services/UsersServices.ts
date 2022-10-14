@@ -1,6 +1,7 @@
 import { iUsersService } from "../contracts/iUsersServices";
 import { UsersRepository } from "../repository/UsersRepository";
 import CryptoJS from "crypto-js";
+import { cryptoEncrypt } from "../utils/crypto.utils";
 
 export class UsersService implements iUsersService {
   async get(_id: string) {
@@ -70,14 +71,7 @@ export class UsersService implements iUsersService {
       id: user._id,
       type: user.type,
     });
-    // encrypted hash;
-    const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
-    const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-    const jwt = CryptoJS.AES.encrypt(convertResult, secret, {
-      iv: iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
-    }).toString();
+    const jwt = cryptoEncrypt(convertResult);
     return jwt;
   }
 }

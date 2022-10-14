@@ -3,7 +3,7 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise,
-} from "../utils/factory";
+} from "../utils/utils.unit.factory";
 import sinon from "sinon";
 import OrderService from "../../services/OrderService";
 import { OrderRepository } from "../../repository/OrderRepository";

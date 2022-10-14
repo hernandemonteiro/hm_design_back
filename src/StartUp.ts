@@ -6,8 +6,8 @@ import cartRouter from "./router/CartRouter";
 import orderRouter from "./router/OrderRouter";
 import categoryRouter from "./router/CategoryRouter";
 import forgotPasswordRouter from "./router/ForgotPasswordRouter";
-import CryptoJS from "crypto-js";
 import cors from "cors";
+import { cryptoDecrypt } from "./utils/crypto.utils";
 
 class StartUp {
   public app: Application;
@@ -75,17 +75,7 @@ class StartUp {
       </body>
     </html>`;
 
-    if (!Authenticate) {
-      res.send(errorPage);
-    }
-
-    const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
-    const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-    const tokenDecrypted = CryptoJS.AES.decrypt(Authenticate, secret, {
-      iv: iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
-    }).toString(CryptoJS.enc.Utf8);
+    const tokenDecrypted = cryptoDecrypt(Authenticate);
 
     if (tokenDecrypted === process.env.HASH_SECRET) {
       next();

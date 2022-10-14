@@ -39,7 +39,7 @@ cartRouter.route("/cart/:id").get((req, res) => {
  */
 cartRouter
   .route(
-    "/cart/:user_id/:quantity/:product_id/:product/:unit_price/:total_price/:order_id/:status"
+    "/cart/register/:user_id/:quantity/:product_id/:product/:unit_price/:total_price/:order_id/:status"
   )
   .put((req, res) => {
     return CartController.registerProductCart(req, res);
