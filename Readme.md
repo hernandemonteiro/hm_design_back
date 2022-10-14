@@ -16,7 +16,7 @@ print shop e-commerce back-end provider [hm-design];
 ### CI:
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 <br>
-[![server_hm_design - CI](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.yml/badge.svg)](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.yml)
+[![server_hm_design - CI](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.preview.yml/badge.svg)](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.yml)
 ### Platform Deploy:
 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](https://server-two-liart.vercel.app/)
 
