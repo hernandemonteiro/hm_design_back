@@ -80,7 +80,7 @@ class StartUp {
     if (tokenDecrypted === process.env.HASH_SECRET) {
       next();
     } else {
-      res.send(errorPage);
+      res.status(401).send(errorPage);
     }
   }
 

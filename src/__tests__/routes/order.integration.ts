@@ -1,5 +1,5 @@
 import { describe, it, expect } from "@jest/globals";
-import { CartRepository } from "../../repository/CartRepository";
+import { OrderRepository } from "../../repository/OrderRepository";
 import {
   sinonIntegrationStubs,
   sinonIntegrationSkips,
@@ -7,19 +7,19 @@ import {
   fetchClient,
 } from "../utils/utils.integration.factory";
 
-describe("/cart", () => {
-  const port = 8001;
+describe("/order", () => {
+  const port = 8004;
   configClient(port);
 
   it("getAll", async () => {
-    sinonIntegrationStubs(CartRepository);
-    const result = await fetchClient("/cart", "GET", port);
+    sinonIntegrationStubs(OrderRepository);
+    const result = await fetchClient("/orders", "GET", port);
     expect(result.status).toBe("find");
   });
 
   it("get", async () => {
-    sinonIntegrationSkips(CartRepository);
-    const result = await fetchClient("/cart/1/10", "GET", port);
+    sinonIntegrationSkips(OrderRepository);
+    const result = await fetchClient("/order/1/10", "GET", port);
     expect(result).toMatchObject({
       Qtd: "10",
       Page: "1",
@@ -29,15 +29,15 @@ describe("/cart", () => {
   });
 
   it("getByID", async () => {
-    sinonIntegrationStubs(CartRepository);
-    const result = await fetchClient("/cart/1", "GET", port);
+    sinonIntegrationStubs(OrderRepository);
+    const result = await fetchClient("/order/1", "GET", port);
     expect(result.status).toBe("findByID");
   });
 
   it("register", async () => {
-    sinonIntegrationStubs(CartRepository);
+    sinonIntegrationStubs(OrderRepository);
     const result = await fetchClient(
-      "/cart/register/user_id/2/2456/product/1.00/2.00/25541/test",
+      "/order/register/1dsa1/address/dsa21/test",
       "PUT",
       port
     );
@@ -45,18 +45,18 @@ describe("/cart", () => {
   });
 
   it("delete", async () => {
-    sinonIntegrationStubs(CartRepository);
-    const result = await fetchClient("/cart/1ad0sa!", "DELETE", port);
+    sinonIntegrationStubs(OrderRepository);
+    const result = await fetchClient("/order/1ad0sa!", "DELETE", port);
     expect(result.status).toBe("findByIdAndDelete");
   });
 
   it("update", async () => {
-    sinonIntegrationStubs(CartRepository);
+    sinonIntegrationStubs(OrderRepository);
     const result = await fetchClient(
-      "/cart/update/025415/0251/2/023hj5/product/1.00/2.00/test",
+      "/order/update/ds4a4/dsa45/address/fd1es5/test",
       "PUT",
       port
     );
-    expect(result.status).toBe("findOneAndUpdate");
+    expect(result.status).toBe("success");
   });
 });
