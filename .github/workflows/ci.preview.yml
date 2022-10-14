@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"     
       - run: npm i
-      - run: HASH_TEST=${{ secrets.HASH_TEST }} CI=true npx jest
+      - run: HASH_TEST=${{ secrets.HASH_TEST }} CI=true npm run test
          env:
           HASH_TEST: ${{ secrets.HASH_TEST }}
       - run: ls -la
