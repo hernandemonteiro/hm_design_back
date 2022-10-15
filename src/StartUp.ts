@@ -8,6 +8,7 @@ import categoryRouter from "./router/CategoryRouter";
 import forgotPasswordRouter from "./router/ForgotPasswordRouter";
 import cors from "cors";
 import { cryptoDecrypt } from "./utils/crypto.utils";
+import helmet from "helmet";
 
 class StartUp {
   public app: Application;
@@ -85,6 +86,7 @@ class StartUp {
   }
 
   routes() {
+    this.app.use(helmet())
     this.app.use(express.json());
     this.app.use(
       cors({
