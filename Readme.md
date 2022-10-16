@@ -148,83 +148,116 @@ basic express.js configuration with routes;
 </details>
 <details>
 <summary><b>Show category routes:</b></summary>
+<br>
         <ul>
             <li><b>/categorys </b>[GET]:</li>
             - find all categorys
+            <br><br>
             <li><b>/categorys/:page/:qtd </b>[GET]:</li>
             - find all categorys with pagination
+            <br><br>
             <li><b>/category/register/:category </b>[PUT]:</li>
             - register a category
+            <br><br>
             <li><b>/category/:id </b>[DELETE]:</li>
             - delete a category by ID
+            <br><br>
             <li><b>/category/update/:id/:category </b>[PUT]:</li>
             - update a category by ID
+            <br><br>
         </ul>
 </details>
 <details>
 <summary><b>Show password routes:</b></summary>
+<br>
         <ul>
             <li><b>/forgotPassword/:email </b>[POST]:</li>
             - forgot password method to send an email with hash
+            <br><br>
             <li><b>/confirmHash/:hash </b>[GET]:</li>
             - confirm the hash to update password
+            <br><br>
             <li><b>/updatePassword/:hash/:password </b>[PUT]:</li>
             - update the password
+            <br><br>
         </ul>
 </details>
 <details>
 <summary><b>Show order routes:</b></summary>
+<br>
         <ul>
             <li><b>/orders </b>[GET]:</li>
             - find all orders
+            <br><br>
             <li><b>/order/:page/:qtd </b>[GET]:</li>
             - find all orders with pagination
+            <br><br>
             <li><b>/order/:id </b>[GET]:</li>
             - find a order by ID
+            <br><br>
             <li><b>/order/register/:user_id/:address/:order_id/:status </b>[PUT]:</li>
             - register a order
+            <br><br>
             <li><b>/order/:id </b>[DELETE]:</li>
             - delete a order by ID
+            <br><br>
             <li><b>/order/update/:id/:user_id/:address/:order_id/:status </b>[PUT]:</li>
             - update an order by ID
+            <br><br>
         </ul>
 </details>
 <details>
 <summary><b>Show product routes:</b></summary>
+<br>
         <ul>
             <li><b>/products </b>[GET]:</li>
             - find all products
+            <br><br>
             <li><b>/products/:page/:qtd </b>[GET]:</li>
             - find all products with pagination
+            <br><br>
             <li><b>/product/:id </b>[GET]:</li>
             - find a products by ID
+            <br><br>
             <li><b>/products/category/:category </b>[GET]:</li>
             - find products from category
+            <br><br>
             <li><b>/products/search/:search </b>[GET]:</li>
             - find products from search
+            <br><br>
             <li><b>/product/delete/:id </b>[DELETE]:</li>
             - delete a product by ID
+            <br><br>
             <li><b>/product/register/:name/:price/:images/:description/:category/:options </b>[PUT]:</li>
             - register a product
+            <br><br>
             <li><b>/product/update/:id/:name/:price/:images/:description/:status/:options </b>[PUT]:</li>
             - update an product by ID
+            <br><br>
         </ul>
 </details>
 <details>
 <summary><b>Show user routes:</b></summary>
+<br>
        <ul>
             <li><b>/users </b>[GET]:</li>
-            - find all userss
+            - find all users
+            <br><br>
             <li><b>/users/:id </b>[GET]:</li>
             - find a users by ID
+            <br><br>
             <li><b>/users/:name/:email/:password/:type </b>[POST]:</li>
             - register a user
+            <br><br>
             <li><b>/users/:id </b>[DELETE]:</li>
             - delete a users by ID
+            <br><br>
             <li><b>/users/update/:id/:name/:email/:password </b>[PUT]:</li>
             - update an user by ID
+            <br><br>
             <li><b>/login/:email/:password </b>[GET]:</li>
             - login method, return a token with user id and type encrypted
+            <br><br>
         </ul>
 </details>
 </ul>
