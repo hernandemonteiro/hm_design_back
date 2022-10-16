@@ -1,46 +1,88 @@
 # Hm-design - Back-end
 
+[![server_hm_design - CI](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.preview.yml/badge.svg)](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.preview.yml)
+
 ## Description:
 
 Hm-design e-commerce back-end(API) provider developed using typescript and NodeJS;
 
-## Estructure:
+## Project Estructure:
 
-    ./index.ts:
-        application starts implementation (run express server);
+<ul>
 
-    ./src/:
-        folder to organize the application;
+<li><b>./index.ts:</b></li>
 
-    ./src/__tests__/:
-        units and integrations tests wrote in jest;
+<ul>
+ application starts implementation (run express server);
+</ul>
 
-    ./src/contracts/:
-        interfaces types for services implementation;
+<li><b>./src/:</b></li>
 
-    ./src/controllers/:
-        controllers to receive requests from routes and create service calls;
+<ul>
+folder to organize the application;
+</ul>
 
-    ./src/infra/:
-        database connection and pagination returned value configs;
+<li><b>./src/_tests_/:</b></li>
 
-    ./src/models/:
-        models Schemas to moongose configuration;
+<ul>
+units and integrations tests wrote in jest;
+</ul>
 
-    ./src/repository/:
-        repositorys mongoose configuration using Schemas from ./models/;
+<li><b>./src/contracts/:</b></li>
 
-    ./src/router/:
-        routes declarations;
+<ul>
+interfaces types for services implementation;
+</ul>
 
-    ./src/services/:
-        objects for database management with contracts implementations;
+<li><b>./src/controllers/:</b></li>
 
-    ./src/utils/:
-        all utils/helpers functions;
-        
-    ./src/StartUp.ts:
-        basic express.js configuration with routes;
+<ul>
+controllers to receive requests from routes and create service calls;
+</ul>
+
+<li><b>./src/infra/:</b></li>
+
+<ul>
+database connection and pagination returned value configs;
+</ul>
+
+<li><b>./src/models/:</b></li>
+
+<ul>
+models Schemas to moongose configuration;
+</ul>
+
+<li><b>./src/repository/:</b></li>
+
+<ul>
+repositorys mongoose configuration using Schemas from ./models/;
+</ul>
+
+<li><b>./src/router/:</b></li>
+
+<ul>
+routes declarations;
+</ul>
+
+<li><b>./src/services/:</b></li>
+
+<ul>
+objects for database management with contracts implementations;
+</ul>
+
+<li><b>./src/utils/:</b></li>
+
+<ul>
+all utils/helpers functions;
+</ul>
+
+<li><b>./src/StartUp.ts:</b></li>
+
+<ul>
+basic express.js configuration with routes;
+</ul>
+
+</ul>
 
 ### Development Languages and tests:
 
@@ -58,13 +100,6 @@ Hm-design e-commerce back-end(API) provider developed using typescript and NodeJ
 ### Containers:
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-
-### CI:
-
-![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
-<br>
-
-[![server_hm_design - CI](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.preview.yml/badge.svg)](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.preview.yml)
 
 ### Platform Deploy:
 
