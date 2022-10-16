@@ -11,7 +11,7 @@
 <ol>
 <li><a href="#summary">Summary</a></li>
 <li><a href="#description">Description</a></li>
-<li><a href="#projectEstructure">Project Estructure</a></li>
+<li><a href="#projectStructure">Project Structure</a></li>
 <li><a href="#endpoints">Endpoints</a></li>
 <li><a href="#resources">Tools and Resources</a></li>
 <li><a href="#deploy">Deploy</a></li>
@@ -27,9 +27,9 @@
 
 </div>
 <hr>
-<div id="projectEstructure">
+<div id="projectStructure">
 
-## Project Estructure:
+## Project Structure:
 
 <ul>
 
