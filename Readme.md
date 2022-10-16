@@ -2,81 +2,104 @@
 
 [![server_hm_design - CI](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.preview.yml/badge.svg)](https://github.com/hernandemonteiro/server_hm_design/actions/workflows/ci.preview.yml)
 
+<hr>
+
+<div id="summary">
+
+## Summary:
+
+<ol>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#projectEstructure">Project Estructure</a></li>
+<li><a href="#endpoints">Endpoints</a></li>
+<li><a href="#resources">Tools and Resources</a></li>
+<li><a href="#deploy">Deploy</a></li>
+</ol>
+</div>
+<hr>
+<div id="description">
+
 ## Description:
 
-Hm-design e-commerce back-end(API) provider developed using typescript and NodeJS;
+    Hm-design e-commerce back-end(API) provider developed
+    using Typescript and NodeJS;
+
+</div>
+<hr>
+<div id="projectEstructure">
 
 ## Project Estructure:
 
 <ul>
 
-<li><b>./index.ts:</b></li>
+<li><h5>./index.ts:</h5></li>
 
 <ul>
  application starts implementation (run express server);
 </ul>
 
-<li><b>./src/:</b></li>
+<li><h5>./src/:</h5></li>
 
 <ul>
 folder to organize the application;
 </ul>
 
-<li><b>./src/_tests_/:</b></li>
+<li><h5>./src/_tests_/:</h5></li>
 
 <ul>
 units and integrations tests wrote in jest;
 </ul>
 
-<li><b>./src/contracts/:</b></li>
+<li><h5>./src/contracts/:</h5></li>
 
 <ul>
 interfaces types for services implementation;
 </ul>
 
-<li><b>./src/controllers/:</b></li>
+<li><h5>./src/controllers/:</h5></li>
 
 <ul>
 controllers to receive requests from routes and create service calls;
 </ul>
 
-<li><b>./src/infra/:</b></li>
+<li><h5>./src/infra/:</h5></li>
 
 <ul>
 database connection and pagination returned value configs;
 </ul>
 
-<li><b>./src/models/:</b></li>
+<li><h5>./src/models/:</h5></li>
 
 <ul>
 models Schemas to moongose configuration;
 </ul>
 
-<li><b>./src/repository/:</b></li>
+<li><h5>./src/repository/:</h5></li>
 
 <ul>
 repositorys mongoose configuration using Schemas from ./models/;
 </ul>
 
-<li><b>./src/router/:</b></li>
+<li><h5>./src/router/:</h5></li>
 
 <ul>
 routes declarations;
 </ul>
 
-<li><b>./src/services/:</b></li>
+<li><h5>./src/services/:</h5></li>
 
 <ul>
 objects for database management with contracts implementations;
 </ul>
 
-<li><b>./src/utils/:</b></li>
+<li><h5>./src/utils/:</h5></li>
 
 <ul>
 all utils/helpers functions;
 </ul>
 
-<li><b>./src/StartUp.ts:</b></li>
+<li><h5>./src/StartUp.ts:</h5></li>
 
 <ul>
 basic express.js configuration with routes;
@@ -84,16 +107,142 @@ basic express.js configuration with routes;
 
 </ul>
 
-### Development Languages and tests:
+</div>
+<hr>
+<div id="endpoints">
 
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
-![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
+### Endpoints (routes):
 
-### Database:
+    All params needed is marked with ":"!
+    --
+    after the routes is defined the method
+    of request!
+    --
+    Example: /user/:id [GET]
+    (*id is passed in the route as a parameter)
 
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+<ul>
+<details>
+<summary><b>Show cart routes:</b></summary>
+<br>
+        <ul>
+            <li><b>/cart </b>[GET]:</li>
+            - find all products in cart
+            <br><br>
+            <li><b>/cart/:page/:qtd </b>[GET]:</li>
+            - find all products in cart with pagination
+            <br><br>
+            <li><b>/cart/:id </b>[GET]:</li>
+            - find one product by ID
+            <br><br>
+            <li><b>/cart/register/:user_id/:quantity/:product_id/:product/:unit_price/:total_price/:order_id/:status </b>[PUT]:</li>
+            - insert a product in cart
+            <br><br>
+            <li><b>/cart/:id </b>[DELETE]:</li>
+            - delete one product by ID
+            <br><br>
+            <li><b>/cart/update/:id/:user_id/:quantity/:product_id/:product/:unit_price/:total_price/:status </b>[PUT]:</li>
+            - update one product in cart by ID
+            <br><br>
+        </ul>
+</details>
+<details>
+<summary><b>Show category routes:</b></summary>
+        <ul>
+            <li><b>/categorys </b>[GET]:</li>
+            - find all categorys
+            <li><b>/categorys/:page/:qtd </b>[GET]:</li>
+            - find all categorys with pagination
+            <li><b>/category/register/:category </b>[PUT]:</li>
+            - register a category
+            <li><b>/category/:id </b>[DELETE]:</li>
+            - delete a category by ID
+            <li><b>/category/update/:id/:category </b>[PUT]:</li>
+            - update a category by ID
+        </ul>
+</details>
+<details>
+<summary><b>Show password routes:</b></summary>
+        <ul>
+            <li><b>/forgotPassword/:email </b>[POST]:</li>
+            - forgot password method to send an email with hash
+            <li><b>/confirmHash/:hash </b>[GET]:</li>
+            - confirm the hash to update password
+            <li><b>/updatePassword/:hash/:password </b>[PUT]:</li>
+            - update the password
+        </ul>
+</details>
+<details>
+<summary><b>Show order routes:</b></summary>
+        <ul>
+            <li><b>/orders </b>[GET]:</li>
+            - find all orders
+            <li><b>/order/:page/:qtd </b>[GET]:</li>
+            - find all orders with pagination
+            <li><b>/order/:id </b>[GET]:</li>
+            - find a order by ID
+            <li><b>/order/register/:user_id/:address/:order_id/:status </b>[PUT]:</li>
+            - register a order
+            <li><b>/order/:id </b>[DELETE]:</li>
+            - delete a order by ID
+            <li><b>/order/update/:id/:user_id/:address/:order_id/:status </b>[PUT]:</li>
+            - update an order by ID
+        </ul>
+</details>
+<details>
+<summary><b>Show product routes:</b></summary>
+        <ul>
+            <li><b>/products </b>[GET]:</li>
+            - find all products
+            <li><b>/products/:page/:qtd </b>[GET]:</li>
+            - find all products with pagination
+            <li><b>/product/:id </b>[GET]:</li>
+            - find a products by ID
+            <li><b>/products/category/:category </b>[GET]:</li>
+            - find products from category
+            <li><b>/products/search/:search </b>[GET]:</li>
+            - find products from search
+            <li><b>/product/delete/:id </b>[DELETE]:</li>
+            - delete a product by ID
+            <li><b>/product/register/:name/:price/:images/:description/:category/:options </b>[PUT]:</li>
+            - register a product
+            <li><b>/product/update/:id/:name/:price/:images/:description/:status/:options </b>[PUT]:</li>
+            - update an product by ID
+        </ul>
+</details>
+<details>
+<summary><b>Show user routes:</b></summary>
+       <ul>
+            <li><b>/users </b>[GET]:</li>
+            - find all userss
+            <li><b>/users/:id </b>[GET]:</li>
+            - find a users by ID
+            <li><b>/users/:name/:email/:password/:type </b>[POST]:</li>
+            - register a user
+            <li><b>/users/:id </b>[DELETE]:</li>
+            - delete a users by ID
+            <li><b>/users/update/:id/:name/:email/:password </b>[PUT]:</li>
+            - update an user by ID
+            <li><b>/login/:email/:password </b>[GET]:</li>
+            - login method, return a token with user id and type encrypted
+        </ul>
+</details>
+</ul>
+</div>
+
+<hr>
+<div id="resources">
+
+### Tools and Resources:
+
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
+</div>
+<hr>
+<div id="deploy">
+
 ### Platform Deploy:
 
 [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](https://server-two-liart.vercel.app/)
+
+</div>
