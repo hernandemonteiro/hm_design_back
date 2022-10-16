@@ -8,26 +8,37 @@ Hm-design e-commerce back-end(API) provider developed using typescript and NodeJ
 
     ./index.ts:
         application starts implementation (run express server);
+
     ./src/:
         folder to organize the application;
+
     ./src/__tests__/:
         units and integrations tests wrote in jest;
+
     ./src/contracts/:
         interfaces types for services implementation;
+
     ./src/controllers/:
         controllers to receive requests from routes and create service calls;
+
     ./src/infra/:
         database connection and pagination returned value configs;
+
     ./src/models/:
         models Schemas to moongose configuration;
+
     ./src/repository/:
         repositorys mongoose configuration using Schemas from ./models/;
+
     ./src/router/:
         routes declarations;
+
     ./src/services/:
         objects for database management with contracts implementations;
+
     ./src/utils/:
         all utils/helpers functions;
+        
     ./src/StartUp.ts:
         basic express.js configuration with routes;
 
