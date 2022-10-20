@@ -86,14 +86,9 @@ class StartUp {
   }
 
   routes() {
-    this.app.use(helmet())
+    this.app.use(helmet());
     this.app.use(express.json());
-    this.app.use(
-      cors({
-        exposedHeaders: ["x-access-token"],
-        origin: "*",
-      })
-    );
+    this.app.use(cors());
 
     this.app.use("*", this.tokenSecurity);
     this.app.use("/", userRouter);
