@@ -4,7 +4,7 @@ import {
   reqErrorTest,
   documentReturn,
   commonExpectsReturn,
-} from "../utils/utils.unit.factory";
+} from "../helpers/utilsUnit";
 import CartController from "../../controllers/CartController";
 import CartService from "../../services/CartService";
 
@@ -89,17 +89,8 @@ describe("Cart tests for Controllers", () => {
     reqErrorTest(CartService.registerProductCart);
     await CartController.registerProductCart(req, res);
     commonExpectsReturn(res, CartService.registerProductCart);
-    expect(CartService.registerProductCart).toHaveBeenCalledWith(
-      req.params.user_id,
-      req.params.quantity,
-      req.params.product_id,
-      req.params.product,
-      req.params.unit_price,
-      req.params.total_price,
-      req.params.order_id,
-      req.params.status
-    );
   });
+
   it("update a product", async () => {
     const res = resConfig();
     const req = {
@@ -119,15 +110,5 @@ describe("Cart tests for Controllers", () => {
     reqErrorTest(CartService.updateProductCart);
     await CartController.updateProductCart(req, res);
     commonExpectsReturn(res, CartService.updateProductCart);
-    expect(CartService.updateProductCart).toHaveBeenCalledWith(
-      req.params.id,
-      req.params.user_id,
-      req.params.quantity,
-      req.params.product_id,
-      req.params.product,
-      req.params.unit_price,
-      req.params.total_price,
-      req.params.status
-    );
   });
 });

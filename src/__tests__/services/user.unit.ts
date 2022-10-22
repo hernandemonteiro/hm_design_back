@@ -3,7 +3,8 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   dotEnvMock,
-} from "../utils/utils.unit.factory";
+  stubCrypto,
+} from "../helpers/utilsUnit";
 import UsersService from "../../services/UsersServices";
 import { UsersRepository } from "../../repository/UsersRepository";
 
@@ -15,8 +16,8 @@ describe("User service test", () => {
 
   it("get User by id", async () => {
     documentReturn(UsersRepository.findById);
-    const getByID = await UsersService.get("id");
-    commonExpectsServicesReturn(getByID);
+    const getById = await UsersService.get("id");
+    commonExpectsServicesReturn(getById);
   });
 
   it("get all Users", async () => {
@@ -26,6 +27,7 @@ describe("User service test", () => {
   });
 
   it("register an user", async () => {
+    stubCrypto();
     jest.mocked(UsersRepository.count).mockResolvedValue(0);
     documentReturn(UsersRepository.create);
     const insertedProduct = await UsersService.userRegister(

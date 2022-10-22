@@ -4,8 +4,7 @@ import { CategoryRepository } from "../repository/CategoryRepository";
 
 export class CategoryService implements iCategoryService {
   async get(_id: string) {
-    const result = await CategoryRepository.findById(_id);
-    return result;
+    return await CategoryRepository.findById(_id);
   }
 
   async getAllWithLimit(page: number, qtd: number): Promise<Result> {
@@ -20,24 +19,21 @@ export class CategoryService implements iCategoryService {
   }
 
   async getAll() {
-    const result = await CategoryRepository.find({});
-    return result;
+    return await CategoryRepository.find({});
   }
 
   async registerCategory(category: string) {
-    const result = await CategoryRepository.create({
+    return await CategoryRepository.create({
       category: category,
     });
-    return result;
   }
 
   async deleteCategory(id: string) {
-    const result = await CategoryRepository.findByIdAndDelete(id);
-    return result;
+    return await CategoryRepository.findByIdAndDelete(id);
   }
 
   async updateCategory(id: string, category: string) {
-    await CategoryRepository.findOneAndUpdate(
+    return await CategoryRepository.findOneAndUpdate(
       { _id: id },
       {
         $set: {
@@ -45,7 +41,6 @@ export class CategoryService implements iCategoryService {
         },
       }
     );
-    return { status: "success" };
   }
 }
 

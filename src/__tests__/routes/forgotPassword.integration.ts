@@ -10,18 +10,19 @@ import { ForgotPasswordRepository } from "../../repository/ForgotPasswordReposit
 import { UsersRepository } from "../../repository/UsersRepository";
 import {
   configClient,
-  sinonIntegrationStubs,
+  sinonCommonStubs,
   fetchClient,
-} from "../utils/utils.integration.factory";
+} from "../helpers/utilsIntegration";
 import sinon from "sinon";
 import nodemailer from "nodemailer";
+
 
 jest.mock("nodemailer");
 
 describe("/forgotPassword", () => {
   const port = 8003;
   configClient(port);
-
+  
   // const sendMailMock = jest.fn();
   // beforeEach(() => {
   //   sendMailMock.mockClear();

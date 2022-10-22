@@ -11,28 +11,28 @@ class CartController {
       const page = request.params.page;
       const qtd = request.params.qtd;
       const result = await this._service.getAllWithLimit(page, qtd);
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async getAll(request, response) {
     try {
       const result = await this._service.getAll();
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async getById(request, response) {
     try {
       const _id = request.params.id;
-      const result = await this._service.get(_id)
-      response.status(200).json( result );
+      const result = await this._service.get(_id);
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
@@ -40,61 +40,47 @@ class CartController {
     try {
       const _id = request.params.id;
       const result = await this._service.deleteProductCart(_id);
-      response.status(200).json( result );
+      response.status(200).json(result);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async registerProductCart(request, response) {
     try {
-      const user_id = request.params.user_id;
-      const quantity = request.params.quantity;
-      const product_id = request.params.product_id;
-      const product = request.params.product;
-      const unit_price = request.params.unit_price;
-      const total_price = request.params.total_price;
-      const order_id = request.params.order_id;
-      const status = request.params.status;
-      const result = await this._service.registerProductCart(
-        user_id,
-        quantity,
-        product_id,
-        product,
-        unit_price,
-        total_price,
-        order_id,
-        status
-      );
-      response.status(200).json( result );
+      const productToInsert = {
+        user_id: request.params.user_id,
+        quantity: request.params.quantity,
+        product_id: request.params.product_id,
+        product: request.params.product,
+        unit_price: request.params.unit_price,
+        total_price: request.params.total_price,
+        order_id: request.params.order_id,
+        status: request.params.status,
+      };
+      const register = await this._service.registerProductCart(productToInsert);
+      response.status(200).json(register);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
   async updateProductCart(request, response) {
     try {
-      const id = request.params.id;
-      const user_id = request.params.user_id;
-      const quantity = request.params.quantity;
-      const product_id = request.params.product_id;
-      const product = request.params.product;
-      const unit_price = request.params.unit_price;
-      const total_price = request.params.total_price;
-      const status = request.params.status;
-      const result = await this._service.updateProductCart(
-        id,
-        user_id,
-        quantity,
-        product_id,
-        product,
-        unit_price,
-        total_price,
-        status
-      );
-      response.status(200).json( result );
+      const productToUpdate = {
+        id: request.params.id,
+        user_id: request.params.user_id,
+        quantity: request.params.quantity,
+        product_id: request.params.product_id,
+        product: request.params.product,
+        unit_price: request.params.unit_price,
+        total_price: request.params.total_price,
+        status: request.params.status,
+      };
+      const update = await this._service.updateProductCart(productToUpdate);
+      response.status(200).json(update);
     } catch (error) {
-      response.status(500).json({ error: error.message  || error.toString()});
+      response.status(500).json({ error: error.message || error.toString() });
     }
   }
 }

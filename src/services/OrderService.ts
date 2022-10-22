@@ -4,8 +4,7 @@ import { OrderRepository } from "../repository/OrderRepository";
 
 export class OrderService implements iOrderService {
   async get(_id: string) {
-    const result = await OrderRepository.findById(_id);
-    return result;
+    return await OrderRepository.findById(_id);
   }
 
   async getAllWithLimit(page: number, qtd: number): Promise<Result> {
@@ -20,8 +19,7 @@ export class OrderService implements iOrderService {
   }
 
   async getAll() {
-    const result = await OrderRepository.find({});
-    return result;
+    return await OrderRepository.find({});
   }
 
   async registerOrder(
@@ -30,18 +28,16 @@ export class OrderService implements iOrderService {
     order_id: string,
     status: string
   ) {
-    const result = await OrderRepository.create({
+    return await OrderRepository.create({
       user_id: user_id,
       address: address,
       order_id: order_id,
       status: status,
     });
-    return result;
   }
 
   async deleteOrder(id: string) {
-    const result = await OrderRepository.findByIdAndDelete(id);
-    return result;
+    return await OrderRepository.findByIdAndDelete(id);
   }
 
   async updateOrder(

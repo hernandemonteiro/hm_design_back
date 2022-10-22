@@ -4,8 +4,7 @@ import { ProductsRepository } from "../repository/ProductsRepository";
 
 export class ProductsService implements iProductsService {
   async get(_id: string) {
-    const result = await ProductsRepository.findById(_id);
-    return result;
+    return await ProductsRepository.findById(_id);
   }
 
   async getAllWithLimit(page: number, qtd: number): Promise<Result> {
@@ -20,28 +19,24 @@ export class ProductsService implements iProductsService {
   }
 
   async getAll() {
-    const result = await ProductsRepository.find({});
-    return result;
+    return await ProductsRepository.find({});
   }
 
   async getPerCategory(category: string) {
-    const result = await ProductsRepository.find({ category: category });
-    return result;
+    return await ProductsRepository.find({ category: category });
   }
 
   async getPerSearch(search: string) {
-    const result = await ProductsRepository.find({
+    return await ProductsRepository.find({
       $or: [
         { name: { $regex: search, $options: "i" } },
         { description: { $regex: search, $options: "i" } },
       ],
     });
-    return result;
   }
 
   async deleteProduct(id: string) {
-    const result = await ProductsRepository.findByIdAndDelete(id);
-    return result;
+    return await ProductsRepository.findByIdAndDelete(id);
   }
 
   async registerProduct(
@@ -52,7 +47,7 @@ export class ProductsService implements iProductsService {
     category: string,
     options: string
   ) {
-    const result = await ProductsRepository.create({
+    return await ProductsRepository.create({
       name: name,
       price: price,
       images: images,
@@ -60,7 +55,6 @@ export class ProductsService implements iProductsService {
       category: category,
       options: options,
     });
-    return result;
   }
 
   async updateProduct(

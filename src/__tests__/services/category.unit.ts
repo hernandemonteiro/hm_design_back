@@ -1,9 +1,9 @@
-import { describe, it, jest, expect } from "@jest/globals";
+import { describe, it, jest, expect, afterEach } from "@jest/globals";
 import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise,
-} from "../utils/utils.unit.factory";
+} from "../helpers/utilsUnit";
 import sinon from "sinon";
 import CategoryService from "../../services/CategoryService";
 import { CategoryRepository } from "../../repository/CategoryRepository";
@@ -11,6 +11,10 @@ import { CategoryRepository } from "../../repository/CategoryRepository";
 jest.mock("../../repository/CategoryRepository");
 
 describe("Category services test", () => {
+  afterEach(() => {
+    sinon.restore();
+  });
+
   it("get a category by ID", async () => {
     documentReturn(CategoryRepository.findById);
     const getByid = await CategoryService.get("id");
@@ -47,7 +51,7 @@ describe("Category services test", () => {
   });
 
   it("update category", async () => {
-    documentReturn(CategoryRepository.findByIdAndUpdate);
+    documentReturn(CategoryRepository.findOneAndUpdate);
     const updatedCategory = await CategoryService.updateCategory(
       "id",
       "category"

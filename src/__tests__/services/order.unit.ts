@@ -3,7 +3,7 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise,
-} from "../utils/utils.unit.factory";
+} from "../helpers/utilsUnit";
 import sinon from "sinon";
 import OrderService from "../../services/OrderService";
 import { OrderRepository } from "../../repository/OrderRepository";
@@ -13,8 +13,8 @@ jest.mock("../../repository/OrderRepository");
 describe("Orders service", () => {
   it("get order by id", async () => {
     documentReturn(OrderRepository.findById);
-    const getByID = await OrderService.get("id");
-    commonExpectsServicesReturn(getByID);
+    const getById = await OrderService.get("id");
+    commonExpectsServicesReturn(getById);
   });
 
   //   getallwithlimit implements;

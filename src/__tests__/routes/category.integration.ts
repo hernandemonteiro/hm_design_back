@@ -2,23 +2,24 @@ import { describe, it, expect } from "@jest/globals";
 import { CategoryRepository } from "../../repository/CategoryRepository";
 import {
   configClient,
-  sinonIntegrationStubs,
-  sinonIntegrationSkips,
+  sinonCommonStubs,
+  sinonSkips,
   fetchClient,
-} from "../utils/utils.integration.factory";
+} from "../helpers/utilsIntegration";
 
 describe("/category", () => {
   const port = 8002;
   configClient(port);
-
+  
+  
   it("getAll", async () => {
-    sinonIntegrationStubs(CategoryRepository);
+    sinonCommonStubs(CategoryRepository);
     const result = await fetchClient("/categorys", "GET", port);
     expect(result.status).toBe("find");
   });
 
   it("get", async () => {
-    sinonIntegrationSkips(CategoryRepository);
+    sinonSkips(CategoryRepository);
     const result = await fetchClient("/categorys/1/10", "GET", port);
     expect(result).toMatchObject({
       Qtd: "10",
@@ -28,31 +29,35 @@ describe("/category", () => {
     });
   });
 
-  it("getByID", async () => {
-    sinonIntegrationStubs(CategoryRepository);
+  it("getById", async () => {
+    sinonCommonStubs(CategoryRepository);
     const result = await fetchClient("/category/1", "GET", port);
     expect(result.status).toBe("findByID");
   });
 
   it("register", async () => {
-    sinonIntegrationStubs(CategoryRepository);
-    const result = await fetchClient("/category/register/category", "PUT", port);
+    sinonCommonStubs(CategoryRepository);
+    const result = await fetchClient(
+      "/category/register/category",
+      "PUT",
+      port
+    );
     expect(result.status).toBe("create");
   });
 
   it("delete", async () => {
-    sinonIntegrationStubs(CategoryRepository);
+    sinonCommonStubs(CategoryRepository);
     const result = await fetchClient("/category/10", "DELETE", port);
     expect(result.status).toBe("findByIdAndDelete");
   });
 
   it("update", async () => {
-    sinonIntegrationStubs(CategoryRepository);
+    sinonCommonStubs(CategoryRepository);
     const result = await fetchClient(
       "/category/update/02s415/categoryUpdate",
       "PUT",
       port
     );
-    expect(result.status).toBe("success");
+    expect(result.status).toBe("findOneAndUpdate");
   });
 });

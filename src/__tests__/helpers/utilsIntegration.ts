@@ -1,16 +1,18 @@
-import { jest, afterEach } from "@jest/globals";
+import { jest, afterEach, beforeEach } from "@jest/globals";
 import fetch from "node-fetch";
 import Database from "../../infra/db";
 import StartUp from "../../StartUp";
-import { dotEnvMock } from "./utils.unit.factory";
+import { dotEnvMock } from "./utilsUnit";
 import sinon from "sinon";
 import dotEnv from "dotenv";
+import CryptoUtils from "../../utils/CryptoUtils";
 dotEnv.config();
 
 jest.mock("../../infra/db");
 jest.mock("dotenv");
+jest.mock("../../utils/CryptoUtils");
 
-export function sinonIntegrationStubs(service) {
+export function sinonCommonStubs(service) {
   sinon.stub(service, "find").returns({ status: "find" });
   sinon.stub(service, "findById").returns({ status: "findByID" });
   sinon.stub(service, "create").returns({ status: "create" });
@@ -23,14 +25,16 @@ export function sinonIntegrationStubs(service) {
     .returns({ status: "findOneAndUpdate" });
 }
 
-export function sinonIntegrationSkips(service) {
+export function sinonSkips(service) {
   sinon.stub(service, "count").returns(1);
   sinon.stub(service, "find").returns({
     skip: (n) => {
+      n;
       return {
         limit: (m) => {
           return new Promise((resolve) => {
             resolve({ status: "skipFunction" });
+            m;
           });
         },
       };
@@ -42,32 +46,27 @@ export function configClient(port) {
   dotEnvMock();
   jest.mocked(Database.createConnection);
   process.env.HASH_SECRET = "tester";
+  beforeEach(() => {
+    jest.mocked(CryptoUtils.DecryptValue).mockResolvedValueOnce("tester");
+  });
   StartUp.app.listen(port);
   afterEach(() => sinon.restore());
 }
 
 export async function fetchClient(route: string, method: string, port) {
-  const fetchClient = await fetch(`http://localhost:${port}${route}`, {
+  return await fetch(`http://localhost:${port}${route}`, {
     method: method,
     headers: {
-      "x-access-token": "/lZunqpAUMGBXlJ6fP2JSg==",
+      "x-access-token": "requestToken",
     },
-  })
-    .then((Response) => Response.json())
-    .then((Response) => {
-      return Response;
-    });
-  return fetchClient;
+  }).then(async (Response) => await Response.json());
 }
 
 export async function fetchClientFailed(route: string, method: string) {
-  const fetchClientFailed = await fetch(`http://localhost:8585${route}`, {
+  return await fetch(`http://localhost:8585${route}`, {
     method: method,
     headers: {
       "x-access-token": "Failed",
     },
-  }).then((Response) => {
-    return Response;
-  });
-  return fetchClientFailed;
+  }).then((Response) => Response);
 }

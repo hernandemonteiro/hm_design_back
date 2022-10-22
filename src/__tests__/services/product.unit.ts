@@ -3,7 +3,7 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise
-} from "../utils/utils.unit.factory";
+} from "../helpers/utilsUnit";
 import sinon from "sinon";
 import ProductsService from "../../services/ProductsService";
 import { ProductsRepository } from "../../repository/ProductsRepository";
@@ -14,8 +14,8 @@ describe("Products services tests", () => {
 
   it("get Product by id", async () => {
     documentReturn(ProductsRepository.findById);
-    const getByID = await ProductsService.get("id");
-    commonExpectsServicesReturn(getByID);
+    const getById = await ProductsService.get("id");
+    commonExpectsServicesReturn(getById);
   });
 
   it("get all products with limit pages", async () => {

@@ -3,7 +3,7 @@ import {
   documentReturn,
   commonExpectsServicesReturn,
   resultPromise,
-} from "../utils/utils.unit.factory";
+} from "../helpers/utilsUnit";
 import sinon from "sinon";
 import CartService from "../../services/CartService";
 import { CartRepository } from "../../repository/CartRepository";
@@ -42,32 +42,34 @@ describe("cart service tests", () => {
   });
 
   it("insert a product in cart", async () => {
+    const productToInsert = {
+      user_id: "user_id",
+      quantity: "quantity",
+      product_id: "product_id",
+      product: "product",
+      unit_price: "unit_price",
+      total_price: "total_price",
+      order_id: "order_id",
+      status: "status",
+    };
     documentReturn(CartRepository.create);
-    const insertedProduct = await CartService.registerProductCart(
-      "user_id",
-      "quantity",
-      "product_id",
-      "product",
-      "unit_price",
-      "total_price",
-      "order_id",
-      "status"
-    );
+    const insertedProduct = await CartService.registerProductCart(productToInsert);
     commonExpectsServicesReturn(insertedProduct);
   });
 
   it("update a product", async () => {
+    const product = {
+      id: "id",
+      user_id: "user_id",
+      quantity: "quantity",
+      product_id: "product_id",
+      product: "product",
+      unit_price: "unit_price",
+      total_price: "total_price",
+      status: "status",
+    };
     documentReturn(CartRepository.findOneAndUpdate);
-    const updated = await CartService.updateProductCart(
-      "id",
-      "user_id",
-      "quantity",
-      "product_id",
-      "product",
-      "unit_price",
-      "total_price",
-      "status"
-    );
+    const updated = await CartService.updateProductCart(product);
     commonExpectsServicesReturn(updated);
   });
 });

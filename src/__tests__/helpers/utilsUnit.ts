@@ -1,7 +1,14 @@
 import { jest, expect, beforeEach, afterEach } from "@jest/globals";
 import sinon from "sinon";
+import CryptoUtils from "../../utils/CryptoUtils";
 
-// basic config to a Response:
+// stub for crypto:
+export function stubCrypto(){
+  sinon.stub(CryptoUtils, "EncryptValue").returns("tester");
+  sinon.stub(CryptoUtils, "DecryptValue").returns("tester");
+}
+
+// basic config to Response:
 export function resConfig() {
   const res = {
     json: jest.fn(() => res),
@@ -49,8 +56,10 @@ export function commonExpectsServicesReturn(mockFn) {
 export function resultPromise(service) {
   sinon.stub(service, "find").returns({
     skip: (n) => {
+      n;
       return {
         limit: (m) => {
+          m;
           return new Promise((resolve, reject) => {
             resolve({ status: "success" });
           });

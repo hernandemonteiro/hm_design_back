@@ -1,17 +1,15 @@
 import { iUsersService } from "../contracts/iUsersServices";
 import { UsersRepository } from "../repository/UsersRepository";
 import CryptoJS from "crypto-js";
-import { cryptoEncrypt } from "../utils/crypto.utils";
+import CryptoUtils from "../utils/CryptoUtils";
 
 export class UsersService implements iUsersService {
   async get(_id: string) {
-    const result = await UsersRepository.findById(_id);
-    return result;
+    return await UsersRepository.findById(_id);
   }
 
   async getAll() {
-    const result = await UsersRepository.find({});
-    return result;
+    return await UsersRepository.find({});
   }
 
   async userRegister(
@@ -20,25 +18,23 @@ export class UsersService implements iUsersService {
     password: string,
     type: string
   ) {
-    const encryptedPassword = CryptoJS.SHA256(password).toString();
-    const encryptedEmail = CryptoJS.SHA256(email).toString();
+    const encryptedPassword = CryptoUtils.EncryptValue(password);
+    const encryptedEmail = CryptoUtils.EncryptValue(email);
     const userIsRegistered = await UsersRepository.count({
       email: encryptedEmail,
     });
-
-    if (userIsRegistered === 0) {
-      const result = await UsersRepository.create({
-        name: name,
-        email: encryptedEmail,
-        password: encryptedPassword,
-        type: type,
-      });
-      return result;
-    } else {
-      const message = "user registered";
-      return message;
-    }
+    let response;
+    userIsRegistered === 0
+      ? (response = await UsersRepository.create({
+          name: name,
+          email: encryptedEmail,
+          password: encryptedPassword,
+          type: type,
+        }))
+      : (response = "user registered");
+    return response;
   }
+
   async updateUser(id: string, name: string, email: string, password: string) {
     const encryptedPassword = CryptoJS.SHA256(password);
     const encryptedEmail = CryptoJS.SHA256(email);
@@ -56,23 +52,20 @@ export class UsersService implements iUsersService {
   }
 
   async deleteUser(_id: string) {
-    const deleteUser = await UsersRepository.findByIdAndDelete(_id);
-    return deleteUser;
+    return await UsersRepository.findByIdAndDelete(_id);
   }
 
   async login(email: string, password: string) {
-    const encryptedPassword = CryptoJS.SHA256(password).toString();
-    const encryptedEmail = CryptoJS.SHA256(email).toString();
     const user = await UsersRepository.findOne({
-      email: encryptedEmail,
-      password: encryptedPassword,
+      email: await CryptoUtils.EncryptValue(email),
+      password: await CryptoUtils.EncryptValue(password),
     });
     const convertResult = JSON.stringify({
       id: user._id,
       type: user.type,
     });
-    const jwt = cryptoEncrypt(convertResult);
-    return jwt;
+
+    return await CryptoUtils.EncryptValue(convertResult);
   }
 }
 

@@ -1,24 +1,25 @@
 import { describe, it, expect } from "@jest/globals";
 import { ProductsRepository } from "../../repository/ProductsRepository";
 import {
-  sinonIntegrationStubs,
-  sinonIntegrationSkips,
+  sinonCommonStubs,
+  sinonSkips,
   configClient,
   fetchClient,
-} from "../utils/utils.integration.factory";
+} from "../helpers/utilsIntegration";
+
 
 describe("/product", () => {
   const port = 8005;
   configClient(port);
-
+  
   it("getAll", async () => {
-    sinonIntegrationStubs(ProductsRepository);
+    sinonCommonStubs(ProductsRepository);
     const result = await fetchClient("/products", "GET", port);
     expect(result.status).toBe("find");
   });
 
   it("get", async () => {
-    sinonIntegrationSkips(ProductsRepository);
+    sinonSkips(ProductsRepository);
     const result = await fetchClient("/products/pages/1/10", "GET", port);
     expect(result).toMatchObject({
       Qtd: "10",
@@ -28,14 +29,14 @@ describe("/product", () => {
     });
   });
 
-  it("getByID", async () => {
-    sinonIntegrationStubs(ProductsRepository);
+  it("getById", async () => {
+    sinonCommonStubs(ProductsRepository);
     const result = await fetchClient("/product/1", "GET", port);
     expect(result.status).toBe("findByID");
   });
 
   it("getPerCategory", async () => {
-    sinonIntegrationStubs(ProductsRepository);
+    sinonCommonStubs(ProductsRepository);
     const result = await fetchClient(
       "/products/category/category",
       "GET",
@@ -45,13 +46,13 @@ describe("/product", () => {
   });
 
   it("getPerSearch", async () => {
-    sinonIntegrationStubs(ProductsRepository);
+    sinonCommonStubs(ProductsRepository);
     const result = await fetchClient("/products/search/search", "GET", port);
     expect(result.status).toBe("find");
   });
 
   it("register", async () => {
-    sinonIntegrationStubs(ProductsRepository);
+    sinonCommonStubs(ProductsRepository);
     const result = await fetchClient(
       "/product/register/name/price/images/description/category/options",
       "PUT",
@@ -61,13 +62,13 @@ describe("/product", () => {
   });
 
   it("delete", async () => {
-    sinonIntegrationStubs(ProductsRepository);
+    sinonCommonStubs(ProductsRepository);
     const result = await fetchClient("/product/delete/1ad0sa!", "DELETE", port);
     expect(result.status).toBe("findByIdAndDelete");
   });
 
   it("update", async () => {
-    sinonIntegrationStubs(ProductsRepository);
+    sinonCommonStubs(ProductsRepository);
     const result = await fetchClient(
       "/product/update/id/name/price/images/description/status/options",
       "PUT",
