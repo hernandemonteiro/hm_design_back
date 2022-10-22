@@ -6,25 +6,25 @@ const orderRouter = express();
 /*
  * @description this route find all orders
  */
-orderRouter.route("/orders").get((req, res) => {
-  return OrderController.getAll(req, res);
-});
+orderRouter
+  .route("/orders")
+  .get((req, res) => OrderController.getAll(req, res));
 
 /*
  * @description this route find all products limited by pages and a quantity;
  * @params [page] [qtd] filter the results in limited quantity with pages;
  */
-orderRouter.route("/order/:page/:qtd").get((req, res) => {
-  return OrderController.get(req, res);
-});
+orderRouter
+  .route("/order/:page/:qtd")
+  .get((req, res) => OrderController.get(req, res));
 
 /*
  * @description this route find onde product;
  * @param [id] find the product by id;
  */
-orderRouter.route("/order/:id").get((req, res) => {
-  return OrderController.getById(req, res);
-});
+orderRouter
+  .route("/order/:id")
+  .get((req, res) => OrderController.getById(req, res));
 
 /*
  * @description this route register a order
@@ -35,17 +35,15 @@ orderRouter.route("/order/:id").get((req, res) => {
  */
 orderRouter
   .route("/order/register/:user_id/:address/:order_id/:status")
-  .put((req, res) => {
-    return OrderController.registerOrder(req, res);
-  });
+  .put((req, res) => OrderController.registerOrder(req, res));
 
 /*
  * @description this route delete a order;
  * @param [id] find the order to delete;
  */
-orderRouter.route("/order/:id").delete((req, res) => {
-  return OrderController.deleteOrder(req, res);
-});
+orderRouter
+  .route("/order/:id")
+  .delete((req, res) => OrderController.deleteOrder(req, res));
 
 /*
  * @description this route update a order
@@ -57,8 +55,6 @@ orderRouter.route("/order/:id").delete((req, res) => {
  */
 orderRouter
   .route("/order/update/:id/:user_id/:address/:order_id/:status")
-  .put((req, res) => {
-    return OrderController.updateOrder(req, res);
-  });
+  .put((req, res) => OrderController.updateOrder(req, res));
 
 export default orderRouter;
