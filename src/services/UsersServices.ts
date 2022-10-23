@@ -13,9 +13,7 @@ export class UsersService implements iUsersService {
   }
 
   async userExists(email: string) {
-    return await UsersRepository.count({
-      email: email,
-    });
+    return await UsersRepository.count({ email: email });
   }
 
   async userRegister(

@@ -123,7 +123,7 @@ basic express.js configuration with routes;
 
 <ul>
 <details>
-<summary><b>Show cart routes:</b></summary>
+<summary><b>Show Cart routes:</b></summary>
 <br>
         <ul>
             <li><b>/cart </b>[GET]:</li>
@@ -147,7 +147,7 @@ basic express.js configuration with routes;
         </ul>
 </details>
 <details>
-<summary><b>Show category routes:</b></summary>
+<summary><b>Show Category routes:</b></summary>
 <br>
         <ul>
             <li><b>/categorys </b>[GET]:</li>
@@ -168,7 +168,7 @@ basic express.js configuration with routes;
         </ul>
 </details>
 <details>
-<summary><b>Show password routes:</b></summary>
+<summary><b>Show Password routes:</b></summary>
 <br>
         <ul>
             <li><b>/forgotPassword/:email </b>[POST]:</li>
@@ -183,7 +183,7 @@ basic express.js configuration with routes;
         </ul>
 </details>
 <details>
-<summary><b>Show order routes:</b></summary>
+<summary><b>Show Order routes:</b></summary>
 <br>
         <ul>
             <li><b>/orders </b>[GET]:</li>
@@ -207,7 +207,7 @@ basic express.js configuration with routes;
         </ul>
 </details>
 <details>
-<summary><b>Show product routes:</b></summary>
+<summary><b>Show Product routes:</b></summary>
 <br>
         <ul>
             <li><b>/products </b>[GET]:</li>
@@ -237,20 +237,20 @@ basic express.js configuration with routes;
         </ul>
 </details>
 <details>
-<summary><b>Show user routes:</b></summary>
+<summary><b>Show User routes:</b></summary>
 <br>
        <ul>
             <li><b>/users </b>[GET]:</li>
             - find all users
             <br><br>
             <li><b>/users/:id </b>[GET]:</li>
-            - find a users by ID
+            - find a user by ID
             <br><br>
             <li><b>/users/:name/:email/:password/:type </b>[POST]:</li>
             - register a user
             <br><br>
             <li><b>/users/:id </b>[DELETE]:</li>
-            - delete a users by ID
+            - delete a user by ID
             <br><br>
             <li><b>/users/update/:id/:name/:email/:password </b>[PUT]:</li>
             - update an user by ID
