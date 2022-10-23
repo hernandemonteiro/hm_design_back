@@ -36,7 +36,7 @@
 <li><h5>./index.ts:</h5></li>
 
 <ul>
- application starts implementation (run express server);
+ starts server (run express server);
 </ul>
 
 <li><h5>./src/:</h5></li>
