@@ -256,7 +256,7 @@ basic express.js configuration with routes;
             - update an user by ID
             <br><br>
             <li><b>/login/:email/:password </b>[GET]:</li>
-            - login method, return a token with user id and type encrypted
+            - login method, returning an token with user id and user type encrypted
             <br><br>
         </ul>
 </details>
