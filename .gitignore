@@ -4,6 +4,7 @@ node_modules
 # development ambient
 .env
 tsconfig.tsbuildinfo
+.vscode
 
 # coverage test
 coverage
