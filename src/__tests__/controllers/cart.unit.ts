@@ -19,9 +19,9 @@ describe("Cart tests for Controllers", () => {
       },
     };
     documentReturn(CartService.getWithPagination);
-    await CartController.get(req, res);
+    await CartController.getWithPagination(req, res);
     reqErrorTest(CartService.getWithPagination);
-    await CartController.get(req, res);
+    await CartController.getWithPagination(req, res);
     commonExpectsReturn(res, CartService.getWithPagination);
     expect(CartService.getWithPagination).toHaveBeenCalledWith(
       req.params.page,
