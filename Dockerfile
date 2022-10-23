@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 
 WORKDIR /usr/src/app
 
@@ -12,4 +12,4 @@ RUN npm run build
 
 EXPOSE 8080
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]
