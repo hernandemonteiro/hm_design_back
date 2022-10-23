@@ -7,6 +7,8 @@ import {
 } from "../helpers/utilsUnit";
 import UsersService from "../../services/UsersServices";
 import { UsersRepository } from "../../repository/UsersRepository";
+import { sinonCommonStubs } from "../helpers/utilsIntegration";
+import sinon from "sinon";
 
 jest.mock("../../repository/UsersRepository");
 
@@ -50,14 +52,15 @@ describe("User service test", () => {
   });
 
   it("update User", async () => {
-    documentReturn(UsersRepository.findByIdAndUpdate);
+    sinonCommonStubs(UsersRepository);
     const updateUser = await UsersService.updateUser(
       "id",
       "name",
       "email",
       "password"
     );
-    commonExpectsServicesReturn(updateUser);
+    expect(updateUser).toMatchObject({ status: "findOneAndUpdate" });
+    sinon.restore();
   });
 
   it("user login", async () => {

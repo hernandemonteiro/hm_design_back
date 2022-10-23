@@ -49,7 +49,7 @@ describe("/user", () => {
       "PUT",
       port
     );
-    expect(result.status).toBe("success");
+    expect(result.status).toBe("findOneAndUpdate");
   });
 
   it("login", async () => {

@@ -36,19 +36,16 @@ export class UsersService implements iUsersService {
   }
 
   async updateUser(id: string, name: string, email: string, password: string) {
-    const encryptedPassword = CryptoJS.SHA256(password);
-    const encryptedEmail = CryptoJS.SHA256(email);
-    await UsersRepository.findOneAndUpdate(
+    return await UsersRepository.findOneAndUpdate(
       { _id: id },
       {
         $set: {
           name: name,
-          email: encryptedEmail,
-          password: encryptedPassword,
+          email: await CryptoUtils.EncryptValue(email),
+          password: await CryptoUtils.EncryptValue(password),
         },
       }
     );
-    return { status: "success" };
   }
 
   async deleteUser(_id: string) {
@@ -60,12 +57,12 @@ export class UsersService implements iUsersService {
       email: await CryptoUtils.EncryptValue(email),
       password: await CryptoUtils.EncryptValue(password),
     });
-    const convertResult = JSON.stringify({
-      id: user._id,
-      type: user.type,
-    });
-
-    return await CryptoUtils.EncryptValue(convertResult);
+    return await CryptoUtils.EncryptValue(
+      await JSON.stringify({
+        id: user._id,
+        type: user.type,
+      })
+    );
   }
 }
 
