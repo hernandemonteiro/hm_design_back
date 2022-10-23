@@ -8,7 +8,7 @@ import categoryRouter from "./router/CategoryRouter";
 import forgotPasswordRouter from "./router/ForgotPasswordRouter";
 import cors from "cors";
 import helmet from "helmet";
-import AccessAPI from "./utils/access.utils"
+import AccessAPI from "./utils/access.utils";
 
 class StartUp {
   public app: Application;
@@ -19,16 +19,13 @@ class StartUp {
     this._db.createConnection();
     this.routes();
   }
-  
 
   routes() {
-    // configs and security;
     this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(cors());
     this.app.use("*", AccessAPI.tokenSecurity);
     
-    // routes use;
     this.app.use("/", userRouter);
     this.app.use("/", productsRouter);
     this.app.use("/", cartRouter);

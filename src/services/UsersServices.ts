@@ -12,27 +12,27 @@ export class UsersService implements iUsersService {
     return await UsersRepository.find({});
   }
 
+  async userExists(email: string) {
+    return await UsersRepository.count({
+      email: email,
+    });
+  }
+
   async userRegister(
     name: string,
     email: string,
     password: string,
     type: string
   ) {
-    const encryptedPassword = CryptoUtils.EncryptValue(password);
     const encryptedEmail = CryptoUtils.EncryptValue(email);
-    const userIsRegistered = await UsersRepository.count({
-      email: encryptedEmail,
-    });
-    let response;
-    userIsRegistered === 0
-      ? (response = await UsersRepository.create({
+    return (await this.userExists(encryptedEmail)) === 0
+      ? await UsersRepository.create({
           name: name,
           email: encryptedEmail,
-          password: encryptedPassword,
+          password: await CryptoUtils.EncryptValue(password),
           type: type,
-        }))
-      : (response = "user registered");
-    return response;
+        })
+      : "user registered";
   }
 
   async updateUser(id: string, name: string, email: string, password: string) {

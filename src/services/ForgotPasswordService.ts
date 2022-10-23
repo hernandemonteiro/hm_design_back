@@ -3,6 +3,7 @@ import { UsersRepository } from "../repository/UsersRepository";
 import nodemailer from "nodemailer";
 import CryptoJS from "crypto-js";
 import { ForgotPasswordRepository } from "../repository/ForgotPasswordRepository";
+import CryptoUtils from "../utils/CryptoUtils";
 
 export class ForgotPasswordService implements iForgotPasswordService {
   async forgotPassword(email: string) {
@@ -81,32 +82,20 @@ export class ForgotPasswordService implements iForgotPasswordService {
     return await ForgotPasswordRepository.count({ hash: hash });
   }
 
-  async updatePassword(hash: string, password: string) {
-    const hashFormated = hash.split("___").join("/");
-    const encryptedPassword = CryptoJS.SHA256(password).toString();
-
-    const iv = CryptoJS.enc.Base64.parse(process.env.HASH_SECRET);
-    const secret = CryptoJS.SHA256(process.env.HASH_SECRET);
-    const hashDecrypted = CryptoJS.AES.decrypt(hashFormated, secret, {
-      iv: iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.Pkcs7,
-    }).toString(CryptoJS.enc.Utf8);
-
-    const deletehash = await ForgotPasswordRepository.findOneAndDelete({
+  async deleteHash(hash: string) {
+    return await ForgotPasswordRepository.findOneAndDelete({
       hash: hash,
     });
+  }
 
+  async updatePassword(hash: string, password: string) {
+    const hashFormated = hash.split("___").join("/");
+    this.deleteHash(hash);
     const updatePassword = await UsersRepository.findOneAndUpdate(
-      { email: hashDecrypted },
-      { $set: { password: encryptedPassword } }
+      { email: await CryptoUtils.DecryptValue(hashFormated) },
+      { $set: { password: await CryptoUtils.EncryptValue(password) } }
     );
-
-    if (updatePassword && deletehash) {
-      return "Success";
-    } else {
-      return "Failure";
-    }
+    return updatePassword ? "Success" : "Failure";
   }
 }
 export default new ForgotPasswordService();
