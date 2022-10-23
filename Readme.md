@@ -241,22 +241,26 @@ basic express.js configuration with routes;
 <br>
        <ul>
             <li><b>/users </b>[GET]:</li>
-            - find all users
+            - find all users;
             <br><br>
             <li><b>/users/:id </b>[GET]:</li>
-            - find a user by ID
+            - find a user by ID;
             <br><br>
             <li><b>/users/:name/:email/:password/:type </b>[POST]:</li>
-            - register a user
+            - register a user;
+            - returning the new user or "user registered" if email is registered;
             <br><br>
             <li><b>/users/:id </b>[DELETE]:</li>
             - delete a user by ID
+            - returning the deleted user;
             <br><br>
             <li><b>/users/update/:id/:name/:email/:password </b>[PUT]:</li>
-            - update an user by ID
+            - update an user by ID;
+            - returning the updated user;
             <br><br>
             <li><b>/login/:email/:password </b>[GET]:</li>
-            - login method, returning an token with user id and user type encrypted
+            - login method;
+            - returning an token with user id and user type encrypted;
             <br><br>
         </ul>
 </details>
