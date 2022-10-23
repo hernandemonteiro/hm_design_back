@@ -1,8 +1,9 @@
 # npm modules path
 node_modules
 
-# ambient variables
+# development ambient
 .env
+tsconfig.tsbuildinfo
 
 # coverage test
 coverage

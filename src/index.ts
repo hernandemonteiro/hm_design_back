@@ -1,4 +1,4 @@
-import StartUp from "./src/StartUp";
+import StartUp from "./StartUp";
 
 const port = 8080;
 
