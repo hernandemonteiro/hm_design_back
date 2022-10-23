@@ -7,7 +7,7 @@ export class ProductsService implements iProductsService {
     return await ProductsRepository.findById(_id);
   }
 
-  async getAllWithLimit(page: number, qtd: number): Promise<Result> {
+  async getWithPagination(page: number, qtd: number): Promise<Result> {
     const result = new Result();
     result.Page = page;
     result.Qtd = qtd;

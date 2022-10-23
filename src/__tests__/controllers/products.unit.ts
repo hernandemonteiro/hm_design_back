@@ -19,12 +19,12 @@ describe("Products tests", () => {
         qtd: 10,
       },
     };
-    documentReturn(ProductsService.getAllWithLimit);
-    await ProductsController.get(req, res);
-    reqErrorTest(ProductsService.getAllWithLimit);
-    await ProductsController.get(req, res);
-    commonExpectsReturn(res, ProductsService.getAllWithLimit);
-    expect(ProductsService.getAllWithLimit).toHaveBeenCalledWith(
+    documentReturn(ProductsService.getWithPagination);
+    await ProductsController.getWithPagination(req, res);
+    reqErrorTest(ProductsService.getWithPagination);
+    await ProductsController.getWithPagination(req, res);
+    commonExpectsReturn(res, ProductsService.getWithPagination);
+    expect(ProductsService.getWithPagination).toHaveBeenCalledWith(
       req.params.page,
       req.params.qtd
     );
@@ -37,7 +37,7 @@ describe("Products tests", () => {
     await ProductsController.getAll(req, res);
     reqErrorTest(ProductsService.getAll);
     await ProductsController.getAll(req, res);
-    commonExpectsReturn(res, ProductsService.getAllWithLimit);
+    commonExpectsReturn(res, ProductsService.getWithPagination);
   });
 
   it("get a product by ID", async () => {

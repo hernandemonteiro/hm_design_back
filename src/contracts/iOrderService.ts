@@ -3,7 +3,7 @@ import { Result } from "../infra/Result";
 export interface iOrderService {
   get(id: string);
 
-  getAllWithLimit(qtd: number, page: number): Promise<Result>;
+  getWithPagination(qtd: number, page: number): Promise<Result>;
 
   registerOrder(
     user_id: string,

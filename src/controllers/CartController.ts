@@ -6,11 +6,11 @@ class CartController {
     this._service = new CartService();
   }
 
-  async get(request, response) {
+  async getWithPagination(request, response) {
     try {
       const page = request.params.page;
       const qtd = request.params.qtd;
-      const result = await this._service.getAllWithLimit(page, qtd);
+      const result = await this._service.getWithPagination(page, qtd);
       response.status(200).json(result);
     } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
@@ -36,17 +36,17 @@ class CartController {
     }
   }
 
-  async deleteProductCart(request, response) {
+  async deleteProductOfCart(request, response) {
     try {
       const _id = request.params.id;
-      const result = await this._service.deleteProductCart(_id);
+      const result = await this._service.deleteProductOfCart(_id);
       response.status(200).json(result);
     } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });
     }
   }
 
-  async registerProductCart(request, response) {
+  async insertProductInCart(request, response) {
     try {
       const productToInsert = {
         user_id: request.params.user_id,
@@ -58,7 +58,7 @@ class CartController {
         order_id: request.params.order_id,
         status: request.params.status,
       };
-      const register = await this._service.registerProductCart(productToInsert);
+      const register = await this._service.insertProductInCart(productToInsert);
       response.status(200).json(register);
     } catch (error) {
       response.status(500).json({ error: error.message || error.toString() });

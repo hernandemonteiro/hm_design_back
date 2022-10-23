@@ -21,10 +21,10 @@ describe("Orders service", () => {
   it("get all orders with limit pages", async () => {
     jest.mocked(OrderRepository.count).mockResolvedValue(10);
     resultPromise(OrderRepository);
-    const getAllWithLimit = await OrderService.getAllWithLimit(1, 1).then(
+    const getWithPagination = await OrderService.getWithPagination(1, 1).then(
       (res) => res.Data
     );
-    expect(getAllWithLimit).toMatchObject({ status: "success" });
+    expect(getWithPagination).toMatchObject({ status: "success" });
     sinon.restore();
     expect(OrderRepository.count).toHaveBeenCalledTimes(1);
   });

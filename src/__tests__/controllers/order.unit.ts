@@ -19,12 +19,12 @@ describe("Order tests", () => {
         qtd: 10,
       },
     };
-    documentReturn(OrderService.getAllWithLimit);
+    documentReturn(OrderService.getWithPagination);
     await OrderController.get(req, res);
-    reqErrorTest(OrderService.getAllWithLimit);
+    reqErrorTest(OrderService.getWithPagination);
     await OrderController.get(req, res);
-    commonExpectsReturn(res, OrderService.getAllWithLimit);
-    expect(OrderService.getAllWithLimit).toHaveBeenCalledWith(
+    commonExpectsReturn(res, OrderService.getWithPagination);
+    expect(OrderService.getWithPagination).toHaveBeenCalledWith(
       req.params.page,
       req.params.qtd
     );

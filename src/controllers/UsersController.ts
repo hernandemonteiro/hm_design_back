@@ -1,4 +1,7 @@
 import { UsersService } from "../services/UsersServices";
+import AccessAPI from "../utils/access.utils";
+import CryptoUtils from "../utils/CryptoUtils";
+import { errorPage } from "../utils/error.utils";
 
 class UsersController {
   private _service: UsersService;

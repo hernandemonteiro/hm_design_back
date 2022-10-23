@@ -5,11 +5,11 @@ export interface iCartService {
 
   getAll();
 
-  getAllWithLimit(qtd: number, page: number): Promise<Result | object>;
+  getWithPagination(qtd: number, page: number): Promise<Result | object>;
 
-  deleteProductCart(_id: string);
+  deleteProductOfCart(_id: string);
 
-  registerProductCart(product: object);
+  insertProductInCart(product: object);
 
   updateProductCart(product: object);
 }

@@ -20,10 +20,10 @@ describe("cart service tests", () => {
   it("get all products in cart with limit pages", async () => {
     jest.mocked(CartRepository.count).mockResolvedValue(10);
     resultPromise(CartRepository);
-    const getAllWithLimit = await CartService.getAllWithLimit(1, 1).then(
+    const getWithPagination = await CartService.getWithPagination(1, 1).then(
       (res) => res.Data
     );
-    expect(getAllWithLimit).toMatchObject({ status: "success" });
+    expect(getWithPagination).toMatchObject({ status: "success" });
     sinon.restore();
     expect(CartRepository.count).toHaveBeenCalledTimes(1);
   });
@@ -37,7 +37,7 @@ describe("cart service tests", () => {
 
   it("delete an product by ID in cart", async () => {
     documentReturn(CartRepository.findByIdAndDelete);
-    const deleteProduct = await CartService.deleteProductCart("id");
+    const deleteProduct = await CartService.deleteProductOfCart("id");
     commonExpectsServicesReturn(deleteProduct);
   });
 
@@ -53,7 +53,7 @@ describe("cart service tests", () => {
       status: "status",
     };
     documentReturn(CartRepository.create);
-    const insertedProduct = await CartService.registerProductCart(productToInsert);
+    const insertedProduct = await CartService.insertProductInCart(productToInsert);
     commonExpectsServicesReturn(insertedProduct);
   });
 

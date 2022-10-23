@@ -7,7 +7,7 @@ export class OrderService implements iOrderService {
     return await OrderRepository.findById(_id);
   }
 
-  async getAllWithLimit(page: number, qtd: number): Promise<Result> {
+  async getWithPagination(page: number, qtd: number): Promise<Result> {
     const result = new Result();
     result.Page = page;
     result.Qtd = qtd;

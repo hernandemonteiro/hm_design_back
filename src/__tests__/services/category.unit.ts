@@ -24,10 +24,10 @@ describe("Category services test", () => {
   it("get all categorys with limit pages", async () => {
     jest.mocked(CategoryRepository.count).mockResolvedValue(10);
     resultPromise(CategoryRepository);
-    const getAllWithLimit = await CategoryService.getAllWithLimit(1, 1).then(
+    const getWithPagination = await CategoryService.getWithPagination(1, 1).then(
       (res) => res.Data
     );
-    expect(getAllWithLimit).toMatchObject({ status: "success" });
+    expect(getWithPagination).toMatchObject({ status: "success" });
     sinon.restore();
     expect(CategoryRepository.count).toHaveBeenCalledTimes(1);
   });

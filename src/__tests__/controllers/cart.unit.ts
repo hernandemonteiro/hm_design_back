@@ -18,12 +18,12 @@ describe("Cart tests for Controllers", () => {
         qtd: 10,
       },
     };
-    documentReturn(CartService.getAllWithLimit);
+    documentReturn(CartService.getWithPagination);
     await CartController.get(req, res);
-    reqErrorTest(CartService.getAllWithLimit);
+    reqErrorTest(CartService.getWithPagination);
     await CartController.get(req, res);
-    commonExpectsReturn(res, CartService.getAllWithLimit);
-    expect(CartService.getAllWithLimit).toHaveBeenCalledWith(
+    commonExpectsReturn(res, CartService.getWithPagination);
+    expect(CartService.getWithPagination).toHaveBeenCalledWith(
       req.params.page,
       req.params.qtd
     );
@@ -62,12 +62,12 @@ describe("Cart tests for Controllers", () => {
         id: "id_test",
       },
     };
-    documentReturn(CartService.deleteProductCart);
-    await CartController.deleteProductCart(req, res);
-    reqErrorTest(CartService.deleteProductCart);
-    await CartController.deleteProductCart(req, res);
-    commonExpectsReturn(res, CartService.deleteProductCart);
-    expect(CartService.deleteProductCart).toHaveBeenCalledWith(req.params.id);
+    documentReturn(CartService.deleteProductOfCart);
+    await CartController.deleteProductOfCart(req, res);
+    reqErrorTest(CartService.deleteProductOfCart);
+    await CartController.deleteProductOfCart(req, res);
+    commonExpectsReturn(res, CartService.deleteProductOfCart);
+    expect(CartService.deleteProductOfCart).toHaveBeenCalledWith(req.params.id);
   });
 
   it("register a product", async () => {
@@ -84,11 +84,11 @@ describe("Cart tests for Controllers", () => {
         status: "test coverage",
       },
     };
-    documentReturn(CartService.registerProductCart);
-    await CartController.registerProductCart(req, res);
-    reqErrorTest(CartService.registerProductCart);
-    await CartController.registerProductCart(req, res);
-    commonExpectsReturn(res, CartService.registerProductCart);
+    documentReturn(CartService.insertProductInCart);
+    await CartController.insertProductInCart(req, res);
+    reqErrorTest(CartService.insertProductInCart);
+    await CartController.insertProductInCart(req, res);
+    commonExpectsReturn(res, CartService.insertProductInCart);
   });
 
   it("update a product", async () => {

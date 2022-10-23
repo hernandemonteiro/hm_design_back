@@ -7,7 +7,7 @@ export class CartService implements iCartService {
     return await CartRepository.findById(_id);
   }
 
-  async getAllWithLimit(page: number, qtd: number): Promise<Result> {
+  async getWithPagination(page: number, qtd: number): Promise<Result> {
     const result = new Result();
     result.Page = page;
     result.Qtd = qtd;
@@ -22,11 +22,11 @@ export class CartService implements iCartService {
     return await CartRepository.find({});
   }
 
-  async deleteProductCart(_id: string) {
+  async deleteProductOfCart(_id: string) {
     return await CartRepository.findByIdAndDelete(_id);
   }
 
-  async registerProductCart(productToInsert) {
+  async insertProductInCart(productToInsert) {
     return await CartRepository.create({
       user_id: productToInsert.user_id,
       quantity: productToInsert.quantity,

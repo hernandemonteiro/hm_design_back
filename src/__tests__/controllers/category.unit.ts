@@ -19,12 +19,12 @@ describe("Cart tests for Controllers", () => {
         qtd: 10,
       },
     };
-    documentReturn(CategoryService.getAllWithLimit);
-    await CategoryController.get(req, res);
-    reqErrorTest(CategoryService.getAllWithLimit);
-    await CategoryController.get(req, res);
-    commonExpectsReturn(res, CategoryService.getAllWithLimit);
-    expect(CategoryService.getAllWithLimit).toHaveBeenCalledWith(
+    documentReturn(CategoryService.getWithPagination);
+    await CategoryController.getWithPagination(req, res);
+    reqErrorTest(CategoryService.getWithPagination);
+    await CategoryController.getWithPagination(req, res);
+    commonExpectsReturn(res, CategoryService.getWithPagination);
+    expect(CategoryService.getWithPagination).toHaveBeenCalledWith(
       req.params.page,
       req.params.qtd
     );

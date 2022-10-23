@@ -7,11 +7,11 @@ class CategoryController {
     this._service = new CategoryService();
   }
 
-  async get(request, response) {
+  async getWithPagination(request, response) {
     try {
       const page = request.params.page;
       const qtd = request.params.qtd;
-      const result = await this._service.getAllWithLimit(page, qtd);
+      const result = await this._service.getWithPagination(page, qtd);
       response.status(200).json( result );
     } catch (error) {
       response.status(500).json({ error: error.message  || error.toString()});
