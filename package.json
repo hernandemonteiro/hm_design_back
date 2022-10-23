@@ -15,13 +15,15 @@
   "author": "Hernande monteiro",
   "license": "ISC",
   "dependencies": {
+    "@types/node-fetch": "^2.6.2",
+    "babel-jest": "^29.2.1",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "helmet": "^6.0.0",
     "mongoose": "^6.5.2",
-    "node-fetch": "^3.2.10",
+    "node-fetch": "2.6.0",
     "nodemailer": "^6.7.8",
     "nodemon": "^2.0.19",
     "sinon": "^14.0.1"

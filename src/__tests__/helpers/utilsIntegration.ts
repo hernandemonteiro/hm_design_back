@@ -1,10 +1,10 @@
 import { jest, afterEach, beforeEach } from "@jest/globals";
-import fetch from "node-fetch";
 import Database from "../../infra/db";
 import StartUp from "../../StartUp";
 import { dotEnvMock } from "./utilsUnit";
 import sinon from "sinon";
 import dotEnv from "dotenv";
+import fetch from "node-fetch";
 import CryptoUtils from "../../utils/CryptoUtils";
 dotEnv.config();
 
