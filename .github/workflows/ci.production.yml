@@ -3,7 +3,7 @@
 
 name: Hm-Design Back - CI/CD
 
-on: [pull_request]
+on: push
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
