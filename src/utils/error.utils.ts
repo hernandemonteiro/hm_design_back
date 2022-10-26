@@ -48,7 +48,7 @@ export function errorPage() {
         <div>
           <h1>You are not Authenticated</h1><br />
           <img
-            src="https://doc-10-0o-docs.googleusercontent.com/docs/securesc/rsvalvqlqbbis11vij0jvsd45e7emm0r/ss75abntnts0u8r0077nukplbdl4l1ku/1666716600000/04962512627974799525/03774904808948709139Z/1wJDZcEPfFGJ2WqvJX_2zFuBVeeRryo7B?e=view&uuid=3af9194b-c8d6-43ab-acd8-0eab8d4535d3&nonce=76sqcittr1j88&user=03774904808948709139Z&hash=9nk7246kqai4vaq2d1mri2kjhsplumdl"
+            src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSxodDPZyNeo59eAGoDlNz_v2kmg0OgcBsBfp4FHCKf2DiHFt2Do0ulUBl-9lqKZCt1M3BzZSQ=w1280-h851"
           />
         </div>
       </body>

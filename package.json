@@ -2,12 +2,12 @@
   "name": "hm_design_server",
   "version": "1.0.0",
   "description": "Api server for hm-design",
-  "main": "./src/index.ts",
+  "main": "index.ts",
   "engines": {
     "node": "16.x"
   },
   "scripts": {
-    "start": "nodemon ./src/index.ts",
+    "start": "nodemon ./index.ts",
     "lint": "npx eslint .",
     "test": "jest --coverage --forceExit"
   },
